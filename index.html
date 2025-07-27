@@ -4,23 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Murakaza neza kuri Murikimpano</title>
-    
-    <!-- Uyu murongo uhuza iyi paji n'amabara (CSS) -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-    <header>
-        <h1>MURAKAZA NEZA KURI MURIKIMPANO</h1>
-    </header>
+    <div class="container">
 
-    <main>
-        <p>Uru rubuga rurimo kwubakwa. Vuba ruraba rwuzuye.</p>
-    </main>
+        <!-- Agasanduku ko guhindura ururimi -->
+        <div class="language-switcher">
+            <select id="language-select">
+                <option value="rw">Kinyarwanda</option>
+                <option value="ki">Kirundi</option>
+                <option value="en">English</option>
+                <option value="fr">Français</option>
+                <option value="sw">Kiswahili</option>
+                <!-- Izindi ndimi 5 zizongerwamo hano byoroshye -->
+            </select>
+        </div>
 
-    <footer>
-        <p>© 2025 Murikimpano</p>
-    </footer>
+        <img src="logo.png" alt="Ikirango cya Murikimpano" class="logo">
+
+        <header>
+            <h1 data-lang-key="welcome_slogan">MURAKAZA NEZA KURI MURIKIMPANO</h1>
+        </header>
+
+        <main>
+            <div class="button-group">
+                <a href="#" class="btn btn-primary" data-lang-key="create_account_btn">Fungura Konti</a>
+                <a href="#" class="btn btn-secondary" data-lang-key="login_btn">Injira</a>
+                <a href="#" class="btn btn-tertiary" data-lang-key="forgot_password_btn">Wibagiwe ijambobanga?</a>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2025 Murikimpano</p>
+        </footer>
+    </div>
+
+    <!-- Iyi script niyo izakora igikorwa cyo guhindura ururimi -->
+    <script src="assets/js/lang.js"></script>
 
 </body>
 </html>
