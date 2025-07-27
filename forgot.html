@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="rw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="forgot_page_title">Wibagiwe Ijambobanga? - Murikimpano</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- Agasanduku ko guhindura ururimi -->
+        <div class="language-switcher">
+            <select id="language-select">
+                <option value="rw">Kinyarwanda</option>
+                <option value="ki">Kirundi</option>
+                <option value="en">English</option>
+                <option value="fr">Français</option>
+                <option value="sw">Kiswahili</option>
+            </select>
+        </div>
+
+        <header>
+            <h1 data-lang-key="forgot_title">Subirana Ijambobanga</h1>
+        </header>
+
+        <main>
+            <p class="auth-description" data-lang-key="forgot_instruction">
+                Shyiramo imeri yawe wakoresheje wiyandikisha. Turakoherezaho ubutumwa bugufasha gusubirana ijambobanga ryawe.
+            </p>
+            <form class="auth-form">
+                <div class="form-group">
+                    <label for="email" data-lang-key="email_label">Imeri yawe</label>
+                    <input type="email" id="email" name="email">
+                </div>
+                <button type="submit" class="btn btn-primary" data-lang-key="send_reset_link_btn">Ohereza Link</button>
+            </form>
+            <p class="auth-link">
+                <a href="login.html" data-lang-key="back_to_login_link">Subira ku ipaji yo Kwinjira</a>
+            </p>
+        </main>
+    </div>
+
+    <script src="assets/js/lang.js"></script>
+
+</body>
+</html>
