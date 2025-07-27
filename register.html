@@ -1,64 +1,65 @@
-<!DOCTYPE html>
-<html lang="rw">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-lang-key="register_page_title">Fungura Konti - Murikimpano</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
+import { auth } from './firebase.js';
+import { 
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    sendPasswordResetEmail 
+} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
-    <div class="container">
+function showNotification(message, isSuccess) {
+    const existingNotif = document.querySelector('.notification');
+    if (existingNotif) { existingNotif.remove(); }
+    const notification = document.createElement('div');
+    notification.className = `notification ${isSuccess ? 'success' : 'error'}`;
+    notification.innerText = message;
+    document.body.appendChild(notification);
+    setTimeout(() => { notification.remove(); }, 5000);
+}
 
-        <div class="language-switcher">
-            <select id="language-select">
-                <option value="rw">Kinyarwanda</option>
-                <option value="ki">Kirundi</option>
-                <option value="en">English</option>
-                <option value="fr">Français</option>
-                <option value="sw">Kiswahili</option>
-            </select>
-        </div>
+// --- Ipaaji yo Kwiyandikisha ---
+if (document.querySelector('form.register-form')) {
+    const form = document.querySelector('form.register-form');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = form.querySelector('#email').value;
+        const password = form.querySelector('#password').value;
+        showNotification("Turimo kubika amakuru...", true);
+        createUserWithEmailAndPassword(auth, email, password)
+            .then(() => {
+                showNotification("Wiyandikishije neza! Ubu woherejwe aho winjirira.", true);
+                setTimeout(() => { window.location.href = 'login.html'; }, 2000);
+            })
+            .catch((error) => { showNotification("Ikosa: " + error.code, false); });
+    });
+}
 
-        <header>
-            <h1 data-lang-key="create_new_account_title">Fungura Konti Nshya</h1>
-        </header>
+// --- Ipaji yo Kwinjira ---
+if (document.querySelector('form.login-form')) {
+    const form = document.querySelector('form.login-form');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = form.querySelector('#email').value;
+        const password = form.querySelector('#password').value;
+        showNotification("Turimo kugerageza...", true);
+        signInWithEmailAndPassword(auth, email, password)
+            .then(() => {
+                showNotification("Winjiye neza! Murakaza neza!", true);
+                setTimeout(() => { window.location.href = 'index.html'; }, 2000);
+            })
+            .catch(() => { showNotification("Ikosa: Imeri cyangwa ijambobanga si byo.", false); });
+    });
+}
 
-        <main>
-            <!-- IKI KIGOMBA GUHINDUKA -->
-            <form class="auth-form register-form">
-                <div class="form-group">
-                    <label for="username" data-lang-key="username_label">Izina ukoresha</label>
-                    <input type="text" id="username" name="username">
-                </div>
-                <div class="form-group">
-                    <label for="email" data-lang-key="email_label">Imeri yawe</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="password" data-lang-key="password_label">Ijambobanga</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <button type="submit" class="btn btn-primary" data-lang-key="register_btn">Iyandikishe</button>
-            </form>
-            <p class="auth-link">
-                <span data-lang-key="already_have_account">Usanganywe konti?</span>
-                <!-- Iyi link nayo igomba kujya kuri login.html -->
-                <a href="login.html" data-lang-key="login_here_link">Injira hano</a>
-            </p>
-        </main>
-    </div>
-
-    <script src="assets/js/lang.js"></script>
-
-    <!-- IYI MIRONGO Y'INGENZI NI YO YARI YABUZE -->
-    <script type="module" src="assets/js/firebase.js"></script>
-    <script type="module" src="assets/js/auth.js"></script>
-
-</body>
-</html>
+// --- Ipaji yo Kwibagirwa Ijambobanga ---
+if (document.querySelector('form.forgot-form')) {
+    const form = document.querySelector('form.forgot-form');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = form.querySelector('#email').value;
+        showNotification("Turimo kohereza imeri...", true);
+        sendPasswordResetEmail(auth, email)
+            .then(() => {
+                showNotification("Twakohereje ubutumwa. Reba muri imeri yawe.", true);
+            })
+            .catch((error) => { showNotification("Ikosa: " + error.code, false); });
+    });
+}
