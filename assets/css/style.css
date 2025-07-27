@@ -1,20 +1,67 @@
-body {
-    font-family: sans-serif;
-    background-color: #f0f0f0; /* Ibara ry'inyuma ry'urupapuro */
-    color: #333; /* Ibara ry'inyandiko */
-    text-align: center; /* Inyandiko yose ijye hagati */
-    padding: 50px;
-}
+// Ububiko bw'amagambo yose yahinduwe
+const translations = {
+    // Ikinyarwanda
+    rw: {
+        welcome_slogan: "MURAKAZA NEZA KURI MURIKIMPANO",
+        create_account_btn: "Fungura Konti",
+        login_btn: "Injira",
+        forgot_password_btn: "Wibagiwe ijambobanga?"
+    },
+    // Ikirundi
+    ki: {
+        welcome_slogan: "KAZE NEZA MURI MURIKIMPANO",
+        create_account_btn: "Ugurura Konti",
+        login_btn: "Injira",
+        forgot_password_btn: "Wibagiye ijambobanga?"
+    },
+    // Icyongereza
+    en: {
+        welcome_slogan: "WELCOME TO MURIKIMPANO",
+        create_account_btn: "Create Account",
+        login_btn: "Log In",
+        forgot_password_btn: "Forgot Password?"
+    },
+    // Igifaransa
+    fr: {
+        welcome_slogan: "BIENVENUE CHEZ MURIKIMPANO",
+        create_account_btn: "Créer un Compte",
+        login_btn: "Connexion",
+        forgot_password_btn: "Mot de passe oublié ?"
+    },
+    // Igiswahili
+    sw: {
+        welcome_slogan: "KARIBU MURIKIMPANO",
+        create_account_btn: "Fungua Akaunti",
+        login_btn: "Ingia",
+        forgot_password_btn: "Umesahau nenosiri?"
+    }
+};
 
-header {
-    background-color: #4CAF50; /* Icyatsi */
-    color: white;
-    padding: 20px;
-    border-radius: 8px;
-}
+// Gufata agasanduku ko guhitamo ururimi
+const languageSelector = document.getElementById('language-select');
 
-footer {
-    margin-top: 40px;
-    font-size: 0.8em;
-    color: #777;
-}
+// Igikorwa cyo guhindura ururimi
+const setLanguage = (language) => {
+    // Gushaka ibintu byose bifite akamenyetso ka "data-lang-key"
+    document.querySelectorAll('[data-lang-key]').forEach(element => {
+        const key = element.getAttribute('data-lang-key');
+        // Guhindura inyandiko isanzwe
+        if (element.innerText) {
+            element.innerText = translations[language][key];
+        }
+    });
+    // Kubika ururimi rwahiswemo kugira ngo ruzagaruke ubutaha
+    localStorage.setItem('murikimpano_lang', language);
+};
+
+// Iyo umuntu ahisemo ururimi rushya
+languageSelector.addEventListener('change', (event) => {
+    setLanguage(event.target.value);
+});
+
+// Iyo paji ifungutse, reba niba hari ururimi rwabitswe
+document.addEventListener('DOMContentLoaded', () => {
+    const savedLanguage = localStorage.getItem('murikimpano_lang') || 'rw'; // Fata ururimi rwabitswe, niba ntayirufata Ikinyarwanda
+    languageSelector.value = savedLanguage;
+    setLanguage(savedLanguage);
+});
