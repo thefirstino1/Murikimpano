@@ -1,15 +1,17 @@
-// Import the functions you need from the SDKs
+// Tuvanye iyi kode ku buryo bwa CDN kugira ngo ikore neza kuri GitHub Pages
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
-// Your web app's Firebase configuration
+// Aya ni ya makuru mashya wampaye
 const firebaseConfig = {
-  apiKey: "AIzaSyAjP5U1t-wuOS2vjABLYU-7Rsmf8n2Gv5Y", // Uru ni rwo rufunguzo twari twibeshyeho
-  authDomain: "murikimpano-app.firebaseapp.com",
-  projectId: "murikimpano-app",
-  storageBucket: "murikimpano-app.appspot.com",
-  messagingSenderId: "713207713179",
-  appId: "1:713207713179:web:ef2c65d865cfb86d61a3b1"
+  apiKey: "AIzaSyBC-bxI0yfqnlp2TyDAYZH0vEYcQH_tDf0",
+  authDomain: "murikimpano.firebaseapp.com",
+  databaseURL: "https://murikimpano-default-rtdb.firebaseio.com",
+  projectId: "murikimpano",
+  storageBucket: "murikimpano.appspot.com", // Nahinduye hano gato
+  messagingSenderId: "288360394906",
+  appId: "1:288360394906:web:036db545a633f8eba5af23",
+  measurementId: "G-08Q2CKEE87"
 };
 
 // Initialize Firebase
