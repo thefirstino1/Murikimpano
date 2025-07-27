@@ -87,3 +87,22 @@ document.addEventListener('DOMContentLoaded', () => {
         setLanguage(savedLanguage);
     }
 });
+/* Imiterere y'ubutumwa bwo kumenyesha */
+.notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 25px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    z-index: 1000;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.notification.success {
+    background-color: var(--success-color);
+}
+.notification.error {
+    background-color: #e74c3c; /* Umutuku w'ikosa */
+    }
