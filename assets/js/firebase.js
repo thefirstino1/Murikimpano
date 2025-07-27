@@ -4,7 +4,7 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAjP5U1t-wuOS2vjABLYU-7Rsmf8n2Gv5Y",
+  apiKey: "AIzaSyAjP5U1t-wuOS2vjABLYU-7Rsmf8n2Gv5Y", // Uru ni rwo rufunguzo twari twibeshyeho
   authDomain: "murikimpano-app.firebaseapp.com",
   projectId: "murikimpano-app",
   storageBucket: "murikimpano-app.appspot.com",
@@ -14,4 +14,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+// Tangiza serivisi yo kwiyandikisha hanyuma uyisangize izindi dosiye
 export const auth = getAuth(app);
