@@ -15,7 +15,6 @@
 
     <div class="container">
 
-        <!-- Agasanduku ko guhindura ururimi -->
         <div class="language-switcher">
             <select id="language-select">
                 <option value="rw">Kinyarwanda</option>
@@ -34,10 +33,11 @@
             <p class="auth-description" data-lang-key="forgot_instruction">
                 Shyiramo imeri yawe wakoresheje wiyandikisha. Turakoherezaho ubutumwa bugufasha gusubirana ijambobanga ryawe.
             </p>
-            <form class="auth-form">
+            <!-- IKI KIGOMBA GUHINDUKA -->
+            <form class="auth-form forgot-form">
                 <div class="form-group">
                     <label for="email" data-lang-key="email_label">Imeri yawe</label>
-                    <input type="email" id="email" name="email">
+                    <input type="email" id="email" name="email" required>
                 </div>
                 <button type="submit" class="btn btn-primary" data-lang-key="send_reset_link_btn">Ohereza Link</button>
             </form>
@@ -48,7 +48,8 @@
     </div>
 
     <script src="assets/js/lang.js"></script>
-<script type="module" src="assets/js/firebase.js"></script>
-<script type="module" src="assets/js/auth.js"></script>
+    <script type="module" src="assets/js/firebase.js"></script>
+    <script type="module" src="assets/js/auth.js"></script>
+
 </body>
 </html>
