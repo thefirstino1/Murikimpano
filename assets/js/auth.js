@@ -1,4 +1,3 @@
-// Tura na serivisi yo kwiyandikisha twakoze muri firebase.js
 import { auth } from './firebase.js';
 import { 
     createUserWithEmailAndPassword,
@@ -6,72 +5,61 @@ import {
     sendPasswordResetEmail 
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
-// Igikorwa cyo kwerekana ubutumwa bw'amakuru (notification)
 function showNotification(message, isSuccess) {
     const existingNotif = document.querySelector('.notification');
     if (existingNotif) { existingNotif.remove(); }
-
     const notification = document.createElement('div');
     notification.className = `notification ${isSuccess ? 'success' : 'error'}`;
     notification.innerText = message;
     document.body.appendChild(notification);
-
     setTimeout(() => { notification.remove(); }, 5000);
 }
 
-// --- LOGIC Y'IPAJI YO KWIYANDIKISHA (REGISTER) ---
+// --- Ipaaji yo Kwiyandikisha ---
 if (document.querySelector('form.register-form')) {
-    const registerForm = document.querySelector('form.register-form');
-    registerForm.addEventListener('submit', (e) => {
+    const form = document.querySelector('form.register-form');
+    form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const email = registerForm.querySelector('#email').value;
-        const password = registerForm.querySelector('#password').value;
-        showNotification("Turimo kugerageza...", true);
+        const email = form.querySelector('#email').value;
+        const password = form.querySelector('#password').value;
+        showNotification("Turimo kubika amakuru...", true);
         createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                showNotification("Wiyandikishije neza! Ubu woherejwe ku ipaji yo kwinjira.", true);
+            .then(() => {
+                showNotification("Wiyandikishije neza! Ubu woherejwe aho winjirira.", true);
                 setTimeout(() => { window.location.href = 'login.html'; }, 2000);
             })
-            .catch((error) => {
-                showNotification("Habaye ikosa: " + error.code, false);
-            });
+            .catch((error) => { showNotification("Ikosa: " + error.code, false); });
     });
 }
 
-// --- LOGIC Y'IPAJI YO KWINJIRA (LOGIN) - IGICE GISHYA ---
+// --- Ipaji yo Kwinjira ---
 if (document.querySelector('form.login-form')) {
-    const loginForm = document.querySelector('form.login-form');
-    loginForm.addEventListener('submit', (e) => {
+    const form = document.querySelector('form.login-form');
+    form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const email = loginForm.querySelector('#email').value;
-        const password = loginForm.querySelector('#password').value;
-        showNotification("Turimo kugerageza kwinjira...", true);
+        const email = form.querySelector('#email').value;
+        const password = form.querySelector('#password').value;
+        showNotification("Turimo kugerageza...", true);
         signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Byakunze! Tuzamwohereza ahandi (nka Dashboard)
+            .then(() => {
                 showNotification("Winjiye neza! Murakaza neza!", true);
-                // Nko mu gihe kiri imbere, tuzamwohereza kuri 'dashboard.html'
                 setTimeout(() => { window.location.href = 'index.html'; }, 2000);
             })
-            .catch((error) => {
-                showNotification("Habaye ikosa: Imeri cyangwa ijambobanga si byo.", false);
-            });
+            .catch(() => { showNotification("Ikosa: Imeri cyangwa ijambobanga si byo.", false); });
     });
 }
 
-// --- LOGIC Y'IPAJI YO KWIBAGIRWA IJAMBOBANGA (FORGOT) - IGICE GISHYA ---
+// --- Ipaji yo Kwibagirwa Ijambobanga ---
 if (document.querySelector('form.forgot-form')) {
-    const forgotForm = document.querySelector('form.forgot-form');
-    forgotForm.addEventListener('submit', (e) => {
+    const form = document.querySelector('form.forgot-form');
+    form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const email = forgotForm.querySelector('#email').value;
-        showNotification("Turimo kohereza... Tegereza.", true);
+        const email = form.querySelector('#email').value;
+        showNotification("Turimo kohereza imeri...", true);
         sendPasswordResetEmail(auth, email)
             .then(() => {
-                showNotification("Twakohereje ubutumwa kuri imeri yawe. Reba muri email.", true);
+                showNotification("Twakohereje ubutumwa. Reba muri imeri yawe.", true);
             })
-            .catch((error) => {
-                showNotification("Habaye ikosa: " + error.code, false);
-            });
+            .catch((error) => { showNotification("Ikosa: " + error.code, false); });
     });
 }
