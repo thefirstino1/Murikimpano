@@ -131,3 +131,22 @@ footer {
 }
 .auth-link { margin-top: 20px; }
 .auth-link a { color: var(--secondary-color); font-weight: bold; }
+/* ======================================== */
+/*      IMITERERE Y'AGASANDUKU K'INDIMI     */
+/* ======================================== */
+
+.language-switcher {
+    position: absolute; /* Guhagarara hejuru y'ibindi */
+    top: 20px;
+    right: 20px;
+    z-index: 10; /* Kureba ko ihora hejuru */
+}
+
+#language-select {
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    font-weight: bold;
+}
