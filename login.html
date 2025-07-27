@@ -15,7 +15,6 @@
 
     <div class="container">
 
-        <!-- Agasanduku ko guhindura ururimi -->
         <div class="language-switcher">
             <select id="language-select">
                 <option value="rw">Kinyarwanda</option>
@@ -31,14 +30,15 @@
         </header>
 
         <main>
-            <form class="auth-form">
+            <!-- IKI KIGOMBA GUHINDUKA -->
+            <form class="auth-form login-form">
                 <div class="form-group">
                     <label for="email" data-lang-key="email_label">Imeri yawe</label>
-                    <input type="email" id="email" name="email">
+                    <input type="email" id="email" name="email" required>
                 </div>
                 <div class="form-group">
                     <label for="password" data-lang-key="password_label">Ijambobanga</label>
-                    <input type="password" id="password" name="password">
+                    <input type="password" id="password" name="password" required>
                 </div>
                 <button type="submit" class="btn btn-primary" data-lang-key="login_btn_main">Injira</button>
             </form>
@@ -50,6 +50,10 @@
     </div>
 
     <script src="assets/js/lang.js"></script>
+
+    <!-- IYI MIRONGO Y'INGENZI NI YO YARI YABUZE -->
+    <script type="module" src="assets/js/firebase.js"></script>
+    <script type="module" src="assets/js/auth.js"></script>
 
 </body>
 </html>
