@@ -1,67 +1,100 @@
-// Ububiko bw'amagambo yose yahinduwe
 const translations = {
-    // Ikinyarwanda
     rw: {
         welcome_slogan: "MURAKAZA NEZA KURI MURIKIMPANO",
         create_account_btn: "Fungura Konti",
         login_btn: "Injira",
-        forgot_password_btn: "Wibagiwe ijambobanga?"
+        forgot_password_btn: "Wibagiwe ijambobanga?",
+        register_page_title: "Fungura Konti - Murikimpano",
+        create_new_account_title: "Fungura Konti Nshya",
+        username_label: "Izina ukoresha",
+        email_label: "Imeri yawe",
+        password_label: "Ijambobanga",
+        register_btn: "Iyandikishe",
+        already_have_account: "Usanganywe konti?",
+        login_here_link: "Subira ahabanza"
     },
-    // Ikirundi
     ki: {
         welcome_slogan: "KAZE NEZA MURI MURIKIMPANO",
         create_account_btn: "Ugurura Konti",
         login_btn: "Injira",
-        forgot_password_btn: "Wibagiye ijambobanga?"
+        forgot_password_btn: "Wibagiye ijambobanga?",
+        register_page_title: "Ugurura Konti - Murikimpano",
+        create_new_account_title: "Ugurura Konti Nshasha",
+        username_label: "Izina ukoresha",
+        email_label: "Imeri yawe",
+        password_label: "Ijambobanga",
+        register_btn: "Iyandikishe",
+        already_have_account: "Ufise konti?",
+        login_here_link: "Subira ahatanguriro"
     },
-    // Icyongereza
     en: {
         welcome_slogan: "WELCOME TO MURIKIMPANO",
         create_account_btn: "Create Account",
         login_btn: "Log In",
-        forgot_password_btn: "Forgot Password?"
+        forgot_password_btn: "Forgot Password?",
+        register_page_title: "Create Account - Murikimpano",
+        create_new_account_title: "Create a New Account",
+        username_label: "Username",
+        email_label: "Your Email",
+        password_label: "Password",
+        register_btn: "Register",
+        already_have_account: "Already have an account?",
+        login_here_link: "Back to Home"
     },
-    // Igifaransa
     fr: {
         welcome_slogan: "BIENVENUE CHEZ MURIKIMPANO",
         create_account_btn: "Créer un Compte",
         login_btn: "Connexion",
-        forgot_password_btn: "Mot de passe oublié ?"
+        forgot_password_btn: "Mot de passe oublié ?",
+        register_page_title: "Créer un Compte - Murikimpano",
+        create_new_account_title: "Créer un nouveau compte",
+        username_label: "Nom d'utilisateur",
+        email_label: "Votre e-mail",
+        password_label: "Mot de passe",
+        register_btn: "S'inscrire",
+        already_have_account: "Vous avez déjà un compte ?",
+        login_here_link: "Retour à l'accueil"
     },
-    // Igiswahili
     sw: {
         welcome_slogan: "KARIBU MURIKIMPANO",
         create_account_btn: "Fungua Akaunti",
         login_btn: "Ingia",
-        forgot_password_btn: "Umesahau nenosiri?"
+        forgot_password_btn: "Umesahau nenosiri?",
+        register_page_title: "Fungua Akaunti - Murikimpano",
+        create_new_account_title: "Fungua Akaunti Mpya",
+        username_label: "Jina la mtumiaji",
+        email_label: "Barua pepe yako",
+        password_label: "Nenosiri",
+        register_btn: "Sajili",
+        already_have_account: "Tayari una akaunti?",
+        login_here_link: "Rudi Mwanzo"
     }
 };
 
-// Gufata agasanduku ko guhitamo ururimi
+// Kode isigaye yo guhindura ururimi ntiyahindutse (ikurikireho)
 const languageSelector = document.getElementById('language-select');
-
-// Igikorwa cyo guhindura ururimi
 const setLanguage = (language) => {
-    // Gushaka ibintu byose bifite akamenyetso ka "data-lang-key"
     document.querySelectorAll('[data-lang-key]').forEach(element => {
         const key = element.getAttribute('data-lang-key');
-        // Guhindura inyandiko isanzwe
-        if (element.innerText) {
-            element.innerText = translations[language][key];
+        if (translations[language] && translations[language][key]) {
+            if(element.tagName === 'INPUT' || element.tagName === 'TEXTAREA'){
+                element.placeholder = translations[language][key];
+            } else {
+                element.innerText = translations[language][key];
+            }
         }
     });
-    // Kubika ururimi rwahiswemo kugira ngo ruzagaruke ubutaha
     localStorage.setItem('murikimpano_lang', language);
+    if(document.documentElement.lang !== language) {
+        document.documentElement.lang = language;
+    }
+    if (document.title.getAttribute('data-lang-key')) {
+         document.title = translations[language][document.title.getAttribute('data-lang-key')];
+    }
 };
-
-// Iyo umuntu ahisemo ururimi rushya
-languageSelector.addEventListener('change', (event) => {
-    setLanguage(event.target.value);
-});
-
-// Iyo paji ifungutse, reba niba hari ururimi rwabitswe
+languageSelector.addEventListener('change', (event) => setLanguage(event.target.value));
 document.addEventListener('DOMContentLoaded', () => {
-    const savedLanguage = localStorage.getItem('murikimpano_lang') || 'rw'; // Fata ururimi rwabitswe, niba ntayirufata Ikinyarwanda
+    const savedLanguage = localStorage.getItem('murikimpano_lang') || 'rw';
     languageSelector.value = savedLanguage;
     setLanguage(savedLanguage);
 });
