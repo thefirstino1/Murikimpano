@@ -1,3 +1,4 @@
+// Tura na serivisi yo kwiyandikisha twakoze muri firebase.js
 import { auth } from './firebase.js';
 import { 
     createUserWithEmailAndPassword,
@@ -5,17 +6,22 @@ import {
     sendPasswordResetEmail 
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
+// Igikorwa cyo kwerekana ubutumwa bw'amakuru (notification)
 function showNotification(message, isSuccess) {
     const existingNotif = document.querySelector('.notification');
     if (existingNotif) { existingNotif.remove(); }
+
     const notification = document.createElement('div');
     notification.className = `notification ${isSuccess ? 'success' : 'error'}`;
     notification.innerText = message;
     document.body.appendChild(notification);
-    setTimeout(() => { notification.remove(); }, 5000);
+
+    setTimeout(() => {
+        if (notification) notification.remove();
+    }, 5000); // Guhisha nyuma y'amasegonda 5
 }
 
-// --- Ipaaji yo Kwiyandikisha ---
+// --- LOGIC Y'IPAJI YO KWIYANDIKISHA (REGISTER) ---
 if (document.querySelector('form.register-form')) {
     const form = document.querySelector('form.register-form');
     form.addEventListener('submit', (e) => {
@@ -28,11 +34,13 @@ if (document.querySelector('form.register-form')) {
                 showNotification("Wiyandikishije neza! Ubu woherejwe aho winjirira.", true);
                 setTimeout(() => { window.location.href = 'login.html'; }, 2000);
             })
-            .catch((error) => { showNotification("Ikosa: " + error.code, false); });
+            .catch((error) => {
+                showNotification("Ikosa: " + error.code, false);
+            });
     });
 }
 
-// --- Ipaji yo Kwinjira ---
+// --- LOGIC Y'IPAJI YO KWINJIRA (LOGIN) ---
 if (document.querySelector('form.login-form')) {
     const form = document.querySelector('form.login-form');
     form.addEventListener('submit', (e) => {
@@ -43,13 +51,16 @@ if (document.querySelector('form.login-form')) {
         signInWithEmailAndPassword(auth, email, password)
             .then(() => {
                 showNotification("Winjiye neza! Murakaza neza!", true);
+                // Nyuma tuzahita tujya kuri Dashboard, ubu dusubire ahabanza
                 setTimeout(() => { window.location.href = 'index.html'; }, 2000);
             })
-            .catch(() => { showNotification("Ikosa: Imeri cyangwa ijambobanga si byo.", false); });
+            .catch(() => {
+                showNotification("Ikosa: Imeri cyangwa ijambobanga si byo.", false);
+            });
     });
 }
 
-// --- Ipaji yo Kwibagirwa Ijambobanga ---
+// --- LOGIC Y'IPAJI YO KWIBAGIRWA IJAMBOBANGA (FORGOT) ---
 if (document.querySelector('form.forgot-form')) {
     const form = document.querySelector('form.forgot-form');
     form.addEventListener('submit', (e) => {
@@ -59,7 +70,10 @@ if (document.querySelector('form.forgot-form')) {
         sendPasswordResetEmail(auth, email)
             .then(() => {
                 showNotification("Twakohereje ubutumwa. Reba muri imeri yawe.", true);
+                form.reset(); // Guhita usiba imeri yari yanditswemo
             })
-            .catch((error) => { showNotification("Ikosa: " + error.code, false); });
+            .catch((error) => {
+                showNotification("Ikosa: " + error.code, false);
+            });
     });
-}
+                  }
