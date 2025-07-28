@@ -1,7 +1,5 @@
-// Ntabwo tugikeneye "import" kuko firebase.js iba yamaze gukora byose.
-// Tura na serivisi yo kwiyandikisha twakoze muri firebase.js
-// Iyi code ikoresha "firebase" object iba yamaze guteranywa na CDN
-const authService = firebase.auth();
+// Iyi kode nshya ntabwo ikoresha "import"
+// Irasanga firebase yamaze guteranywa na CDN
 
 // Igikorwa cyo kwerekana ubutumwa bw'amakuru (notification)
 function showNotification(message, isSuccess) {
@@ -22,7 +20,7 @@ if (document.querySelector('form.register-form')) {
         const email = form.querySelector('#email').value;
         const password = form.querySelector('#password').value;
         showNotification("Turimo kubika amakuru...", true);
-        authService.createUserWithEmailAndPassword(email, password)
+        firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(() => {
                 showNotification("Wiyandikishije neza! Ubu woherejwe aho winjirira.", true);
                 setTimeout(() => { window.location.href = 'login.html'; }, 2000);
@@ -33,4 +31,38 @@ if (document.querySelector('form.register-form')) {
     });
 }
 
-// N'izindi paji nazo tuzazikora gutya
+// --- LOGIC Y'IPAJI YO KWINJIRA (LOGIN) ---
+if (document.querySelector('form.login-form')) {
+    const form = document.querySelector('form.login-form');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = form.querySelector('#email').value;
+        const password = form.querySelector('#password').value;
+        showNotification("Turimo kugerageza...", true);
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(() => {
+                showNotification("Winjiye neza! Murakaza neza!", true);
+                setTimeout(() => { window.location.href = 'index.html'; }, 2000);
+            })
+            .catch(() => {
+                showNotification("Ikosa: Imeri cyangwa ijambobanga si byo.", false);
+            });
+    });
+}
+
+// --- LOGIC Y'IPAJI YO KWIBAGIRWA IJAMBOBANGA (FORGOT) ---
+if (document.querySelector('form.forgot-form')) {
+    const form = document.querySelector('form.forgot-form');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = form.querySelector('#email').value;
+        showNotification("Turimo kohereza imeri...", true);
+        firebase.auth().sendPasswordResetEmail(email)
+            .then(() => {
+                showNotification("Twakohereje ubutumwa. Reba muri imeri yawe.", true);
+            })
+            .catch((error) => {
+                showNotification("Ikosa: " + error.message, false);
+            });
+    });
+}
