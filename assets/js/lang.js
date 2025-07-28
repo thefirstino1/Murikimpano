@@ -37,3 +37,12 @@ service3_title: "AI & Crypto Training",
 service3_desc: "We teach simple ways to use artificial intelligence (AI) and invest in Cryptocurrency.",
 service4_title: "Tech Consulting",
 service4_desc: "We provide advice and support for all your web and technology-related projects."
+// ...ibya kera...
+contact_page_title: "Contact Us - Murikimpano",
+contact_title: "Contact Us",
+send_us_message: "Send us a Message",
+your_name: "Your Name",
+your_email: "Your Email",
+your_message: "Your Message",
+send_btn: "Send",
+other_ways_to_contact: "Other Ways to Contact"
