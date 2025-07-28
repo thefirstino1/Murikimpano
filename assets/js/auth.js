@@ -1,3 +1,6 @@
+// IGERAGEZA: Niba ubona ubu butumwa, bivuze ko dosiye nshya yaje.
+alert("UBWONKO BUSHYA BURAJE KANDI BURAKORA!");
+
 // Tura na serivisi yo kwiyandikisha twakoze muri firebase.js
 import { auth } from './firebase.js';
 import { 
@@ -18,7 +21,7 @@ function showNotification(message, isSuccess) {
 
     setTimeout(() => {
         if (notification) notification.remove();
-    }, 5000); // Guhisha nyuma y'amasegonda 5
+    }, 5000);
 }
 
 // --- LOGIC Y'IPAJI YO KWIYANDIKISHA (REGISTER) ---
@@ -51,7 +54,6 @@ if (document.querySelector('form.login-form')) {
         signInWithEmailAndPassword(auth, email, password)
             .then(() => {
                 showNotification("Winjiye neza! Murakaza neza!", true);
-                // Nyuma tuzahita tujya kuri Dashboard, ubu dusubire ahabanza
                 setTimeout(() => { window.location.href = 'index.html'; }, 2000);
             })
             .catch(() => {
@@ -70,7 +72,7 @@ if (document.querySelector('form.forgot-form')) {
         sendPasswordResetEmail(auth, email)
             .then(() => {
                 showNotification("Twakohereje ubutumwa. Reba muri imeri yawe.", true);
-                form.reset(); // Guhita usiba imeri yari yanditswemo
+                form.reset();
             })
             .catch((error) => {
                 showNotification("Ikosa: " + error.code, false);
