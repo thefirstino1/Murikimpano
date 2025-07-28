@@ -1,110 +1,204 @@
-const translations = {
-    // --- Ikinyarwanda ---
-    rw: {
-        welcome_slogan: "MURAKAZA NEZA KURI MURIKIMPANO",
-        create_account_btn: "Fungura Konti",
-        login_btn: "Injira",
-        forgot_password_btn: "Wibagiwe ijambobanga?",
-        register_page_title: "Fungura Konti - Murikimpano",
-        create_new_account_title: "Fungura Konti Nshya",
-        username_label: "Izina ukoresha",
-        email_label: "Imeri yawe",
-        password_label: "Ijambobanga",
-        register_btn: "Iyandikishe",
-        already_have_account: "Usanganywe konti?",
-        login_here_link: "Injira hano",
-        login_page_title: "Injira - Murikimpano",
-        login_title: "Injira Muri Konti Yawe",
-        login_btn_main: "Injira",
-        no_account_yet: "Nta konti ufite?",
-        create_one_link: "Fungura imwe hano",
-        forgot_page_title: "Wibagiwe Ijambobanga? - Murikimpano",
-        forgot_title: "Subirana Ijambobanga",
-        forgot_instruction: "Shyiramo imeri yawe wakoresheje wiyandikisha. Turakoherezaho ubutumwa bugufasha gusubirana ijambobanga ryawe.",
-        send_reset_link_btn: "Ohereza Link",
-        back_to_login_link: "Subira ku ipaji yo Kwinjira"
-    },
-    // --- Icyongereza ---
-    en: {
-        welcome_slogan: "WELCOME TO MURIKIMPANO",
-        create_account_btn: "Create Account",
-        login_btn: "Log In",
-        forgot_password_btn: "Forgot Password?",
-        register_page_title: "Create Account - Murikimpano",
-        create_new_account_title: "Create a New Account",
-        username_label: "Username",
-        email_label: "Your Email",
-        password_label: "Password",
-        register_btn: "Register",
-        already_have_account: "Already have an account?",
-        login_here_link: "Log in here",
-        login_page_title: "Log In - Murikimpano",
-        login_title: "Log In to Your Account",
-        login_btn_main: "Log In",
-        no_account_yet: "Don't have an account?",
-        create_one_link: "Create one here",
-        forgot_page_title: "Forgot Password? - Murikimpano",
-        forgot_title: "Reset Password",
-        forgot_instruction: "Enter the email address you used to register. We'll send you a link to reset your password.",
-        send_reset_link_btn: "Send Reset Link",
-        back_to_login_link: "Back to Log In"
-    },
-    // --- Nujuje n'izindi ndimi ---
-    ki: { /* ... Ubu ni wowe ushobora kuzuzuza ukurikije uko tumaze kubigenza ... */ },
-    fr: { /* ... */ },
-    sw: { /* ... */ }
-};
+/* ======================================== */
+/*      STYLE NSHYA YA MURIKIMPANO 2025     */
+/* ======================================== */
 
-// Kode isigaye yo guhindura ururimi ntiyahindutse
-const languageSelector = document.getElementById('language-select');
-const setLanguage = (language) => {
-    document.querySelectorAll('[data-lang-key]').forEach(element => {
-        const key = element.getAttribute('data-lang-key');
-        if (translations[language] && translations[language][key]) {
-            if(element.tagName === 'INPUT' || element.tagName === 'TEXTAREA'){
-                element.placeholder = translations[language][key];
-            } else {
-                element.innerText = translations[language][key];
-            }
-        }
-    });
-    localStorage.setItem('murikimpano_lang', language);
-    if(document.documentElement.lang !== language) {
-        document.documentElement.lang = language;
-    }
-    const titleKey = document.querySelector('title')?.getAttribute('data-lang-key');
-    if (titleKey && translations[language] && translations[language][titleKey]) {
-         document.title = translations[language][titleKey];
-    }
-};
-if (languageSelector) {
-    languageSelector.addEventListener('change', (event) => setLanguage(event.target.value));
+/* Amabara n'inyandiko by'ibanze */
+:root {
+    --primary-color: #6c5ce7;   /* Umuyugubwe */
+    --secondary-color: #00a8ff; /* Ubururu bw'amazi */
+    --dark-color: #1e272e;      /* Umukara wijimye */
+    --light-color: #f1f2f6;     /* Umweru wijimye */
+    --success-color: #2ecc71;   /* Icyatsi kibisi */
+    --font-family: 'Nunito', sans-serif; /* Inyandiko nziza */
 }
-document.addEventListener('DOMContentLoaded', () => {
-    const savedLanguage = localStorage.getItem('murikimpano_lang') || 'rw';
-    if(languageSelector){
-        languageSelector.value = savedLanguage;
-        setLanguage(savedLanguage);
-    }
-});
-/* Imiterere y'ubutumwa bwo kumenyesha */
+
+/* Inyuma y'umubiri wose */
+body {
+    font-family: var(--font-family);
+    margin: 0;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: var(--light-color);
+    line-height: 1.6;
+    overflow-x: hidden; /* Kwirinda ko hari ibirenza urubuga */
+}
+
+/* Agasanduku k'ingenzi */
+.container {
+    background-color: rgba(255, 255, 255, 0.08); /* Umweru uciriritse */
+    border-radius: 12px;
+    padding: 40px;
+    max-width: 500px;
+    margin: 20px auto; /* Guhagarara hagati */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative; /* Kugira ngo ibindi bice bishobore guhagarara neza */
+    overflow: hidden; /* Kwirinda ibirenza akarere */
+}
+
+/* Agasanduku ko guhindura ururimi */
+.language-switcher {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+#language-select {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--light-color);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#language-select:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Ikirango */
+.logo {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    margin-bottom: 25px;
+}
+
+/* Imitwe y'inyandiko */
+h1 {
+    font-size: 2.4em;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    margin-bottom: 35px;
+    text-transform: uppercase;
+}
+
+/* Utubuto */
+.btn {
+    display: inline-block;
+    padding: 14px 28px;
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary {
+    background: linear-gradient(to right, #ff7979, #ff4757); /* Amabara atukura */
+    color: var(--light-color);
+}
+
+.btn-secondary {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: var(--light-color);
+    border: 2px solid var(--light-color);
+}
+
+.btn-tertiary {
+    background: none;
+    color: var(--light-color);
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+.btn-tertiary:hover {
+    opacity: 1;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Akayunguruzo ko hasi */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.85em;
+    color: var(--light-color);
+    opacity: 0.8;
+}
+
+/* Amafishi yo Kwiyandikisha/Kwinjira */
+.auth-form {
+    margin-top: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1em;
+    border: none;
+    border-radius: 25px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--light-color);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.auth-link {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.auth-link a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.auth-link a:hover {
+    color: var(--light-color);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Ubutumwa bwo kumenyesha (Notifications) */
 .notification {
     position: fixed;
-    top: 20px;
+    top: 30px;
     left: 50%;
     transform: translateX(-50%);
-    padding: 15px 25px;
-    border-radius: 8px;
-    color: white;
-    font-weight: bold;
-    z-index: 1000;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-.notification.success {
     background-color: var(--success-color);
+    color: var(--light-color);
+    padding: 15px 30px;
+    border-radius: 30px;
+    z-index: 1000;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
+
 .notification.error {
-    background-color: #e74c3c; /* Umutuku w'ikosa */
+    background-color: #e74c3c; /* Umutuku w'akaga */
     }
-bishimishije by'urubuga rwacu!
-Erega reka gukosora forgot yonyine ahubwo nama files yose nta style nziza afite kosora muma fils yose agité ubwiza
