@@ -202,3 +202,29 @@ footer {
 .notification.error {
     background-color: #e74c3c; /* Umutuku w'akaga */
     }
+/* ======================================== */
+/*      IMITERERE Y'IPAJI YA "ABO TURI BO"   */
+/* ======================================== */
+
+.about-content {
+    text-align: left; /* Amagambo atangirire ibumoso */
+    margin-top: 20px;
+}
+
+.about-content h2 {
+    color: var(--secondary-color); /* Ubururu bw'amazi */
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 5px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.about-content p {
+    font-size: 1.1em;
+    line-height: 1.7;
+    opacity: 0.9;
+}
+.about-content .btn {
+    margin-top: 30px;
+}
