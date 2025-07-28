@@ -386,3 +386,47 @@ footer {
     text-align: center;
     font-weight: 600;
     }
+/* ======================================== */
+/*      IMITERERE Y'IMIYOBORO RUSANGE       */
+/* ======================================== */
+
+#nav-placeholder {
+    position: fixed; /* Guhagarara hejuru */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+.main-nav {
+    display: flex;
+    justify-content: space-between; /* Gutandukanya ikirango n'imiyoboro */
+    align-items: center;
+    padding: 15px 30px;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.nav-logo {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+}
+
+.nav-links a {
+    color: var(--light-color);
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--secondary-color);
+}
+
+/* Gusunika ibiri ku ipaji hasi gato */
+body {
+    padding-top: 80px; /* Umwanya ungana n'uburebure bw'imiyoboro */
+}
