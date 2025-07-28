@@ -350,3 +350,39 @@ footer {
     width: 100%;
     height: 100%;
 }
+/* ======================================== */
+/*     IMITERERE Y'IPAJI Y'IBIHANGANO       */
+/* ======================================== */
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.gallery-item {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden; /* Guhisha ibirenze akarere k'ifoto */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05); /* Kwiyongera gato iyo umuntu agezeho */
+}
+
+.gallery-item img {
+    width: 100%; /* Ifoto yuzure akarere kayo */
+    height: 180px; /* Uburebure bumwe kuri zose */
+    object-fit: cover; /* Gukata ifoto neza kugira ngo yuzure */
+    display: block;
+}
+
+.gallery-caption {
+    padding: 15px;
+    text-align: center;
+    font-weight: 600;
+    }
