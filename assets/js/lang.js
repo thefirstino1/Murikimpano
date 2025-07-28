@@ -26,3 +26,14 @@ const translations = {
 // Ntabwo nahinduye iyi code ikurikira
 const languageSelector = document.getElementById('language-select');
 // ... n'ibindi ...
+// ...ibya kera...
+services_page_title: "Services - Murikimpano",
+services_title: "Our Services",
+service1_title: "Photo Printing",
+service1_desc: "We print high-quality, durable photos in all sizes with original colors.",
+service2_title: "Logo Design",
+service2_desc: "We design modern logos for companies and individuals that clearly define their brand.",
+service3_title: "AI & Crypto Training",
+service3_desc: "We teach simple ways to use artificial intelligence (AI) and invest in Cryptocurrency.",
+service4_title: "Tech Consulting",
+service4_desc: "We provide advice and support for all your web and technology-related projects."
