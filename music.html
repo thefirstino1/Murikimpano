@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="rw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="music_page_title">Umuziki - Murikimpano</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="language-switcher">
+            <select id="language-select">
+                <option value="rw">Kinyarwanda</option>
+                <option value="ki">Kirundi</option>
+                <option value="en">English</option>
+                <option value="fr">Français</option>
+                <option value="sw">Kiswahili</option>
+            </select>
+        </div>
+
+        <header>
+            <h1 data-lang-key="music_title">Umuziki wacu</h1>
+        </header>
+
+        <main>
+            <div class="media-grid">
+                <!-- Indirimbo ya mbere -->
+                <div class="media-item">
+                    <h3>INDIRIMBO YA MBERE</h3>
+                    <!-- Hano ushyiramo link ya YouTube (embed) -->
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/VIDEO_ID_HERE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <!-- Indirimbo ya kabiri -->
+                <div class="media-item">
+                    <h3>INDIRIMBO YA KABIRI</h3>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/ANOTHER_VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <a href="index.html" class="btn btn-secondary" data-lang-key="back_to_home_btn">Subira ahabanza</a>
+        </main>
+    </div>
+
+    <script src="assets/js/lang.js"></script>
+
+</body>
+</html>
