@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="rw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="contact_page_title">Twandikire - Murikimpano</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="language-switcher">
+            <select id="language-select">
+                <option value="rw">Kinyarwanda</option>
+                <option value="ki">Kirundi</option>
+                <option value="en">English</option>
+                <option value="fr">Français</option>
+                <option value="sw">Kiswahili</option>
+            </select>
+        </div>
+
+        <header>
+            <h1 data-lang-key="contact_title">Twandikire</h1>
+        </header>
+
+        <main>
+            <div class="contact-grid">
+                <!-- Igice cy'ifishi -->
+                <div class="contact-form-container">
+                    <h3 data-lang-key="send_us_message">Twoherereze ubutumwa</h3>
+                    <form id="contact-form" class="auth-form">
+                        <div class="form-group">
+                            <label for="name" data-lang-key="your_name">Izina ryawe</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" data-lang-key="your_email">Imeri yawe</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" data-lang-key="your_message">Ubutumwa bwawe</label>
+                            <textarea id="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" data-lang-key="send_btn">Ohereza</button>
+                    </form>
+                </div>
+
+                <!-- Igice cy'amakuru asanzwe -->
+                <div class="contact-info">
+                    <h3 data-lang-key="other_ways_to_contact">Uburyo bundi watuboneraho</h3>
+                    <p><strong><i class="icon-phone"></i> Telefone:</strong> +257 68 519 434</p>
+                    <p><strong><i class="icon-whatsapp"></i> WhatsApp:</strong> <a href="https://wa.me/25765702755" target="_blank">+257 65 702 755</a></p>
+                    <p><strong><i class="icon-email"></i> Imeri:</strong> gilbertgnbndayi@gmail.com</p>
+                </div>
+            </div>
+
+            <a href="index.html" class="btn btn-secondary" data-lang-key="back_to_home_btn">Subira ahabanza</a>
+        </main>
+    </div>
+
+    <script src="assets/js/lang.js"></script>
+    <!-- Tuzongeramo izindi script nyuma -->
+
+</body>
+</html>
