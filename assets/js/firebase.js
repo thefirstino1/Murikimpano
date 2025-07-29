@@ -1,8 +1,9 @@
-// Tuvanye iyi kode ku buryo bwa CDN kugira ngo ikore neza kuri GitHub Pages
+```js
+// assets/js/firebase.js
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
-// Aya ni ya makuru mashya wampaye
 const firebaseConfig = {
   apiKey: "AIzaSyBC-bxI0yfqnlp2TyDAYZH0vEYcQH_tDf0",
   authDomain: "murikimpano.firebaseapp.com",
@@ -15,5 +16,12 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Nta "export" ikirimo. Turahita tuyikoresha.
-const auth = getAuth(app);
+// Export auth kugira ngo ikoreshwe ahandi
+export const auth = getAuth(app);
+```
+
+Ubwo noneho muri `auth.js` uzajya ukoresha:
+
+```js
+import { auth } from './firebase.js';
+```
