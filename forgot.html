@@ -1,32 +1,64 @@
+```html
 <!DOCTYPE html>
 <html lang="rw">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title data-lang-key="forgot_page_title">Wibagiwe Ijambobanga? - Murikimpano</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
     <div class="container">
-        <div class="language-switcher"><select id="language-select"><option value="rw">Kinyarwanda</option><option value="ki">Kirundi</option><option value="en">English</option><option value="fr">Français</option><option value="sw">Kiswahili</option></select></div>
+        <div class="language-switcher">
+            <select id="language-select">
+                <option value="rw">Kinyarwanda</option>
+                <option value="ki">Kirundi</option>
+                <option value="en">English</option>
+                <option value="fr">Français</option>
+                <option value="sw">Kiswahili</option>
+            </select>
+        </div>
         <header><h1 data-lang-key="forgot_title">Subirana Ijambobanga</h1></header>
-        <main>
-            <p class="auth-description" data-lang-key="forgot_instruction">Shyiramo imeri yawe wakoresheje wiyandikisha. Turakoherezaho ubutumwa bugufasha gusubirana ijambobanga ryawe.</p>
-            <form class="auth-form forgot-form">
-                <div class="form-group"><label for="email" data-lang-key="email_label">Imeri yawe</label><input type="email" id="email" required></div>
+<main>
+            <p class="auth-description" data-lang-key="forgot_instruction">
+                Shyiramo imeri yawe wakoresheje wiyandikisha. Turakoherezaho ubutumwa bugufasha gusubirana ijambobanga ryawe.
+            </p>
+            <form id="forgotForm" class="auth-form forgot-form">
+                <div class="form-group">
+                    <label for="email" data-lang-key="email_label">Imeri yawe</label>
+                    <input type="email" id="email" required />
+                </div>
                 <button type="submit" class="btn btn-primary" data-lang-key="send_reset_link_btn">Ohereza Link</button>
             </form>
-            <p class="auth-link"><a href="login.html" data-lang-key="back_to_login_link">Subira ku ipaji yo Kwinjira</a></p>
+            <p class="auth-link">
+                <a href="login.html" data-lang-key="back_to_login_link">Subira ku ipaji yo Kwinjira</a>
+            </p>
         </main>
     </div>
+
     <script src="assets/js/lang.js"></script>
-    <script type="module" src="assets/js/firebase.js"></script>
-    <script type="module" src="assets/js/auth.js"></script>
-    <script src="assets/js/lang.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-<script src="assets/js/firebase.js"></script>
-<script src="assets/js/auth.js"></script>
+
+    <!-- Fungura module ya auth.js -->
+    <script type="module">
+        import { resetPassword } from './assets/js/auth.js';
+
+        const form = document.getElementById('forgotForm');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value.trim();
+
+            try {
+                await resetPassword(email);
+alert('Ubutumwa bwo gusubirana ijambobanga bwoherejwe kuri ' + email);
+                window.location.href = 'login.html';
+            } catch (error) {
+                alert('Habaye ikibazo: ' + error.message);
+            }
+        });
+    </script>
 </body>
 </html>
+```
