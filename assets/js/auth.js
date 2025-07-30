@@ -1,9 +1,10 @@
 // assets/js/auth.js
 
-// Importa functions zose dukeneye: iyo kurema umukoresha n'iyo kwinjiza umukoresha
+// Importa functions zose dukeneye:
 import { 
     createUserWithEmailAndPassword, 
-    signInWithEmailAndPassword 
+    signInWithEmailAndPassword,
+    sendPasswordResetEmail  // Iyi ni nshya
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 import { auth } from './firebase.js'; // Ihamagara 'auth' service twateguye muri firebase.js
 
@@ -15,11 +16,18 @@ export const registerUser = (email, password) => {
 };
 
 /**
- * IYI NI FUNCTION NSHYA
  * Yinjiza umukoresha usanzwe afite konti.
  */
 export const loginUser = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
 };
 
-// Nyuma tuzongeraho n'izindi nka logoutUser, forgotPassword, etc.
+/**
+ * IYI NI FUNCTION NSHYA
+ * Yohereza imeri yo gusubiza ijambobanga ryibagiwe.
+ */
+export const resetPassword = (email) => {
+    return sendPasswordResetEmail(auth, email);
+};
+
+// Nyuma tuzongeraho n'izindi nka logoutUser...
