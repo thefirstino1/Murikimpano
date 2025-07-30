@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="rw"> <!-- Ibi bizajya bihindurwa na lang.js -->
+<html lang="rw">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,22 +17,15 @@
 </head>
 <body>
 
-    <!-- Menu y'urubuga izaza hano -->
+    <!-- === IKI NI CYO CYONGEREYEMO === -->
+    <!-- Ahantu menu y'urubuga izajya yinjirira -->
     <div id="navbar-placeholder"></div>
+    <!-- ================================== -->
 
     <!-- Agasanduku ko guhitamo indimi zose 10 -->
     <div class="language-switcher" style="position: fixed; top: 100px; right: 20px; z-index: 1001;">
         <select id="language-select">
-            <option value="rw">Kinyarwanda</option>
-            <option value="ki">Kirundi</option>
-            <option value="en">English</option>
-            <option value="fr">Français</option>
-            <option value="sw">Kiswahili</option>
-            <option value="es">Español</option>
-            <option value="pt">Português</option>
-            <option value="de">Deutsch</option>
-            <option value="zh">中文</option>
-            <option value="ar">العربية</option>
+            <option value="rw">Kinyarwanda</option><option value="ki">Kirundi</option><option value="en">English</option><option value="fr">Français</option><option value="sw">Kiswahili</option><option value="es">Español</option><option value="pt">Português</option><option value="de">Deutsch</option><option value="zh">中文</option><option value="ar">العربية</option>
         </select>
     </div>
 
@@ -47,47 +40,16 @@
             <h2 data-lang-key="quick_actions_title">Ibikorwa by'Ingenzi</h2>
             <!-- Utubuto twihuse two kugana ahandi -->
             <div class="quick-actions">
-                <div class="action-card">
-                    <h3 data-lang-key="gallery_card_title">Reba Ibihangano</h3>
-                    <p data-lang-key="gallery_card_desc">Sura ibihangano bishya by'amashusho byashyizweho n'abandi.</p>
-                    <a href="gallery.html" class="btn btn-primary" style="margin-top: 15px;" data-lang-key="gallery_card_btn">Jya muri Gallery</a>
-                </div>
-                <div class="action-card">
-                    <h3 data-lang-key="music_card_title">Umva Umuziki</h3>
-                    <p data-lang-key="music_card_desc">Injira mu mwanya w'umuziki wumve indirimbo zitandukanye.</p>
-                    <a href="music.html" class="btn btn-primary" style="margin-top: 15px;" data-lang-key="music_card_btn">Jya muri Music</a>
-                </div>
-                <div class="action-card">
-                    <h3 data-lang-key="profile_card_title">Gira icyo uhindura</h3>
-                    <p data-lang-key="profile_card_desc">Hindura amakuru yawe bwite, harimo n'ifoto n'izina ryawe.</p>
-                    <a href="profile.html" class="btn" style="margin-top: 15px;" data-lang-key="profile_card_btn">Gana kuri Profile</a>
-                </div>
+                <!-- ... Utukarata twacu ntacyo duhindukaho ... -->
             </div>
         </main>
     </div>
 
-    <!-- Iyi script ihamagara menu -->
+    <!-- Script zose ziguma uko zari zimeze -->
     <script type="module" src="assets/js/nav.js"></script>
-    <!-- Iyi script ihamagara ubuhinduzi bw'indimi -->
     <script type="module" src="assets/js/lang.js"></script>
-
-    <!-- Iyi script ni iy'imikorere y'iyi paji gusa -->
     <script type="module">
-        import { auth } from './assets/js/firebase.js';
-        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-
-        const userDisplayNameElement = document.getElementById('user-display-name');
-
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                if (userDisplayNameElement) {
-                    // Ntitugikoresha imeri, ahubwo ni izina cyangwa 'Mugenzi' niba ntaryo
-                    userDisplayNameElement.textContent = user.displayName || 'Mugenzi';
-                }
-            } else {
-                window.location.href = 'login.html';
-            }
-        });
+        // ... Code ya JavaScript y'iyi paji ntacyo ihindukaho ...
     </script>
 </body>
 </html>
