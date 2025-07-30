@@ -3,57 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twandikire - Murikimpano</title>
+    <title>Serivisi Zacu - Murikimpano</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
-        .contact-container {
+        .services-grid {
             display: grid;
-            grid-template-columns: 1fr; /* Umurongo umwe kuri telefoni */
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
             margin-top: 20px;
         }
-
-        /* Iyo screen ibaye nini, ducamo kabiri */
-        @media (min-width: 800px) {
-            .contact-container {
-                grid-template-columns: 1fr 1.5fr; /* Inkingi ebyiri, iya form iba nini gato */
-            }
-        }
-        
-        .contact-info, .contact-form-container {
-            background: rgba(0, 0, 0, 0.2);
+        .service-card {
+            background-color: rgba(0, 0, 0, 0.2);
             padding: 30px;
             border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
         }
-
-        .contact-info h3, .contact-form-container h3 {
-            margin-top: 0;
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .service-card .icon {
+            font-size: 3em;
             color: var(--secondary-color);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
-
-        .contact-info p {
-            margin-bottom: 20px;
-            font-size: 1.1em;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .contact-info a {
+        .service-card h3 {
             color: var(--light-color);
-            text-decoration: none;
-            transition: color 0.3s;
+            margin-bottom: 10px;
+            font-size: 1.4em;
         }
-        .contact-info a:hover {
-            color: var(--secondary-color);
-        }
-        .contact-info .icon {
-            font-size: 1.5em;
-            color: var(--secondary-color);
-        }
-        .form-group textarea {
-            min-height: 120px;
-            resize: vertical;
+        .service-card p {
+            opacity: 0.9;
+            font-size: 1em;
+            line-height: 1.7;
         }
     </style>
 </head>
@@ -64,92 +48,66 @@
 
     <div class="container">
         <header>
-            <h1>Tuvugishe</h1>
+            <h1>Serivisi Dutanze</h1>
         </header>
 
-        <main class="contact-container">
-            <!-- Igice cya 1: Amakuru yo Kudushakaho -->
-            <div class="contact-info">
-                <h3>Aho Wadusanga</h3>
-                <p><span class="icon">📍</span> Bujumbura, burundi</p>
-                <p><span class="icon">📧</span> <a href="mailto:info@murikimpano.com">info@murikimpano.com</a></p>
-                <p><span class="icon">📞</span> <a href="tel:+25768519434">+25768519434</a></p>
-                
-                <h3>Imbuga Nkoranyambaga</h3>
-                <p><span class="icon">👍</span> <a href="#" target="_blank">Facebook</a></p>
-                <p><span class="icon">🐦</span> <a href="#" target="_blank">Twitter (X)</a></p>
-                <p><span class="icon">📸</span> <a href="#" target="_blank">Instagram</a></p>
-            </div>
+        <main>
+            <div class="services-grid">
 
-            <!-- Igice cya 2: Ifishi yo Kohereza Ubutumwa -->
-            <div class="contact-form-container">
-                <h3>Ohereza Ubutumwa</h3>
-                <form id="contact-form">
-                    <div class="form-group">
-                        <label for="contact-name">Amazina Yanyu</label>
-                        <input type="text" id="contact-name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-email">Imeri Yanyu</label>
-                        <input type="email" id="contact-email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-message">Ubutumwa</label>
-                        <textarea id="contact-message" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Ohereza</button>
-                    <p id="form-message" style="display:none; margin-top: 15px; font-weight: bold;"></p>
-                </form>
+                <div class="service-card">
+                    <div class="icon">🎨</div>
+                    <h3>Gushyiraho Ibihangano</h3>
+                    <p>
+                        Duha abahanzi b'amashusho n'amafoto umwanya wo kwohereza no kwerekana ibihangano byabo ku buryo bworoshye kandi bwizewe.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="icon">🎵</div>
+                    <h3>Gusangiza Umuziki</h3>
+                    <p>
+                        Abahanzi b'indirimbo n'abacuranzi bashobora gushyiraho umuziki wabo, bakawusangiza abakunzi babo n'isi yose.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="icon">👤</div>
+                    <h3>Umwirondoro w'Umuhanzi</h3>
+                    <p>
+                        Buri mukoresha ashobora kurema paji ye bwite (profile) yerekana amakuru ye, ifoto, n'ibindi, bikamufasha kumenyekanisha izina rye.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="icon">🌐</div>
+                    <h3>Guhuzwa n'Abandi</h3>
+                    <p>
+                        Murikimpano ni umuryango. Uruhushya guhura no kuvugana n'abandi banyempano, abakunzi b'ubugeni, n'abashobora kugutera inkunga.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="icon">🚀</div>
+                    <h3>Kumenyekanisha Impano</h3>
+                    <p>
+                        Twiyemeje gufasha impano nshya kuzamuka, tumenya uburyo bwo kumenyekanisha ibihangano byagejejwe ku rubuga rwacu.
+                    </p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="icon">🛡️</div>
+                    <h3>Umutekano w'Ibihangano</h3>
+                    <p>
+                        Ufite uburenganzira busesuye ku bihangano byawe. Ushobora kubishyiraho, kubikuraho, no kubicunga igihe cyose ubishakiye.
+                    </p>
+                </div>
+
             </div>
         </main>
     </div>
 
-    <!-- Script z'ingenzi -->
+    <!-- Script ya Menu -->
     <script type="module" src="assets/js/nav.js"></script>
-    <script type="module">
-        // Importa ibyo dukeneye muri Firestore
-        import { db } from './assets/js/firebase.js';
-        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
-        const contactForm = document.getElementById('contact-form');
-        const formMessage = document.getElementById('form-message');
-
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const name = document.getElementById('contact-name').value;
-            const email = document.getElementById('contact-email').value;
-            const message = document.getElementById('contact-message').value;
-            const submitButton = contactForm.querySelector('button');
-
-            submitButton.disabled = true;
-            submitButton.textContent = 'Tegereza...';
-
-            try {
-                // Bika ubutumwa muri collection nshya yitwa "messages"
-                await addDoc(collection(db, "messages"), {
-                    name: name,
-                    email: email,
-                    message: message,
-                    sentAt: new Date()
-                });
-
-                formMessage.textContent = "Ubutumwa bwawe bwoherejwe neza. Turagusubiza vuba!";
-                formMessage.style.color = 'var(--success-color)';
-                formMessage.style.display = 'block';
-                contactForm.reset();
-                submitButton.textContent = 'Ohereza';
-                submitButton.disabled = false;
-
-            } catch (error) {
-                console.error("Ikosa mu kohereza ubutumwa: ", error);
-                formMessage.textContent = "Habaye ikosa. Nyamuneka, ongera ugerageze.";
-                formMessage.style.color = 'var(--danger-color)';
-                formMessage.style.display = 'block';
-                submitButton.textContent = 'Ohereza';
-                submitButton.disabled = false;
-            }
-        });
-    </script>
 </body>
 </html>
