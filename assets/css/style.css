@@ -1,5 +1,6 @@
 /* ======================================== */
 /*      STYLE NSHYA YA MURIKIMPANO 2025     */
+/*          (IVUGURUYE KANDI IHUJWE)        */
 /* ======================================== */
 
 /* Amabara n'inyandiko by'ibanze */
@@ -9,7 +10,8 @@
     --dark-color: #1e272e;      /* Umukara wijimye */
     --light-color: #f1f2f6;     /* Umweru wijimye */
     --success-color: #2ecc71;   /* Icyatsi kibisi */
-    --font-family: 'Nunito', sans-serif; /* Inyandiko nziza */
+    --danger-color: #e74c3c;    /* Umutuku w'akaga */
+    --font-family: 'Nunito', 'Poppins', sans-serif;
 }
 
 /* Inyuma y'umubiri wose */
@@ -19,138 +21,77 @@ body {
     background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
     color: var(--light-color);
     line-height: 1.6;
-    overflow-x: hidden; /* Kwirinda ko hari ibirenza urubuga */
+    overflow-x: hidden;
+    padding-top: 80px; /* Gusunika ibiri ku ipaji hasi gato */
 }
 
 /* Agasanduku k'ingenzi */
 .container {
-    background-color: rgba(255, 255, 255, 0.08); /* Umweru uciriritse */
+    background-color: rgba(255, 255, 255, 0.08);
     border-radius: 12px;
-    padding: 40px;
-    max-width: 500px;
-    margin: 20px auto; /* Guhagarara hagati */
+    padding: 20px 40px;
+    max-width: 900px; /* Twongereye gato kugira ngo paji nka gallery iboneke neza */
+    margin: 20px auto;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    position: relative; /* Kugira ngo ibindi bice bishobore guhagarara neza */
-    overflow: hidden; /* Kwirinda ibirenza akarere */
 }
 
-/* Agasanduku ko guhindura ururimi */
-.language-switcher {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 10;
-}
-
-#language-select {
-    padding: 10px 15px;
-    border-radius: 8px;
-    border: none;
-    background-color: rgba(255, 255, 255, 0.2);
-    color: var(--light-color);
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#language-select:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-}
-
-/* Ikirango */
-.logo {
-    width: 120px;
-    height: 120px;
-    object-fit: contain;
-    border-radius: 50%;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    margin-bottom: 25px;
+header h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
 }
 
 /* Imitwe y'inyandiko */
-h1 {
-    font-size: 2.4em;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-    margin-bottom: 35px;
-    text-transform: uppercase;
+h2 {
+    color: var(--secondary-color);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 5px;
+    margin-top: 25px;
+    margin-bottom: 15px;
 }
 
 /* Utubuto */
 .btn {
     display: inline-block;
-    padding: 14px 28px;
-    background-color: var(--light-color);
-    color: var(--dark-color);
+    padding: 10px 20px;
+    background-color: var(--secondary-color);
+    color: var(--light-color);
     font-weight: 600;
     text-decoration: none;
     border-radius: 30px;
     transition: all 0.3s ease;
     border: none;
+    cursor: pointer;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    text-transform: uppercase;
-    letter-spacing: 1px;
 }
-
 .btn:hover {
-    transform: translateY(-3px);
+    transform: translateY(-2px);
     box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
 }
-
 .btn-primary {
-    background: linear-gradient(to right, #ff7979, #ff4757); /* Amabara atukura */
+    background: var(--primary-color);
     color: var(--light-color);
 }
-
-.btn-secondary {
-    background-color: rgba(0, 0, 0, 0.1);
-    color: var(--light-color);
-    border: 2px solid var(--light-color);
+.btn-danger {
+    background: var(--danger-color);
 }
 
-.btn-tertiary {
-    background: none;
-    color: var(--light-color);
-    font-size: 0.9em;
-    opacity: 0.8;
-}
-
-.btn-tertiary:hover {
-    opacity: 1;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-}
-
-/* Akayunguruzo ko hasi */
-footer {
-    text-align: center;
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    font-size: 0.85em;
-    color: var(--light-color);
-    opacity: 0.8;
-}
-
-/* Amafishi yo Kwiyandikisha/Kwinjira */
+/* Amafishi yo Kwiyandikisha/Kwinjira (Auth Forms) */
 .auth-form {
-    margin-top: 30px;
+    max-width: 450px;
+    margin: 40px auto;
+    padding: 30px;
 }
-
 .form-group {
     margin-bottom: 20px;
-    text-align: left;
 }
-
 .form-group label {
     display: block;
     margin-bottom: 8px;
     font-weight: 600;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
-
-.form-group input {
+.form-group input, .form-group textarea {
     width: 100%;
     padding: 12px 15px;
     font-size: 1em;
@@ -158,262 +99,35 @@ footer {
     border-radius: 25px;
     background-color: rgba(255, 255, 255, 0.1);
     color: var(--light-color);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
 }
-
 .form-group input:focus {
     outline: none;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 0 2px var(--secondary-color);
 }
 
-.auth-link {
-    margin-top: 25px;
-    text-align: center;
-}
-
-.auth-link a {
-    color: var(--secondary-color);
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-.auth-link a:hover {
-    color: var(--light-color);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-}
-
-/* Ubutumwa bwo kumenyesha (Notifications) */
-.notification {
+/* Imiroboro (Navigation) */
+#navbar-placeholder {
     position: fixed;
-    top: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--success-color);
-    color: var(--light-color);
-    padding: 15px 30px;
-    border-radius: 30px;
+    top: 0;
+    left: 0;
+    width: 100%;
     z-index: 1000;
-    font-weight: bold;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
-
-.notification.error {
-    background-color: #e74c3c; /* Umutuku w'akaga */
-    }
-/* ======================================== */
-/*      IMITERERE Y'IPAJI YA "ABO TURI BO"   */
-/* ======================================== */
-
-.about-content {
-    text-align: left; /* Amagambo atangirire ibumoso */
-    margin-top: 20px;
-}
-
-.about-content h2 {
-    color: var(--secondary-color); /* Ubururu bw'amazi */
-    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-    padding-bottom: 5px;
-    margin-top: 25px;
-    margin-bottom: 15px;
-    font-size: 1.5em;
-}
-
-.about-content p {
-    font-size: 1.1em;
-    line-height: 1.7;
-    opacity: 0.9;
-}
-.about-content .btn {
-    margin-top: 30px;
-}
-/* ======================================== */
-/*      IMITERERE Y'IPAJI YA "SERIVISI"     */
-/* ======================================== */
-
-.services-grid {
-    display: grid; /* Gukora imirongo n'inkingi */
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Gupanga utukarata */
-    gap: 25px; /* Umwanya hagati y'udukarata */
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
-
-.service-card {
-    background-color: rgba(0, 0, 0, 0.2);
-    padding: 25px;
-    border-radius: 10px;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.service-card:hover {
-    transform: translateY(-5px); /* Kuzamuka gato iyo umuntu agezeho */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.service-card h3 {
-    color: var(--secondary-color);
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 1.3em;
-}
-
-.service-card p {
-    opacity: 0.9;
-    font-size: 1em;
-    }
-/* ======================================== */
-/*     IMITERERE Y'IPAJI YA "TWANDIKIRE"    */
-/* ======================================== */
-.contact-grid {
-    display: grid;
-    grid-template-columns: 1fr; /* Umurongo umwe kuri telefone */
-    gap: 40px;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    text-align: left;
-}
-
-/* Iyo screen ibaye nini, ducamo kabiri */
-@media (min-width: 768px) {
-    .contact-grid {
-        grid-template-columns: 1fr 1fr; /* Inkingi ebyiri kuri mudasobwa */
-    }
-}
-
-.contact-info h3, .contact-form-container h3 {
-    color: var(--secondary-color);
-    margin-top: 0;
-    margin-bottom: 20px;
-}
-
-.contact-info p {
-    margin-bottom: 15px;
-    font-size: 1.1em;
-}
-.contact-info a {
-    color: var(--light-color);
-    text-decoration: none;
-}
-.contact-info a:hover {
-    text-decoration: underline;
-}
-
-.form-group textarea {
-    width: 100%;
-    padding: 12px 15px;
-    font-size: 1em;
-    border: none;
-    border-radius: 15px;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--light-color);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-    resize: vertical; /* Kwemerera guhindura uburebure */
-    font-family: var(--font-family);
-}
-/* ======================================== */
-/*   IMITERERE Y'IPAJI Y'UMUZIKI N'IBIHANGANO */
-/* ======================================== */
-
-.media-grid {
-    display: grid;
-    grid-template-columns: 1fr; /* Umurongo umwe kuri telefone */
-    gap: 40px;
-    margin-top: 20px;
-    margin-bottom: 30px;
-}
-
-.media-item h3 {
-    color: var(--secondary-color);
-    margin-top: 0;
-    margin-bottom: 15px;
-    text-align: center;
-}
-
-.video-container {
-    position: relative;
-    padding-bottom: 56.25%; /* Ibi bituma video igira ingano ya 16:9 */
-    height: 0;
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-
-.video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-/* ======================================== */
-/*     IMITERERE Y'IPAJI Y'IBIHANGANO       */
-/* ======================================== */
-
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-    margin-bottom: 30px;
-}
-
-.gallery-item {
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    overflow: hidden; /* Guhisha ibirenze akarere k'ifoto */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease;
-}
-
-.gallery-item:hover {
-    transform: scale(1.05); /* Kwiyongera gato iyo umuntu agezeho */
-}
-
-.gallery-item img {
-    width: 100%; /* Ifoto yuzure akarere kayo */
-    height: 180px; /* Uburebure bumwe kuri zose */
-    object-fit: cover; /* Gukata ifoto neza kugira ngo yuzure */
-    display: block;
-}
-
-.gallery-caption {
-    padding: 15px;
-    text-align: center;
-    font-weight: 600;
-    }
-/* ======================================== */
-/*      IMITERERE Y'IMIYOBORO RUSANGE       */
-/* ======================================== */
-
-#nav-placeholder {
-    position: fixed; /* Guhagarara hejuru */
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 100;
-}
-
 .main-nav {
     display: flex;
-    justify-content: space-between; /* Gutandukanya ikirango n'imiyoboro */
+    justify-content: space-between;
     align-items: center;
     padding: 15px 30px;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(30, 39, 46, 0.3); /* Umukara uciriritse */
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
-
 .nav-logo {
     font-size: 1.5em;
     font-weight: 700;
     color: white;
     text-decoration: none;
 }
-
 .nav-links a {
     color: var(--light-color);
     text-decoration: none;
@@ -421,12 +135,76 @@ footer {
     font-weight: 600;
     transition: color 0.3s ease;
 }
-
 .nav-links a:hover {
     color: var(--secondary-color);
 }
 
-/* Gusunika ibiri ku ipaji hasi gato */
-body {
-    padding-top: 80px; /* Umwanya ungana n'uburebure bw'imiyoboro */
+/* Gallery & Music Pages */
+.gallery-grid, .music-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    padding: 0; /* Gukuraho padding ya list */
+}
+
+.gallery-item, .music-item {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.gallery-item:hover, .music-item:hover {
+    transform: translateY(-5px);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.music-item audio {
+    width: 100%;
+    margin-top: 10px;
+}
+.gallery-item h3, .music-item h3 {
+    color: var(--secondary-color);
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+.gallery-item .btn, .music-item .btn {
+    margin-top: 10px;
+}
+
+/* Profile Page */
+.profile-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+.profile-picture-section, .profile-details {
+    flex: 1;
+    min-width: 300px;
+    background: rgba(0,0,0,0.1);
+    padding: 20px;
+    border-radius: 8px;
+}
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--secondary-color);
+    display: block;
+    margin: 0 auto 20px;
+}
+
+/* Ibindi */
+.auth-link a {
+    color: var(--secondary-color);
+    text-decoration: none;
 }
