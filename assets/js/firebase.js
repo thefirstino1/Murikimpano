@@ -2,6 +2,7 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"; // <<< 1. ONGERAMO UYU MURONGO
 
 // Ibirango byawe bya Firebase (Config)
 const firebaseConfig = {
@@ -18,5 +19,6 @@ const firebaseConfig = {
 // Tangiza Firebase
 const app = initializeApp(firebaseConfig);
 
-// Satura service yo kwandikisha (Authentication) hanyuma uyisohore (export)
+// Satura services zose dukeneye hanyuma uzisohore (export)
 export const auth = getAuth(app);
+export const db = getFirestore(app); // <<< 2. ONGERAMO N'UYU MURONGO
