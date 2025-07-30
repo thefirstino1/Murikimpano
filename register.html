@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="rw">
+<html lang="rw"> <!-- Ibi bizajya bihindurwa na lang.js -->
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,21 +7,33 @@
     <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-    <div class="container">
-        <div class="language-switcher">
+    
+    <!-- Menu y'urubuga izaza hano -->
+    <div id="navbar-placeholder"></div>
+
+    <div class="container auth-form">
+        <!-- Agasanduku ko guhitamo indimi zose 10 -->
+        <div class="language-switcher" style="position: absolute; top: 20px; right: 20px; z-index: 1001;">
             <select id="language-select">
                 <option value="rw">Kinyarwanda</option>
                 <option value="ki">Kirundi</option>
                 <option value="en">English</option>
                 <option value="fr">Français</option>
                 <option value="sw">Kiswahili</option>
+                <option value="es">Español</option>
+                <option value="pt">Português</option>
+                <option value="de">Deutsch</option>
+                <option value="zh">中文</option>
+                <option value="ar">العربية</option>
             </select>
         </div>
         
-        <header><h1 data-lang-key="create_new_account_title">Fungura Konti Nshya</h1></header>
+        <header>
+            <h1 data-lang-key="register_title">Fungura Konti Nshya</h1>
+        </header>
         
         <main>
-            <form id="registerForm" class="auth-form register-form">
+            <form id="registerForm">
                 <div class="form-group">
                     <label for="email" data-lang-key="email_label">Imeri yawe</label>
                     <input type="email" id="email" required autocomplete="email" />
@@ -33,7 +45,7 @@
                 <button type="submit" class="btn btn-primary" data-lang-key="register_btn">Iyandikishe</button>
             </form>
             
-            <!-- Aho ubutumwa bw'amakosa n'ibindi byose byerekanwa -->
+            <!-- Agace ko kwerekana ubutumwa bw'amakosa n'ibindi -->
             <p id="message" style="display:none; font-weight: bold; margin-top: 15px; padding: 10px; border-radius: 5px;"></p>
 
             <p class="auth-link">
@@ -43,18 +55,22 @@
         </main>
     </div>
 
-    <script src="assets/js/lang.js"></script>
-
+    <!-- Iyi script ihamagara menu -->
+    <script type="module" src="assets/js/nav.js"></script>
+    <!-- Iyi script ihamagara ubuhinduzi bw'indimi -->
+    <script type="module" src="assets/js/lang.js"></script>
+    
+    <!-- Iyi script ni iy'imikorere y'iyi paji gusa -->
     <script type="module">
         import { registerUser } from './assets/js/auth.js';
 
+        // Nta cyo twahinduye kuri iyi code kuko imeze neza
         const form = document.getElementById('registerForm');
         const messageElement = document.getElementById('message');
         const submitButton = form.querySelector('button');
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value.trim();
 
@@ -66,7 +82,7 @@
                 .then(userCredential => {
                     messageElement.textContent = 'Wiyandikishije neza! Ubu woherejwe ku paji yo kwinjira...';
                     messageElement.style.color = 'white';
-                    messageElement.style.backgroundColor = 'green';
+                    messageElement.style.backgroundColor = 'var(--success-color)';
                     messageElement.style.display = 'block';
                     
                     setTimeout(() => {
@@ -85,7 +101,7 @@
                     
                     messageElement.textContent = userMessage;
                     messageElement.style.color = 'white';
-                    messageElement.style.backgroundColor = 'red';
+                    messageElement.style.backgroundColor = 'var(--danger-color)';
                     messageElement.style.display = 'block';
 
                     submitButton.disabled = false; 
@@ -94,4 +110,4 @@
         });
     </script>
 </body>
-    </html>
+</html>
