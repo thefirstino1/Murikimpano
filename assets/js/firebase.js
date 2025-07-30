@@ -1,10 +1,9 @@
 // assets/js/firebase.js
 
-// Importa function dukeneye zo muri Firebase SDK
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
-// Aya ni ya makuru nyayo ya Firebase yawe. Nta kibazo, ubu ni byo.
+// Ibirango byawe bya Firebase (Config)
 const firebaseConfig = {
   apiKey: "AIzaSyBC-bxI0yfqnlp2TyDAYZH0vEYcQH_tDf0",
   authDomain: "murikimpano.firebaseapp.com",
@@ -16,9 +15,8 @@ const firebaseConfig = {
   measurementId: "G-08Q2CKEE87"
 };
 
-// Tangiza Firebase ukoresheje uburyo bushya
+// Tangiza Firebase
 const app = initializeApp(firebaseConfig);
 
 // Satura service yo kwandikisha (Authentication) hanyuma uyisohore (export)
-// kugira ngo izindi dosiye zizabashe kuyikoresha.
 export const auth = getAuth(app);
