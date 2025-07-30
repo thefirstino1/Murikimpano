@@ -4,12 +4,13 @@
 import { 
     createUserWithEmailAndPassword, 
     signInWithEmailAndPassword,
-    sendPasswordResetEmail  // Iyi ni nshya
+    sendPasswordResetEmail,
+    signOut // IYI NI NSHYA
 } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-import { auth } from './firebase.js'; // Ihamagara 'auth' service twateguye muri firebase.js
+import { auth } from './firebase.js'; // Ihamagara 'auth' service
 
 /**
- * Iyi function yandikisha umukoresha mushya muri Firebase.
+ * Yandikisha umukoresha mushya.
  */
 export const registerUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -23,11 +24,16 @@ export const loginUser = (email, password) => {
 };
 
 /**
- * IYI NI FUNCTION NSHYA
  * Yohereza imeri yo gusubiza ijambobanga ryibagiwe.
  */
 export const resetPassword = (email) => {
     return sendPasswordResetEmail(auth, email);
 };
 
-// Nyuma tuzongeraho n'izindi nka logoutUser...
+/**
+ * IYI NI FUNCTION NSHYA
+ * Isahora umukoresha wari warinjiye.
+ */
+export const logoutUser = () => {
+    return signOut(auth);
+};
