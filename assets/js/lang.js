@@ -4,109 +4,83 @@
 // ==========================================================
 
 const translations = {
-    // 1. Ikinyarwanda
+    // 1. Kinyarwanda
     'rw': {
-        // Imiyoboro (Menu)
-        'nav_about': 'Abo Turibo', 'nav_services': 'Serivisi', 'nav_music': 'Umuziki',
-        'nav_gallery': 'Ibihangano', 'nav_contact': 'Twandikire', 'nav_login': 'Injira', 'nav_register': 'Iyandikishe',
-        // Ipaji yo Kwinjira (Login)
-        'login_page_title': 'Injira - Murikimpano', 'login_title': 'Injira Muri Konti Yawe',
-        'email_label': 'Imeri yawe', 'password_label': 'Ijambobanga', 'login_btn_main': 'Injira',
-        'forgot_password_link': 'Wibagiwe ijambobanga?', 'no_account_yet': 'Nta konti ufite?',
-        'create_one_link': 'Fungura imwe hano',
-        // Ipaji yo Kwiyandikisha (Register)
-        'register_page_title': 'Fungura Konti - Murikimpano', 'register_title': 'Fungura Konti Nshya',
-        'register_btn': 'Iyandikishe', 'already_have_account': 'Usanganywe konti?', 'login_here_link': 'Injira hano',
-        // Ipaji yo Kwibagirwa Ijambobanga (Forgot)
-        'forgot_page_title': 'Wibagiwe Ijambobanga? - Murikimpano', 'forgot_title': 'Subirana Ijambobanga',
-        'forgot_instruction': 'Shyiramo imeri wakoresheje wiyandikisha. Turakoherezaho ubutumwa bugufasha.',
-        'send_reset_link_btn': 'Ohereza Link', 'back_to_login_link': 'Subira ku ipaji yo Kwinjira',
-        // Ipaji y'Ikaze (Index)
-        'welcome_page_title': 'Ikaze - Murikimpano', 'welcome_greeting': 'Ikaze,',
-        'welcome_subtitle': 'Twishimiye kongera kukubona. Sangiza abandi impano yawe!',
-        'quick_actions_title': 'Ibikorwa by\'Ingenzi',
-        'gallery_card_title': 'Reba Ibihangano', 'gallery_card_desc': 'Sura ibihangano bishya by\'amashusho byashyizweho.',
-        'gallery_card_btn': 'Jya muri Gallery',
-        'music_card_title': 'Umva Umuziki', 'music_card_desc': 'Injira mu mwanya w\'umuziki wumve indirimbo zitandukanye.',
-        'music_card_btn': 'Jya muri Music',
-        'profile_card_title': 'Gira Icyo Uhindura', 'profile_card_desc': 'Hindura amakuru yawe bwite, harimo n\'ifoto n\'izina ryawe.',
-        'profile_card_btn': 'Gana kuri Profile',
-        // Ipaji ya "Abo Turi Bo" (About)
-        'about_page_title': 'Abo Turi Bo - Murikimpano', 'about_title': 'Abo Turi Bo',
-        'about_mission_title': 'Intego ya Murikimpano',
-        'about_mission_p': 'Murikimpano ni urubuga rwashyiriweho gufasha abanyempano bose, aho bava bakagera, kubona umwanya wo kwerekana no gusangiza isi yose ibihangano byabo.',
-        'about_vision_title': 'Icyo Dukora',
-        'about_vision_p': 'Duha abahanzi bose uburyo bwo gushyiraho ibihangano byabo. Urubuga rwacu rworohereza buri wese kurema umwirondoro we no guhura n\'abandi.',
-        'about_team_title': 'Ikipe yacu', 'team_member1_role': 'Washinze Urubuga',
-        'team_member2_role': 'Ushinzwe Ikoranabuhanga', 'team_member3_role': 'Ushinzwe Abahanzi',
-        // Ipaji ya "Serivisi"
-        'services_page_title': 'Serivisi Zacu - Murikimpano', 'services_title': 'Serivisi Dutanze',
-        'service1_title': 'Gushyiraho Ibihangano', 'service1_desc': 'Duha abahanzi b\'amashusho n\'amafoto umwanya wo kwohereza no kwerekana ibihangano byabo.',
-        'service2_title': 'Gusangiza Umuziki', 'service2_desc': 'Abahanzi b\'indirimbo bashobora gushyiraho umuziki wabo, bakawusangiza abakunzi babo.',
-        'service3_title': 'Umwirondoro w\'Umuhanzi', 'service3_desc': 'Buri mukoresha ashobora kurema paji ye bwite yerekana amakuru ye n\'ifoto ye.',
-        'service4_title': 'Guhuzwa n\'Abandi', 'service4_desc': 'Murikimpano ni umuryango. Uruhushya guhura n\'abandi banyempano n\'abakunzi b\'ubugeni.',
-        'service5_title': 'Kumenyekanisha Impano', 'service5_desc': 'Twiyemeje gufasha impano nshya kuzamuka no kumenyekanisha ibihangano byabo.',
-        'service6_title': 'Umutekano w\'Ibihangano', 'service6_desc': 'Ufite uburenganzira busesuye ku bihangano byawe. Ushobora kubicunga igihe cyose ubishakiye.',
-        // Ipaji yo "Kutwandikira" (Contact)
-        'contact_page_title': 'Twandikire - Murikimpano', 'contact_title': 'Tuvugishe',
-        'contact_info_title': 'Aho Wadusanga', 'social_media_title': 'Imbuga Nkoranyambaga',
-        'send_message_title': 'Ohereza Ubutumwa', 'contact_name_label': 'Amazina Yanyu',
-        'contact_email_label': 'Imeri Yanyu', 'contact_message_label': 'Ubutumwa', 'send_btn': 'Ohereza',
+        'nav_about':'Abo Turibo','nav_services':'Serivisi','nav_music':'Umuziki','nav_gallery':'Ibihangano','nav_contact':'Twandikire','nav_login':'Injira','nav_register':'Iyandikishe',
+        'login_page_title':'Injira - Murikimpano','login_title':'Injira Muri Konti Yawe','email_label':'Imeri yawe','password_label':'Ijambobanga','login_btn_main':'Injira','forgot_password_link':'Wibagiwe ijambobanga?','no_account_yet':'Nta konti ufite?','create_one_link':'Fungura imwe hano',
+        'register_page_title':'Fungura Konti - Murikimpano','register_title':'Fungura Konti Nshya','register_btn':'Iyandikishe','already_have_account':'Usanganywe konti?','login_here_link':'Injira hano',
+        'forgot_page_title':'Wibagiwe Ijambobanga? - Murikimpano','forgot_title':'Subirana Ijambobanga','forgot_instruction':'Shyiramo imeri wakoresheje wiyandikisha. Turakoherezaho ubutumwa bugufasha.','send_reset_link_btn':'Ohereza Link','back_to_login_link':'Subira ku ipaji yo Kwinjira',
+        'welcome_page_title':'Ikaze - Murikimpano','welcome_greeting':'Ikaze,','welcome_subtitle':'Twishimiye kongera kukubona. Sangiza abandi impano yawe!','quick_actions_title':'Ibikorwa by\'Ingenzi',
+        'gallery_card_title':'Reba Ibihangano','gallery_card_desc':'Sura ibihangano bishya by\'amashusho byashyizweho.','gallery_card_btn':'Jya muri Gallery',
+        'music_card_title':'Umva Umuziki','music_card_desc':'Injira mu mwanya w\'umuziki wumve indirimbo zitandukanye.','music_card_btn':'Jya muri Music',
+        'profile_card_title':'Gira Icyo Uhindura','profile_card_desc':'Hindura amakuru yawe bwite, harimo n\'ifoto n\'izina ryawe.','profile_card_btn':'Gana kuri Profile',
+        'about_page_title':'Abo Turi Bo - Murikimpano','about_title':'Abo Turi Bo','about_mission_title':'Intego ya Murikimpano','about_mission_p':'Murikimpano ni urubuga rwashyiriweho gufasha abanyempano bose kubona umwanya wo kwerekana no gusangiza isi ibihangano byabo.','about_vision_title':'Icyo Dukora','about_vision_p':'Duha abahanzi bose uburyo bwo gushyiraho ibihangano byabo, kurema umwirondoro wabo, no guhura n\'abandi.','about_team_title':'Ikipe yacu','team_member1_role':'Washinze Urubuga','team_member2_role':'Ushinzwe Ikoranabuhanga','team_member3_role':'Ushinzwe Abahanzi',
+        'services_page_title':'Serivisi Zacu - Murikimpano','services_title':'Serivisi Dutanze','service1_title':'Gushyiraho Ibihangano','service1_desc':'Duha abahanzi b\'amashusho n\'amafoto umwanya wo kwerekana ibihangano byabo.','service2_title':'Gusangiza Umuziki','service2_desc':'Abahanzi b\'indirimbo bashobora gushyiraho umuziki wabo bakawusangiza abakunzi babo.','service3_title':'Umwirondoro w\'Umuhanzi','service3_desc':'Buri mukoresha ashobora kurema paji ye bwite yerekana amakuru ye n\'ifoto ye.','service4_title':'Guhuzwa n\'Abandi','service4_desc':'Murikimpano ni umuryango ugufasha guhura n\'abandi banyempano n\'abakunzi b\'ubugeni.','service5_title':'Kumenyekanisha Impano','service5_desc':'Twiyemeje gufasha impano nshya kuzamuka no kumenyekanisha ibihangano byabo.','service6_title':'Umutekano w\'Ibihangano','service6_desc':'Ufite uburenganzira busesuye ku bihangano byawe. Ushobora kubicunga igihe cyose ubishakiye.',
+        'contact_page_title':'Twandikire - Murikimpano','contact_title':'Tuvugishe','contact_info_title':'Aho Wadusanga','social_media_title':'Imbuga Nkoranyambaga','send_message_title':'Ohereza Ubutumwa','contact_name_label':'Amazina Yanyu','contact_email_label':'Imeri Yanyu','contact_message_label':'Ubutumwa','send_btn':'Ohereza'
     },
-    // 2. Icyongereza
+    // 2. Kirundi
+    'ki': {
+        'nav_about':'Abo Turi','nav_services':'Ibitunganywa','nav_music':'Umuziki','nav_gallery':'Ibikorwa','nav_contact':'Twandikire','nav_login':'Injira','nav_register':'Iyandikishe',
+        'login_page_title':'Injira - Murikimpano','login_title':'Injira muri Konti yawe','email_label':'Imeri yawe','password_label':'Ijambo ry\'ibanga','login_btn_main':'Injira','forgot_password_link':'Wibagiwe ijambo ry\'ibanga?','no_account_yet':'Nta Konti ufise?','create_one_link':'Ugurura imwe hano',
+        'register_page_title':'Ugurura Konti - Murikimpano','register_title':'Ugurura Konti Nshasha','register_btn':'Iyandikishe','already_have_account':'Ufise konti?','login_here_link':'Injira hano',
+        'forgot_page_title':'Wibagiwe Ijambo ry\'ibanga? - Murikimpano','forgot_title':'Subiza Ijambo ry\'ibanga','forgot_instruction':'Andika imeri wakoresheje wiyandikisha. Turakurungikira ubutumwa bugufasha.','send_reset_link_btn':'Rungika Link','back_to_login_link':'Subira ku rupapuro rwo Kwinjira',
+        'welcome_page_title':'Ikaze - Murikimpano','welcome_greeting':'Ikaze,','welcome_subtitle':'Twahimbawe no kongera kukubona. Sangiza abandi ingabirano yawe!','quick_actions_title':'Ibikorwa Vyihuta',
+        'gallery_card_title':'Raba Ibikorwa','gallery_card_desc':'Sura ibikorwa bishasha vy\'amashusho vyashizweho.','gallery_card_btn':'Ja muri Gallery',
+        'music_card_title':'Umviriza Umuziki','music_card_desc':'Injira mu mwanya w\'umuziki wumvirize indirimbo zitandukanye.','music_card_btn':'Ja muri Music',
+        'profile_card_title':'Gira Ico Uhindura','profile_card_desc':'Hindura amakuru yawe, harimwo n\'ifoto n\'izina ryawe.','profile_card_btn':'Ja kuri Profile',
+        'about_page_title':'Abo Turi - Murikimpano','about_title':'Abo Turi','about_mission_title':'Intego ya Murikimpano','about_mission_p':'Murikimpano ni urubuga rwashizweho gufasha abanyengabirano bose kuronka umwanya wo kwereka no gusangiza isi ibikorwa vyabo.','about_vision_title':'Ico Dukora','about_vision_p':'Duha abahinga bose uburyo bwo gushiraho ibikorwa vyabo, kwiremera umwirondoro, no guhura n\'abandi.','about_team_title':'Umugwi wacu','team_member1_role':'Uwashinze Urubuga','team_member2_role':'Abijejwe Ubuhinga','team_member3_role':'Abijejwe Abahinga',
+        'services_page_title':'Ibitunganywa - Murikimpano','services_title':'Ibitunganywa Vyacu','service1_title':'Gushiraho Ibikorwa','service1_desc':'Duha abahinga b\'amashusho n\'amafoto umwanya wo kwerekana ibikorwa vyabo.','service2_title':'Gusangiza Umuziki','service2_desc':'Abaririmvyi barashobora gushiraho umuziki wabo bakawusangiza abakunzi babo.','service3_title':'Umwirondoro w\'Umuhinga','service3_desc':'Buri mukoresha arashobora kwiremera urupapuro rwiwe rwerekana amakuru n\'ifoto yiwe.','service4_title':'Guhuza n\'Abandi','service4_desc':'Murikimpano ni umuryango ugufasha guhura n\'abandi banyengabirano n\'abakunzi b\'ubuhinga.','service5_title':'Kumenyekanisha Ingabirano','service5_desc':'Twiyemeje gufasha ingabirano nshasha kuzamuka no kumenyekanisha ibikorwa vyabo.','service6_title':'Umutekano w\'Ibikorwa','service6_desc':'Ufise uburenganzira busesuye ku bikorwa vyawe. Urashobora kubicunga igihe cose ubishakiye.',
+        'contact_page_title':'Twandikire - Murikimpano','contact_title':'Tuvugishe','contact_info_title':'Aho Mwadusanga','social_media_title':'Imbuga Ngurukanabumenyi','send_message_title':'Rungika Ubutumwa','contact_name_label':'Amazina Yanyu','contact_email_label':'Imeri Yanyu','contact_message_label':'Ubutumwa','send_btn':'Rungika'
+    },
+    // 3. English
     'en': {
-        'nav_about': 'About Us', 'nav_services': 'Services', 'nav_music': 'Music', 'nav_gallery': 'Gallery', 'nav_contact': 'Contact', 'nav_login': 'Login', 'nav_register': 'Register',
-        'login_page_title': 'Login - Murikimpano', 'login_title': 'Login to Your Account', 'email_label': 'Your Email', 'password_label': 'Password', 'login_btn_main': 'Login', 'forgot_password_link': 'Forgot password?', 'no_account_yet': 'Don\'t have an account?', 'create_one_link': 'Create one here',
-        'register_page_title': 'Register - Murikimpano', 'register_title': 'Create a New Account', 'register_btn': 'Register', 'already_have_account': 'Already have an account?', 'login_here_link': 'Login here',
-        'forgot_page_title': 'Forgot Password? - Murikimpano', 'forgot_title': 'Reset Password', 'forgot_instruction': 'Enter the email you used to register. We will send you a message to help you.', 'send_reset_link_btn': 'Send Link', 'back_to_login_link': 'Back to Login page',
-        'welcome_page_title': 'Welcome - Murikimpano', 'welcome_greeting': 'Welcome,', 'welcome_subtitle': 'We are happy to see you again. Share your talent with others!', 'quick_actions_title': 'Quick Actions',
-        'gallery_card_title': 'View The Gallery', 'gallery_card_desc': 'Visit the gallery to see new visual creations posted by others.', 'gallery_card_btn': 'Go to Gallery',
-        'music_card_title': 'Listen to Music', 'music_card_desc': 'Enter the music space to listen to various songs.', 'music_card_btn': 'Go to Music',
-        'profile_card_title': 'Make a Change', 'profile_card_desc': 'Change your personal information, including your photo and name.', 'profile_card_btn': 'Go to Profile',
-        'about_page_title': 'About Us - Murikimpano', 'about_title': 'About Us', 'about_mission_title': 'Mission of Murikimpano', 'about_mission_p': 'Murikimpano is a platform created to help all talented people, wherever they are, to find a space to showcase and share their creations with the world.', 'about_vision_title': 'What We Do', 'about_vision_p': 'We give all artists the means to post their creations. Our platform makes it easy for everyone to create their profile and connect with others.', 'about_team_title': 'Our Team', 'team_member1_role': 'Founder', 'team_member2_role': 'Lead Developer', 'team_member3_role': 'Artist Relations',
-        'services_page_title': 'Our Services - Murikimpano', 'services_title': 'Our Services',
-        'service1_title': 'Artwork Upload', 'service1_desc': 'We provide visual artists and photographers a space to upload and showcase their creations.',
-        'service2_title': 'Music Sharing', 'service2_desc': 'Musicians can upload their music and share it with their fans.',
-        'service3_title': 'Artist Profile', 'service3_desc': 'Each user can create their own profile page showing their information and photo.',
-        'service4_title': 'Community Connection', 'service4_desc': 'Murikimpano is a community. It allows you to meet other talented people and art lovers.',
-        'service5_title': 'Talent Promotion', 'service5_desc': 'We are committed to helping new talents rise by promoting their creations.',
-        'service6_title': 'Content Security', 'service6_desc': 'You have full rights to your creations. You can manage them whenever you want.',
-        'contact_page_title': 'Contact Us - Murikimpano', 'contact_title': 'Contact Us', 'contact_info_title': 'Our Location', 'social_media_title': 'Social Media', 'send_message_title': 'Send a Message', 'contact_name_label': 'Your Name', 'contact_email_label': 'Your Email', 'contact_message_label': 'Message', 'send_btn': 'Send',
+        'nav_about':'About Us','nav_services':'Services','nav_music':'Music','nav_gallery':'Gallery','nav_contact':'Contact','nav_login':'Login','nav_register':'Register',
+        'login_page_title':'Login - Murikimpano','login_title':'Login to Your Account','email_label':'Your Email','password_label':'Password','login_btn_main':'Login','forgot_password_link':'Forgot password?','no_account_yet':'Don\'t have an account?','create_one_link':'Create one here',
+        'register_page_title':'Register - Murikimpano','register_title':'Create a New Account','register_btn':'Register','already_have_account':'Already have an account?','login_here_link':'Login here',
+        'forgot_page_title':'Forgot Password? - Murikimpano','forgot_title':'Reset Password','forgot_instruction':'Enter the email you used to register. We will send you a message to help you.','send_reset_link_btn':'Send Link','back_to_login_link':'Back to Login page',
+        'welcome_page_title':'Welcome - Murikimpano','welcome_greeting':'Welcome,','welcome_subtitle':'We are happy to see you again. Share your talent with others!','quick_actions_title':'Quick Actions',
+        'gallery_card_title':'View The Gallery','gallery_card_desc':'Visit the gallery to see new visual creations posted by others.','gallery_card_btn':'Go to Gallery',
+        'music_card_title':'Listen to Music','music_card_desc':'Enter the music space to listen to various songs.','music_card_btn':'Go to Music',
+        'profile_card_title':'Make a Change','profile_card_desc':'Change your personal information, including your photo and name.','profile_card_btn':'Go to Profile',
+        'about_page_title':'About Us - Murikimpano','about_title':'About Us','about_mission_title':'Mission of Murikimpano','about_mission_p':'Murikimpano is a platform created to help all talented people to find a space to showcase and share their creations with the world.','about_vision_title':'What We Do','about_vision_p':'We give all artists the means to post their creations, create their profile, and connect with others.','about_team_title':'Our Team','team_member1_role':'Founder','team_member2_role':'Lead Developer','team_member3_role':'Artist Relations',
+        'services_page_title':'Our Services - Murikimpano','services_title':'Our Services','service1_title':'Artwork Upload','service1_desc':'We provide visual artists and photographers a space to upload and showcase their creations.','service2_title':'Music Sharing','service2_desc':'Musicians can upload their music and share it with their fans.','service3_title':'Artist Profile','service3_desc':'Each user can create their own profile page showing their information and photo.','service4_title':'Community Connection','service4_desc':'Murikimpano is a community. It allows you to meet other talented people and art lovers.','service5_title':'Talent Promotion','service5_desc':'We are committed to helping new talents rise by promoting their creations.','service6_title':'Content Security','service6_desc':'You have full rights to your creations. You can manage them whenever you want.',
+        'contact_page_title':'Contact Us - Murikimpano','contact_title':'Contact Us','contact_info_title':'Our Location','social_media_title':'Social Media','send_message_title':'Send a Message','contact_name_label':'Your Name','contact_email_label':'Your Email','contact_message_label':'Message','send_btn':'Send'
     },
-    // Kugira ngo byororhe, izindi ndimi 8 nzizigusigira ngo uzuzuze, ariko imiterere ni imwe.
-    // Koporora ibiri muri 'en', ubishyire muri 'ki', hanyuma uhindure amagambo.
-    'ki': {},
-    'fr': {},
-    'sw': {},
-    'es': {},
-    'pt': {},
-    'de': {},
-    'zh': {},
-    'ar': {}
-};
-
-// ==========================================================
-//      CODE NYAMUKURU Y'UBUHINDUZI (Ntugire icyo uhindura hano)
-// ==========================================================
-function applyTranslations(lang) {
-    if (!translations[lang]) { console.error(`Ururimi "${lang}" ntirubonetse.`); return; }
-    document.querySelectorAll('[data-lang-key]').forEach(el => {
-        const key = el.getAttribute('data-lang-key');
-        if (translations[lang][key]) { el.textContent = translations[lang][key]; }
-    });
-    document.documentElement.lang = lang;
-    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-}
-function handleLanguageChange(selectedLang) {
-    localStorage.setItem('murikimpano_lang', selectedLang);
-    window.location.reload();
-}
-document.addEventListener('DOMContentLoaded', () => {
-    const languageSelect = document.getElementById('language-select');
-    const currentLang = localStorage.getItem('murikimpano_lang') || 'rw';
-    applyTranslations(currentLang);
-    if (languageSelect) {
-        languageSelect.value = currentLang;
-        languageSelect.addEventListener('change', (e) => handleLanguageChange(e.target.value));
-    }
-});
+    // 4. Français
+    'fr': {
+        'nav_about':'À Propos','nav_services':'Services','nav_music':'Musique','nav_gallery':'Galerie','nav_contact':'Contact','nav_login':'Connexion','nav_register':'S\'inscrire',
+        'login_page_title':'Connexion - Murikimpano','login_title':'Connectez-vous à votre compte','email_label':'Votre Email','password_label':'Mot de passe','login_btn_main':'Connexion','forgot_password_link':'Mot de passe oublié?','no_account_yet':'Pas encore de compte?','create_one_link':'Créez-en un ici',
+        'register_page_title':'S\'inscrire - Murikimpano','register_title':'Créer un nouveau compte','register_btn':'S\'inscrire','already_have_account':'Déjà un compte?','login_here_link':'Connectez-vous ici',
+        'forgot_page_title':'Mot de passe oublié? - Murikimpano','forgot_title':'Réinitialiser le mot de passe','forgot_instruction':'Entrez l\'email que vous avez utilisé pour vous inscrire. Nous vous enverrons un message pour vous aider.','send_reset_link_btn':'Envoyer le lien','back_to_login_link':'Retour à la page de connexion',
+        'welcome_page_title':'Bienvenue - Murikimpano','welcome_greeting':'Bienvenue,','welcome_subtitle':'Nous sommes heureux de vous revoir. Partagez votre talent avec les autres!','quick_actions_title':'Actions Rapides',
+        'gallery_card_title':'Voir la Galerie','gallery_card_desc':'Visitez la galerie pour voir les nouvelles créations visuelles publiées par d\'autres.','gallery_card_btn':'Aller à la Galerie',
+        'music_card_title':'Écouter de la Musique','music_card_desc':'Entrez dans l\'espace musical pour écouter diverses chansons.','music_card_btn':'Aller à la Musique',
+        'profile_card_title':'Modifier le Profil','profile_card_desc':'Modifiez vos informations personnelles, y compris votre photo et votre nom.','profile_card_btn':'Aller au Profil',
+        'about_page_title':'À Propos - Murikimpano','about_title':'À Propos de Nous','about_mission_title':'Mission de Murikimpano','about_mission_p':'Murikimpano est une plateforme créée pour aider tous les talentueux à trouver un espace pour présenter et partager leurs créations avec le monde.','about_vision_title':'Ce que nous faisons','about_vision_p':'Nous donnons à tous les artistes les moyens de publier leurs créations, de créer leur profil et de se connecter avec d\'autres.','about_team_title':'Notre Équipe','team_member1_role':'Fondateur','team_member2_role':'Développeur Principal','team_member3_role':'Relations Artistes',
+        'services_page_title':'Nos Services - Murikimpano','services_title':'Nos Services','service1_title':'Télécharger des Œuvres','service1_desc':'Nous offrons aux artistes visuels et aux photographes un espace pour télécharger et présenter leurs créations.','service2_title':'Partage de Musique','service2_desc':'Les musiciens peuvent télécharger leur musique et la partager avec leurs fans.','service3_title':'Profil d\'Artiste','service3_desc':'Chaque utilisateur peut créer sa propre page de profil montrant ses informations et sa photo.','service4_title':'Connexion Communautaire','service4_desc':'Murikimpano est une communauté. Elle vous permet de rencontrer d\'autres personnes talentueuses et des amateurs d\'art.','service5_title':'Promotion des Talents','service5_desc':'Nous nous engageons à aider les nouveaux talents à s\'épanouir en faisant la promotion de leurs créations.','service6_title':'Sécurité du Contenu','service6_desc':'Vous avez tous les droits sur vos créations. Vous pouvez les gérer quand vous le souhaitez.',
+        'contact_page_title':'Contactez-nous - Murikimpano','contact_title':'Contactez-nous','contact_info_title':'Notre Emplacement','social_media_title':'Réseaux Sociaux','send_message_title':'Envoyer un Message','contact_name_label':'Votre Nom','contact_email_label':'Votre Email','contact_message_label':'Message','send_btn':'Envoyer'
+    },
+    // 5. Kiswahili
+    'sw': {
+        'nav_about':'Kuhusu Sisi','nav_services':'Huduma','nav_music':'Muziki','nav_gallery':'Matunzio','nav_contact':'Wasiliana','nav_login':'Ingia','nav_register':'Jisajili',
+        'login_page_title':'Ingia - Murikimpano','login_title':'Ingia kwenye Akaunti Yako','email_label':'Barua pepe yako','password_label':'Nenosiri','login_btn_main':'Ingia','forgot_password_link':'Umesahau nenosiri?','no_account_yet':'Huna akaunti?','create_one_link':'Fungua moja hapa',
+        'register_page_title':'Jisajili - Murikimpano','register_title':'Fungua Akaunti Mpya','register_btn':'Jisajili','already_have_account':'Tayari una akaunti?','login_here_link':'Ingia hapa',
+        'forgot_page_title':'Umesahau Nenosiri? - Murikimpano','forgot_title':'Weka upya Nenosiri','forgot_instruction':'Ingiza barua pepe uliyotumia kujisajili. Tutakutumia ujumbe wa kukusaidia.','send_reset_link_btn':'Tuma Kiungo','back_to_login_link':'Rudi kwenye ukurasa wa Kuingia',
+        'welcome_page_title':'Karibu - Murikimpano','welcome_greeting':'Karibu,','welcome_subtitle':'Tunafurahi kukuona tena. Shiriki talanta yako na wengine!','quick_actions_title':'Vitendo vya Haraka',
+        'gallery_card_title':'Tazama Matunzio','gallery_card_desc':'Tembelea matunzio kuona kazi mpya za sanaa zilizowekwa na wengine.','gallery_card_btn':'Nenda Matunzio',
+        'music_card_title':'Sikiliza Muziki','music_card_desc':'Ingia kwenye nafasi ya muziki kusikiliza nyimbo mbalimbali.','music_card_btn':'Nenda Muziki',
+        'profile_card_title':'Fanya Mabadiliko','profile_card_desc':'Badilisha taarifa zako za kibinafsi, ikiwa ni pamoja na picha na jina lako.','profile_card_btn':'Nenda Wasifu',
+        'about_page_title':'Kuhusu Sisi - Murikimpano','about_title':'Kuhusu Sisi','about_mission_title':'Dhamira ya Murikimpano','about_mission_p':'Murikimpano ni jukwaa lililoundwa kusaidia watu wote wenye talanta kupata nafasi ya kuonyesha na kushiriki kazi zao na ulimwengu.','about_vision_title':'Tunachofanya','about_vision_p':'Tunawapa wasanii wote njia za kuchapisha kazi zao, kuunda wasifu wao, na kuungana na wengine.','about_team_title':'Timu Yetu','team_member1_role':'Mwanzilishi','team_member2_role':'Msanidi Programu Mkuu','team_member3_role':'Mahusiano ya Wasanii',
+        'services_page_title':'Huduma Zetu - Murikimpano','services_title':'Huduma Zetu','service1_title':'Kupakia Kazi za Sanaa','service1_desc':'Tunawapa wasanii wa picha na wachoraji nafasi ya kupakia na kuonyesha kazi zao.','service2_title':'Kushiriki Muziki','service2_desc':'Wanamuziki wanaweza kupakia muziki wao na kuushiriki na mashabiki wao.','service3_title':'Wasifu wa Msanii','service3_desc':'Kila mtumiaji anaweza kuunda ukurasa wake wa wasifu unaoonyesha taarifa na picha zake.','service4_title':'Muunganisho wa Jamii','service4_desc':'Murikimpano ni jamii. Inakuwezesha kukutana na watu wengine wenye talanta na wapenzi wa sanaa.','service5_title':'Kukuza Talanta','service5_desc':'Tumejitolea kusaidia talanta mpya kuinuka kwa kukuza kazi zao.','service6_title':'Usalama wa Maudhui','service6_desc':'Una haki kamili juu ya kazi zako. Unaweza kuzisimamia wakati wowote unapotaka.',
+        'contact_page_title':'Wasiliana Nasi - Murikimpano','contact_title':'Wasiliana Nasi','contact_info_title':'Mahali Petu','social_media_title':'Mitandao ya Kijamii','send_message_title':'Tuma Ujumbe','contact_name_label':'Jina Lako','contact_email_label':'Barua pepe Yako','contact_message_label':'Ujumbe','send_btn':'Tuma'
+    },
+    // 6. Español (Spanish)
+    'es': {
+        'nav_about':'Sobre Nosotros','nav_services':'Servicios','nav_music':'Música','nav_gallery':'Galería','nav_contact':'Contacto','nav_login':'Iniciar Sesión','nav_register':'Registrarse',
+        'login_page_title':'Iniciar Sesión - Murikimpano','login_title':'Inicia Sesión en tu Cuenta','email_label':'Tu Correo Electrónico','password_label':'Contraseña','login_btn_main':'Iniciar Sesión','forgot_password_link':'¿Olvidaste la contraseña?','no_account_yet':'¿No tienes una cuenta?','create_one_link':'Crea una aquí',
+        'register_page_title':'Registrarse - Murikimpano','register_title':'Crear una Nueva Cuenta','register_btn':'Registrarse','already_have_account':'¿Ya tienes una cuenta?','login_here_link':'Inicia sesión aquí',
+        'forgot_page_title':'¿Olvidaste la Contraseña? - Murikimpano','forgot_title':'Restablecer Contraseña','forgot_instruction':'Introduce el correo electrónico que usaste para registrarte. Te enviaremos un mensaje para ayudarte.','send_reset_link_btn':'Enviar Enlace','back_to_login_link':'Volver a la página de inicio de sesión',
+        'welcome_page_title':'Bienvenido - Murikimpano','welcome_greeting':'¡Bienvenido,','welcome_subtitle':'Estamos felices de verte de nuevo. ¡Comparte tu talento con otros!','quick_actions_title':'Acciones Rápidas',
+        'gallery_card_title':'Ver la Galería','gallery_card_desc':'Visita la galería para ver las nuevas creaciones visuales publicadas por otros.','gallery_card_btn':'Ir a la Galería',
+        'music_card_title':'Escuchar Música','music_card_desc':'Entra al espacio musical para escuchar varias canciones.','music_card_btn':'Ir a la Música',
+        'profile_card_title':'Hacer un Cambio','profile_card_desc':'Cambia tu 
