@@ -3,87 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ikaze - Urubuga rwanjye</title>
+    <title>Ikaze - Murikimpano</title>
     <link rel="stylesheet" href="assets/css/style.css">
-    <!-- Ushobora kongeramo izindi styles zawe hano -->
     <style>
-        .welcome-message { margin-bottom: 20px; }
-        #logout-btn {
-            background-color: #dc3545;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        .welcome-header {
+            text-align: center;
+            padding: 40px 20px;
         }
-        #logout-btn:hover { background-color: #c82333; }
+        .welcome-header h1 {
+            font-size: 2.8em;
+        }
+        .welcome-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .action-card {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .action-card:hover {
+            transform: translateY(-5px);
+        }
+        .action-card h3 {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Hano ushobora gushyira Nav yawe ivuye muri nav.js niba uyifite -->
 
-        <header>
-            <h1>Ikaze ku rubuga rwa Murikimpano</h1>
+    <!-- Menu izaza hano -->
+    <div id="navbar-placeholder"><p style="text-align:center; padding: 20px;">Loading menu...</p></div>
+
+    <div class="container">
+        <!-- Igice cyo kwakira umukoresha -->
+        <header class="welcome-header">
+            <h1>Ikaze, <span id="user-display-name">Mugenzi</span>!</h1>
+            <p>Twishimiye kongera kukubona ku rubuga rwa Murikimpano. Sangiza abandi impano yawe!</p>
         </header>
 
         <main>
-            <div class="welcome-message">
-                <p>Wishimiye kugaruka! Winjiye nka: <strong id="user-email">...</strong></p>
+            <h2>Ibikorwa by'Ingenzi</h2>
+            <!-- Utubuto twihuse two kugana ahandi -->
+            <div class="quick-actions">
+                <div class="action-card">
+                    <h3>Reba Ibihangano</h3>
+                    <p>Sura ibihangano bishya by'amashusho byashyizweho n'abandi.</p>
+                    <a href="gallery.html" class="btn btn-primary" style="margin-top: 15px;">Jya muri Gallery</a>
+                </div>
+                <div class="action-card">
+                    <h3>Umva Umuziki</h3>
+                    <p>Injira mu mwanya w'umuziki wumve indirimbo zitandukanye.</p>
+                    <a href="music.html" class="btn btn-primary" style="margin-top: 15px;">Jya muri Music</a>
+                </div>
+                <div class="action-card">
+                    <h3>Gira icyo uhindura</h3>
+                    <p>Hindura amakuru yawe bwite, harimo n'ifoto n'izina ryawe.</p>
+                    <a href="profile.html" class="btn" style="margin-top: 15px;">Gana kuri Profile</a>
+                </div>
             </div>
-            
-            <!-- Buto yo gusohoka (Logout) -->
-            <button id="logout-btn">Sohoka (Logout)</button>
         </main>
-        
-        <footer>
-            <p>© 2025 Murikimpano. All rights reserved.</p>
-        </footer>
     </div>
 
-    <!-- IYI SCRIPT NIYO MUTIMA W'URU RUPAPURO. IRARURINDA KANDI IGASHYIRAHO UBURYO BWO GUSOHOKA -->
+    <!-- Script z'ingenzi -->
+    <script type="module" src="assets/js/nav.js"></script>
     <script type="module">
-        // Importa ibintu by'ingenzi
+        // Importa ibyo dukeneye
         import { auth } from './assets/js/firebase.js';
         import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-        import { logoutUser } from './assets/js/auth.js';
 
-        // Fata ahantu tuzandika email n'aho gukanda basohoka
-        const userEmailElement = document.getElementById('user-email');
-        const logoutButton = document.getElementById('logout-btn');
+        // Dufata ahantu tuzandika izina
+        const userDisplayNameElement = document.getElementById('user-display-name');
 
-        // Iyi function ni umurinzi. Ihora ireba niba hari umuntu warinjiye
+        // Umurinzi w'urupapuro
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                // NIBA HARI UMUNTU URIMO (Logged In):
-                console.log("Umukoresha arimo:", user.email);
-                // EREKANA IBY'UYU MUKORESHA
-                // Andika imeri ye kuri paji
-                if (userEmailElement) {
-                    userEmailElement.textContent = user.email;
+                // NIBA UMUNTU ARIMO:
+                console.log("Umukoresha ari kuri index:", user.email);
+                
+                // Erekana izina rye (niba ari nta ririmo, erekana imeri ye)
+                if (userDisplayNameElement) {
+                    userDisplayNameElement.textContent = user.displayName || user.email;
                 }
 
             } else {
-                // NIBA NTA MUNTU URIMO (Not Logged In):
+                // NIBA NTA MUNTU URIMO:
                 console.log("Nta mukoresha urimo. Oherejwe kuri login.");
                 // HITA UMUSUBIZA KURI LOGIN PAGE
                 window.location.href = 'login.html';
             }
         });
-
-        // Iyo umukoresha akanze kuri buto yo Gusohoka
-        logoutButton.addEventListener('click', () => {
-            logoutUser()
-                .then(() => {
-                    console.log('Umukoresha asohotse neza.');
-                    // Nta kindi gikenewe, kuko wa murinzi (onAuthStateChanged) azahita abibona amusubize kuri login.
-                })
-                .catch((error) => {
-                    console.error('Ikosa ryo gusohoka:', error);
-                    alert('Habaye ikosa mu gihe cyo gusohoka.');
-                });
-        });
     </script>
-
 </body>
 </html>
