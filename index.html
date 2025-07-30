@@ -3,54 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Murakaza neza kuri Murikimpano</title>
-    
-    <!-- Inyandiko nziza ya Nunito -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-    
+    <title>Ikaze - Urubuga rwanjye</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Ushobora kongeramo izindi styles zawe hano -->
+    <style>
+        .welcome-message { margin-bottom: 20px; }
+        #logout-btn {
+            background-color: #dc3545;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #logout-btn:hover { background-color: #c82333; }
+    </style>
 </head>
 <body>
-
-    <!-- Agace k'imiyoboro -->
-    <div id="nav-placeholder"></div>
-
     <div class="container">
-
-        <!-- Agasanduku ko guhindura ururimi -->
-        <div class="language-switcher">
-            <select id="language-select">
-                <option value="rw">Kinyarwanda</option>
-                <option value="ki">Kirundi</option>
-                <option value="en">English</option>
-                <option value="fr">Français</option>
-                <option value="sw">Kiswahili</option>
-            </select>
-        </div>
-
-        <img src="logo.png" alt="Ikirango cya Murikimpano" class="logo">
+        <!-- Hano ushobora gushyira Nav yawe ivuye muri nav.js niba uyifite -->
 
         <header>
-            <h1 data-lang-key="welcome_slogan">MURAKAZA NEZA KURI MURIKIMPANO</h1>
+            <h1>Ikaze ku rubuga rwa Murikimpano</h1>
         </header>
 
         <main>
-            <div class="button-group">
-                <a href="register.html" class="btn btn-primary" data-lang-key="create_account_btn">Fungura Konti</a>
-                <a href="login.html" class="btn btn-secondary" data-lang-key="login_btn">Injira</a>
-                <a href="forgot.html" class="btn btn-tertiary" data-lang-key="forgot_password_btn">Wibagiwe ijambobanga?</a>
+            <div class="welcome-message">
+                <p>Wishimiye kugaruka! Winjiye nka: <strong id="user-email">...</strong></p>
             </div>
+            
+            <!-- Buto yo gusohoka (Logout) -->
+            <button id="logout-btn">Sohoka (Logout)</button>
         </main>
-
+        
         <footer>
-            <p>© 2025 Murikimpano</p>
+            <p>© 2025 Murikimpano. All rights reserved.</p>
         </footer>
     </div>
 
-    <script src="assets/js/lang.js"></script>
-    <script src="assets/js/nav.js"></script>
+    <!-- IYI SCRIPT NIYO MUTIMA W'URU RUPAPURO. IRARURINDA KANDI IGASHYIRAHO UBURYO BWO GUSOHOKA -->
+    <script type="module">
+        // Importa ibintu by'ingenzi
+        import { auth } from './assets/js/firebase.js';
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+        import { logoutUser } from './assets/js/auth.js';
+
+        // Fata ahantu tuzandika email n'aho gukanda basohoka
+        const userEmailElement = document.getElementById('user-email');
+        const logoutButton = document.getElementById('logout-btn');
+
+        // Iyi function ni umurinzi. Ihora ireba niba hari umuntu warinjiye
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // NIBA HARI UMUNTU URIMO (Logged In):
+                console.log("Umukoresha arimo:", user.email);
+                // EREKANA IBY'UYU MUKORESHA
+                // Andika imeri ye kuri paji
+                if (userEmailElement) {
+                    userEmailElement.textContent = user.email;
+                }
+
+            } else {
+                // NIBA NTA MUNTU URIMO (Not Logged In):
+                console.log("Nta mukoresha urimo. Oherejwe kuri login.");
+                // HITA UMUSUBIZA KURI LOGIN PAGE
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Iyo umukoresha akanze kuri buto yo Gusohoka
+        logoutButton.addEventListener('click', () => {
+            logoutUser()
+                .then(() => {
+                    console.log('Umukoresha asohotse neza.');
+                    // Nta kindi gikenewe, kuko wa murinzi (onAuthStateChanged) azahita abibona amusubize kuri login.
+                })
+                .catch((error) => {
+                    console.error('Ikosa ryo gusohoka:', error);
+                    alert('Habaye ikosa mu gihe cyo gusohoka.');
+                });
+        });
+    </script>
 
 </body>
 </html>
