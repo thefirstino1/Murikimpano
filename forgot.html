@@ -1,13 +1,9 @@
-```html
 <!DOCTYPE html>
 <html lang="rw">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title data-lang-key="forgot_page_title">Wibagiwe Ijambobanga? - Murikimpano</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
@@ -22,17 +18,21 @@
             </select>
         </div>
         <header><h1 data-lang-key="forgot_title">Subirana Ijambobanga</h1></header>
-<main>
+        <main>
             <p class="auth-description" data-lang-key="forgot_instruction">
                 Shyiramo imeri yawe wakoresheje wiyandikisha. Turakoherezaho ubutumwa bugufasha gusubirana ijambobanga ryawe.
             </p>
             <form id="forgotForm" class="auth-form forgot-form">
                 <div class="form-group">
                     <label for="email" data-lang-key="email_label">Imeri yawe</label>
-                    <input type="email" id="email" required />
+                    <input type="email" id="email" required autocomplete="email" />
                 </div>
                 <button type="submit" class="btn btn-primary" data-lang-key="send_reset_link_btn">Ohereza Link</button>
             </form>
+            
+            <!-- HANO TUZEREKANIRA UBUTUMWA BW'AMAKOSA N'IBIKORA -->
+            <p id="message" style="display:none; font-weight: bold; margin-top: 15px; padding: 10px; border-radius: 5px;"></p>
+
             <p class="auth-link">
                 <a href="login.html" data-lang-key="back_to_login_link">Subira ku ipaji yo Kwinjira</a>
             </p>
@@ -41,24 +41,52 @@
 
     <script src="assets/js/lang.js"></script>
 
-    <!-- Fungura module ya auth.js -->
+    <!-- IYI SCRIPT NSHYA Niyo izakora byose -->
     <script type="module">
         import { resetPassword } from './assets/js/auth.js';
 
         const form = document.getElementById('forgotForm');
-        form.addEventListener('submit', async (e) => {
+        const messageElement = document.getElementById('message');
+        const submitButton = form.querySelector('button');
+
+        form.addEventListener('submit', (e) => {
             e.preventDefault();
             const email = document.getElementById('email').value.trim();
 
-            try {
-                await resetPassword(email);
-alert('Ubutumwa bwo gusubirana ijambobanga bwoherejwe kuri ' + email);
-                window.location.href = 'login.html';
-            } catch (error) {
-                alert('Habaye ikibazo: ' + error.message);
-            }
+            messageElement.style.display = 'none';
+            submitButton.disabled = true;
+            submitButton.textContent = 'Tegereza...';
+
+            resetPassword(email)
+                .then(() => {
+                    // Iyo byoherejwe neza
+                    console.log('Imeri yo gusubiza ijambobanga yoherejwe kuri ' + email);
+                    messageElement.textContent = 'Imeri yoherejwe! Genzura inbox yawe (na spam) kugira ngo usubizeho ijambobanga rishya.';
+                    messageElement.style.color = 'white';
+                    messageElement.style.backgroundColor = 'green';
+                    messageElement.style.display = 'block';
+
+                    // Nta mpamvu yo guhita afungura buto, kuko akazi kaba karangiye
+                })
+                .catch(error => {
+                    // Iyo habaye ikosa
+                    console.error('Ikosa ryo kohereza imeri:', error.code, error.message);
+                    
+                    let userMessage = 'Habaye ikibazo. Ongera ugerageze.';
+                    if (error.code === 'auth/user-not-found' || error.code === 'auth/invalid-email') {
+                        userMessage = 'Nta mukoresha uboneka ufite iyi meri. Genzura neza ko wanditse neza.';
+                    }
+                    
+                    messageElement.textContent = userMessage;
+                    messageElement.style.color = 'white';
+                    messageElement.style.backgroundColor = 'red';
+                    messageElement.style.display = 'block';
+
+                    // Ongera ufungure buto
+                    submitButton.disabled = false; 
+                    submitButton.textContent = 'Ohereza Link';
+                });
         });
     </script>
 </body>
 </html>
-```
