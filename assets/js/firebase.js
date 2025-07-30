@@ -2,10 +2,11 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"; // <<< 1. ONGERAMO UYU MURONGO
+import { getFirestore } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+import { getStorage } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js"; // <<< IYI NI NSHYA
 
-// Ibirango byawe bya Firebase (Config)
 const firebaseConfig = {
+  // ... ibirango byawe ntacyo uhindura ...
   apiKey: "AIzaSyBC-bxI0yfqnlp2TyDAYZH0vEYcQH_tDf0",
   authDomain: "murikimpano.firebaseapp.com",
   databaseURL: "https://murikimpano-default-rtdb.firebaseio.com",
@@ -16,9 +17,9 @@ const firebaseConfig = {
   measurementId: "G-08Q2CKEE87"
 };
 
-// Tangiza Firebase
 const app = initializeApp(firebaseConfig);
 
-// Satura services zose dukeneye hanyuma uzisohore (export)
+// Satura services zose dukeneye
 export const auth = getAuth(app);
-export const db = getFirestore(app); // <<< 2. ONGERAMO N'UYU MURONGO
+export const db = getFirestore(app);
+export const storage = getStorage(app); // <<< IYI NI NSHYA
