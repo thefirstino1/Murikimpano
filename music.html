@@ -3,57 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-lang-key="music_page_title">Umuziki - Murikimpano</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-    
+    <title>Umwanya w'Umuziki - Murikimpano</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .music-item { border: 1px solid #eee; padding: 15px; border-radius: 5px; margin-bottom: 15px;}
+        .music-item audio { width: 100%; margin-top: 10px; }
+        #upload-progress { margin-top: 10px; }
+    </style>
 </head>
 <body>
-
+    <div id="navbar-placeholder"><p>Loading menu...</p></div>
     <div class="container">
-
-        <div class="language-switcher">
-            <select id="language-select">
-                <option value="rw">Kinyarwanda</option>
-                <option value="ki">Kirundi</option>
-                <option value="en">English</option>
-                <option value="fr">Français</option>
-                <option value="sw">Kiswahili</option>
-            </select>
-        </div>
-
-        <header>
-            <h1 data-lang-key="music_title">Umuziki wacu</h1>
-        </header>
-
+        <header><h1>Umwanya w'Umuziki</h1></header>
         <main>
-            <div class="media-grid">
-                <!-- Indirimbo ya mbere -->
-                <div class="media-item">
-                    <h3>INDIRIMBO YA MBERE</h3>
-                    <!-- Hano ushyiramo link ya YouTube (embed) -->
-                    <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/VIDEO_ID_HERE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <section class="add-music-form" style="padding:20px; border: 1px solid #ddd; border-radius: 5px;">
+                <h2>Ongeraho Indirimbo Nshya (.mp3)</h2>
+                <form id="add-music-form">
+                    <div class="form-group">
+                        <label for="song-title">Izina ry'Indirimbo</label>
+                        <input type="text" id="song-title" required>
                     </div>
-                </div>
-
-                <!-- Indirimbo ya kabiri -->
-                <div class="media-item">
-                    <h3>INDIRIMBO YA KABIRI</h3>
-                    <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/ANOTHER_VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="form-group">
+                        <label for="artist-name">Izina ry'Umuhanzi</label>
+                        <input type="text" id="artist-name" required>
                     </div>
+                    <div class="form-group">
+                        <!-- HANO NIHO HAHINDUTSE: INPUT YAHINDUTSE 'FILE' -->
+                        <label for="song-file">Hitamo Indirimbo (.mp3)</label>
+                        <input type="file" id="song-file" accept=".mp3" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ohereza Indirimbo</button>
+                    <!-- Ahantu ho kwerekana ko upload irimo iba -->
+                    <p id="upload-progress" style="display:none;"></p>
+                </form>
+            </section>
+            <section class="music-display">
+                <h2>Indirimbo Ziriho</h2>
+                <div id="music-list">
+                    <p>Tegereza, turimo gukurura indirimbo...</p>
                 </div>
-            </div>
-
-            <a href="index.html" class="btn btn-secondary" data-lang-key="back_to_home_btn">Subira ahabanza</a>
+            </section>
         </main>
     </div>
 
-    <script src="assets/js/lang.js"></script>
+    <script type="module" src="assets/js/nav.js"></script>
+    <script type="module">
+        import { auth, db, storage } from './assets/js/firebase.js'; // Twongeyemo 'storage'
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+        import { collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"; 
+        import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js"; // Nshya!
 
+        const form = document.getElementById('add-music-form');
+        const musicList = document.getElementById('music-list');
+        const uploadProgress = document.getElementById('upload-progress');
+        let currentUser = null;
+
+        onAuthStateChanged(auth, user => user ? (currentUser = user, loadMusicItems()) : window.location.href = 'login.html');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const title = document.getElementById('song-title').value;
+            const artist = document.getElementById('artist-name').value;
+            const file = document.getElementById('song-file').files[0];
+            
+            if (!file) { alert("Nyamuneka hitamo dosiye."); return; }
+
+            uploadProgress.textContent = "Tegereza, indirimbo irimo yoherezwa...";
+            uploadProgress.style.display = 'block';
+
+            // 1. Kora inzira muri Storage
+            const storageRef = ref(storage, `music/${Date.now()}_${file.name}`);
+
+            try {
+                // 2. Ohereza dosiye muri Storage
+                const snapshot = await uploadBytes(storageRef, file);
+                console.log('Uploaded a blob or file!', snapshot);
+
+                // 3. Fata ya Download URL
+                const downloadURL = await getDownloadURL(snapshot.ref);
+                console.log('File available at', downloadURL);
+
+                // 4. Bika amakuru muri Firestore (harimo na ya link nshya)
+                await addDoc(collection(db, "musicFiles"), {
+                    title: title,
+                    artist: artist,
+                    musicURL: downloadURL, // Twabikamo link nyayo ya download
+                    authorEmail: currentUser.email,
+                    createdAt: new Date()
+                });
+
+                uploadProgress.textContent = "Indirimbo yoherejwe neza!";
+                uploadProgress.style.color = 'green';
+                form.reset();
+                loadMusicItems();
+            } catch (error) {
+                console.error("Habaye ikosa rikomeye: ", error);
+                uploadProgress.textContent = "Habaye ikosa mu kohereza dosiye.";
+                uploadProgress.style.color = 'red';
+            }
+        });
+
+        async function loadMusicItems() {
+            musicList.innerHTML = '<p>Turimo gukurura indirimbo...</p>';
+            const q = query(collection(db, "musicFiles"), orderBy("createdAt", "desc"));
+            const querySnapshot = await getDocs(q);
+            
+            musicList.innerHTML = '';
+            querySnapshot.forEach(doc => {
+                const item = doc.data();
+                const itemElement = document.createElement('div');
+                itemElement.className = 'music-item';
+                itemElement.innerHTML = `
+                    <h3>${item.title}</h3>
+                    <p>Umuhanzi: ${item.artist}</p>
+                    <!-- HANO NIHO HAHINDUTSE: DUKORESHEJE 'AUDIO' TAG -->
+                    <audio controls src="${item.musicURL}">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <br><small>Byakozwe na: ${item.authorEmail}</small>
+                `;
+                musicList.appendChild(itemElement);
+            });
+        }
+    </script>
 </body>
 </html>
