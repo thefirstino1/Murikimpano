@@ -3,49 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-lang-key="about_page_title">Abo Turibo - Murikimpano</title>
-    
-    <!-- Inyandiko nziza ya Nunito -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-    
+    <title>Abo Turi Bo - Murikimpano</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .about-section {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        .about-section h2 {
+            margin-top: 0;
+            border-bottom-color: rgba(255, 255, 255, 0.4);
+        }
+        .about-section p {
+            font-size: 1.1em;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+        .team-member img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--secondary-color);
+        }
+        .team-member h4 {
+            margin-top: 10px;
+            margin-bottom: 5px;
+            color: var(--light-color);
+        }
+        .team-member span {
+            font-size: 0.9em;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 
+    <!-- Menu izaza hano -->
+    <div id="navbar-placeholder"><p style="text-align:center; padding: 20px;">Loading menu...</p></div>
+
     <div class="container">
-
-        <div class="language-switcher">
-            <select id="language-select">
-                <option value="rw">Kinyarwanda</option>
-                <option value="ki">Kirundi</option>
-                <option value="en">English</option>
-                <option value="fr">Français</option>
-                <option value="sw">Kiswahili</option>
-            </select>
-        </div>
-
         <header>
-            <h1 data-lang-key="about_title">Abo Turibo</h1>
+            <h1>Abo Turi Bo</h1>
         </header>
 
-        <main class="about-content">
-            <h2 data-lang-key="vision_title">Icyerekezo Cyacu</h2>
-            <p data-lang-key="vision_text">
-                Kuba isoko y'impinduka nziza mu rubyiruko binyuze mu guhanga udushya, kwigisha ikoranabuhanga, no guteza imbere impano zitandukanye.
-            </p>
+        <main>
+            <!-- Igice cya 1: Intego yacu -->
+            <section class="about-section">
+                <h2>Intego ya Murikimpano</h2>
+                <p>
+                    Murikimpano ni urubuga rwashyiriweho gufasha abanyempano bose, aho bava bakagera, kubona umwanya wo kwerekana no gusangiza isi yose ibihangano byabo. Twemera ko buri muntu afite impano idasanzwe, kandi intego yacu ni ugutanga ikibuga aho izo mpano zishobora kumurika, zigakundwa, kandi zigatera imbaraga abandi.
+                </p>
+            </section>
 
-            <h2 data-lang-key="mission_title">Intego Yacu</h2>
-            <p data-lang-key="mission_text">
-                Guhanga ibikorwa by'ubuhanzi bifite ireme, gutanga serivisi z'ikoranabuhanga zigezweho, no kubaka umuryango uhuriwemo n'abantu bashyigikirana mu iterambere.
-            </p>
+            <!-- Igice cya 2: Icyo Dukora -->
+            <section class="about-section">
+                <h2>Icyo Dukora</h2>
+                <p>
+                    Duha abahanzi, abanditsi, abanyamuziki, n'abandi banyabugeni bose uburyo bwo gushyiraho ibihangano byabo by'amashusho n'amajwi. Urubuga rwacu rworohereza buri wese kurema umwirondoro we, gucunga ibihangano bye, no guhura n'abandi bafite inyota yo kurema no guhanga udushya.
+                </p>
+            </section>
 
-            <a href="index.html" class="btn btn-secondary" data-lang-key="back_to_home_btn">Subira ahabanza</a>
+            <!-- Igice cya 3: Ikipe yacu (Ushobora guhindura aya makuru) -->
+            <section class="about-section">
+                <h2>Ikipe yacu</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="assets/images/logo.png" alt="Ifoto y'umuyobozi">
+                        <h4>Mugisha Yves</h4>
+                        <span>Washinze Urubuga</span>
+                    </div>
+                    <div class="team-member">
+                        <img src="assets/images/logo.png" alt="Ifoto y'ushinzwe tekniki">
+                        <h4>Keza Aline</h4>
+                        <span>Ushinzwe Ikoranabuhanga</span>
+                    </div>
+                    <div class="team-member">
+                        <img src="assets/images/logo.png" alt="Ifoto y'ushinzwe abahanzi">
+                        <h4>Gatete Jean</h4>
+                        <span>Ushinzwe Abahanzi</span>
+                    </div>
+                </div>
+            </section>
+
         </main>
     </div>
 
-    <script src="assets/js/lang.js"></script>
+    <!-- Script ya Menu -->
+    <script type="module" src="assets/js/nav.js"></script>
 
 </body>
 </html>
