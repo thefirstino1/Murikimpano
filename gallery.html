@@ -1,122 +1,100 @@
-<!DOCTYPE html>
-<html lang="rw">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aho Barebera Impano - Murikimpano</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <style>
-        .gallery-item { border: 1px solid #eee; padding: 15px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px;}
-        .gallery-item img { max-width: 100%; height: auto; border-radius: 3px; margin-bottom: 10px; }
-        .gallery-item a { display: inline-block; margin-top: 10px; }
-        #upload-progress { margin-top: 10px; }
-    </style>
-</head>
-<body>
-    <div id="navbar-placeholder"><p>Loading menu...</p></div>
-    <div class="container">
-        <header><h1>Aho Barebera Impano (Amafoto)</h1></header>
-        <main>
-            <section class="add-item-form" style="padding:20px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 30px;">
-                <h2>Ongeraho Ifoto Nshya</h2>
-                <form id="add-item-form">
-                    <div class="form-group">
-                        <label for="item-title">Izina ry'Ifoto (Umutwe)</label>
-                        <input type="text" id="item-title" required>
-                    </div>
-                    <!-- HANO HAHINDUTSE: INPUT YAHINDUTSE 'FILE' YEMERA AMAFOTO GUSA -->
-                    <div class="form-group">
-                        <label for="image-file">Hitamo Ifoto (image/*)</label>
-                        <input type="file" id="image-file" accept="image/*" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Ohereza Ifoto</button>
-                    <p id="upload-progress" style="display:none;"></p>
-                </form>
-            </section>
-            <section class="gallery-display">
-                <h2>Amafoto Ariho</h2>
-                <div id="gallery-grid">
-                    <p>Tegereza, turimo gukurura amafoto...</p>
-                </div>
-            </section>
-        </main>
-    </div>
+// Importa ibyo dukeneye byose hejuru
+import { auth, db, storage } from './assets/js/firebase.js';
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+import { collection, addDoc, getDocs, query, orderBy, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"; 
+import { ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js";
 
-    <script type="module" src="assets/js/nav.js"></script>
-    <script type="module">
-        import { auth, db, storage } from './assets/js/firebase.js';
-        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-        import { collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"; 
-        import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js";
+const form = document.getElementById('add-item-form');
+const galleryGrid = document.getElementById('gallery-grid');
+const uploadProgress = document.getElementById('upload-progress');
+let currentUser = null;
 
-        const form = document.getElementById('add-item-form');
-        const galleryGrid = document.getElementById('gallery-grid');
-        const uploadProgress = document.getElementById('upload-progress');
-        let currentUser = null;
+onAuthStateChanged(auth, user => user ? (currentUser = user, loadGalleryItems()) : window.location.href = 'login.html');
 
-        onAuthStateChanged(auth, user => user ? (currentUser = user, loadGalleryItems()) : window.location.href = 'login.html');
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const title = document.getElementById('item-title').value;
+    const file = document.getElementById('image-file').files[0];
+    if (!file) { alert("Nyamuneka hitamo ifoto."); return; }
+    
+    uploadProgress.textContent = "Tegereza, ifoto irimo yoherezwa...";
+    uploadProgress.style.display = 'block';
 
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const title = document.getElementById('item-title').value;
-            const file = document.getElementById('image-file').files[0];
-            
-            if (!file) { alert("Nyamuneka hitamo ifoto."); return; }
-
-            uploadProgress.textContent = "Tegereza, ifoto irimo yoherezwa...";
-            uploadProgress.style.display = 'block';
-
-            // 1. Kora inzira muri Storage (muri folder yitwa 'images')
-            const storageRef = ref(storage, `images/${Date.now()}_${file.name}`);
-
-            try {
-                // 2. Ohereza dosiye (ifoto) muri Storage
-                const snapshot = await uploadBytes(storageRef, file);
-
-                // 3. Fata ya Download URL
-                const downloadURL = await getDownloadURL(snapshot.ref);
-
-                // 4. Bika amakuru muri Firestore (collection yitwa 'images')
-                await addDoc(collection(db, "images"), {
-                    title: title,
-                    imageURL: downloadURL, // Twabikamo link nyayo ya download
-                    authorEmail: currentUser.email,
-                    createdAt: new Date()
-                });
-
-                uploadProgress.textContent = "Ifoto yoherejwe neza!";
-                uploadProgress.style.color = 'green';
-                form.reset();
-                loadGalleryItems();
-            } catch (error) {
-                console.error("Habaye ikosa rikomeye mu kohereza ifoto: ", error);
-                uploadProgress.textContent = "Habaye ikosa mu kohereza ifoto.";
-                uploadProgress.style.color = 'red';
-            }
+    const storageRef = ref(storage, `images/${Date.now()}_${file.name}`);
+    try {
+        const snapshot = await uploadBytes(storageRef, file);
+        const downloadURL = await getDownloadURL(snapshot.ref);
+        await addDoc(collection(db, "images"), {
+            title: title,
+            imageURL: downloadURL,
+            authorEmail: currentUser.email,
+            authorId: currentUser.uid, // By'ingenzi cyane!
+            createdAt: new Date()
         });
+        uploadProgress.textContent = "Ifoto yoherejwe neza!";
+        form.reset();
+        loadGalleryItems();
+    } catch (error) {
+        console.error("Habaye ikosa rikomeye mu kohereza ifoto: ", error);
+        uploadProgress.textContent = "Habaye ikosa mu kohereza ifoto.";
+    }
+});
 
-        async function loadGalleryItems() {
-            galleryGrid.innerHTML = '<p>Turimo gukurura amafoto...</p>';
-            const q = query(collection(db, "images"), orderBy("createdAt", "desc"));
-            const querySnapshot = await getDocs(q);
-            
-            galleryGrid.innerHTML = '';
-            querySnapshot.forEach(doc => {
-                const item = doc.data();
-                const itemElement = document.createElement('div');
-                itemElement.className = 'gallery-item';
-                itemElement.innerHTML = `
-                    <h3>${item.title}</h3>
-                    <!-- HANO NIHO HAHINDUTSE: DUKORESHEJE 'IMG' TAG -->
-                    <img src="${item.imageURL}" alt="${item.title}" />
-                    <br>
-                    <!-- HANO HARI LINK YO GUKORA DOWNLOAD -->
-                    <a href="${item.imageURL}" download="${item.title}.jpg" class="btn">Download Ifoto</a>
-                    <br><small>Byakozwe na: ${item.authorEmail}</small>
-                `;
-                galleryGrid.appendChild(itemElement);
-            });
+async function loadGalleryItems() {
+    galleryGrid.innerHTML = '<p>Turimo gukurura amafoto...</p>';
+    const q = query(collection(db, "images"), orderBy("createdAt", "desc"));
+    const querySnapshot = await getDocs(q);
+    
+    galleryGrid.innerHTML = '';
+    querySnapshot.forEach((doc) => {
+        const item = doc.data();
+        const itemElement = document.createElement('div');
+        itemElement.className = 'gallery-item';
+        itemElement.setAttribute('data-id', doc.id); // ID ya Firestore
+
+        let deleteButtonHTML = '';
+        if (currentUser && currentUser.uid === item.authorId) {
+            deleteButtonHTML = `<button class="btn btn-danger delete-btn">Siba</button>`;
         }
-    </script>
-</body>
-</html>```
+        itemElement.innerHTML = `
+            <h3>${item.title}</h3>
+            <img src="${item.imageURL}" alt="${item.title}" /> <br>
+            <a href="${item.imageURL}" download="${item.title}.jpg" class="btn">Download</a>
+            ${deleteButtonHTML} <br>
+            <small>Byakozwe na: ${item.authorEmail}</small>
+        `;
+        galleryGrid.appendChild(itemElement);
+    });
+}
+
+// Iyi code yumviriza ibibaye kuri Gallery yose
+galleryGrid.addEventListener('click', async (e) => {
+    if (e.target.classList.contains('delete-btn')) {
+        if (!confirm("Uremeza ko ushaka gusiba iyi foto burundu?")) return;
+
+        const itemElement = e.target.closest('.gallery-item');
+        const docId = itemElement.dataset.id;
+        
+        // Fata URL y'ifoto kugira ngo tuyisibe no muri Storage
+        const imageURL = itemElement.querySelector('img').src;
+
+        try {
+            // 1. Siba muri Firestore
+            await deleteDoc(doc(db, "images", docId));
+            
+            // 2. Siba muri Storage
+            const imageRef = ref(storage, imageURL);
+            await deleteObject(imageRef);
+
+            itemElement.remove(); // Hita uyikura kuri paji
+        } catch (error) {
+            console.error("Ikosa ryo gusiba: ", error);
+            if (error.code === 'storage/object-not-found') {
+                console.warn("Ifoto ntiyabonetse muri Storage, ariko reka dusibe muri Firestore.");
+                itemElement.remove();
+            } else {
+                 alert("Habaye ikosa mu gusiba iyi foto.");
+            }
+        }
+    }
+});
