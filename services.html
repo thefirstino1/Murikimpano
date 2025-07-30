@@ -3,60 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-lang-key="services_page_title">Serivisi - Murikimpano</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-    
+    <title>Serivisi Zacu - Murikimpano</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        .service-card {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .service-card .icon {
+            font-size: 3em;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+        .service-card h3 {
+            color: var(--light-color);
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+        .service-card p {
+            opacity: 0.9;
+            font-size: 1em;
+            line-height: 1.7;
+        }
+    </style>
 </head>
 <body>
 
+    <!-- Menu izaza hano -->
+    <div id="navbar-placeholder"><p style="text-align:center; padding: 20px;">Loading menu...</p></div>
+
     <div class="container">
-
-        <div class="language-switcher">
-            <select id="language-select">
-                <option value="rw">Kinyarwanda</option>
-                <option value="ki">Kirundi</option>
-                <option value="en">English</option>
-                <option value="fr">Français</option>
-                <option value="sw">Kiswahili</option>
-            </select>
-        </div>
-
         <header>
-            <h1 data-lang-key="services_title">Serivisi Dutanga</h1>
+            <h1>Serivisi Tanga</h1>
         </header>
 
         <main>
             <div class="services-grid">
-                <!-- Akarata ka mbere -->
+
+                <!-- Serivisi ya 1: Gushyiraho Ibihangano -->
                 <div class="service-card">
-                    <h3 data-lang-key="service1_title">Gucapa Amafoto</h3>
-                    <p data-lang-key="service1_desc">Ducapa amafoto meza mu ngano zose, aramba kandi afite amabara y'umwimerere.</p>
+                    <div class="icon">🎨</div>
+                    <h3>Gushyiraho Ibihangano</h3>
+                    <p>
+                        Duha abahanzi b'amashusho n'amafoto umwanya wo kwohereza no kwerekana ibihangano byabo ku buryo bworoshye kandi bwizewe.
+                    </p>
                 </div>
-                <!-- Akarata ka kabiri -->
+
+                <!-- Serivisi ya 2: Gusangiza Umuziki -->
                 <div class="service-card">
-                    <h3 data-lang-key="service2_title">Gukora Ibirango (Logos)</h3>
-                    <p data-lang-key="service2_desc">Dukorera ibigo n'abantu ku giti cyabo ibirango bigezweho kandi bisobanura neza ibyo bakora.</p>
+                    <div class="icon">🎵</div>
+                    <h3>Gusangiza Umuziki</h3>
+                    <p>
+                        Abahanzi b'indirimbo n'abacuranzi bashobora gushyiraho umuziki wabo, bakawusangiza abakunzi babo n'isi yose.
+                    </p>
                 </div>
-                <!-- Akarata ka gatatu -->
+
+                <!-- Serivisi ya 3: Kurema Umwirondoro w'Umuhanzi -->
                 <div class="service-card">
-                    <h3 data-lang-key="service3_title">Amahugurwa ya AI & Crypto</h3>
-                    <p data-lang-key="service3_desc">Twiga uburyo bworoshye bwo gukoresha ubwenge buhangano (AI) no gushora imari muri Cryptocurrency.</p>
+                    <div class="icon">👤</div>
+                    <h3>Umwirondoro w'Umuhanzi</h3>
+                    <p>
+                        Buri mukoresha ashobora kurema paji ye bwite (profile) yerekana amakuru ye, ifoto, n'ibindi, bikamufasha kumenyekanisha izina rye.
+                    </p>
                 </div>
-                <!-- Akarata ka kane -->
+
+                <!-- Serivisi ya 4: Guhuzwa n'Abandi -->
                 <div class="service-card">
-                    <h3 data-lang-key="service4_title">Umujyanama mu Ikoranabuhanga</h3>
-                    <p data-lang-key="service4_desc">Tuguha inama n'ubufasha mu mishinga yawe yose ijyanye n'imbuga n'ikoranabuhanga.</p>
+                    <div class="icon">🌐</div>
+                    <h3>Guhuzwa n'Abandi</h3>
+                    <p>
+                        Murikimpano ni umuryango. Uruhushya guhura no kuvugana n'abandi banyempano, abakunzi b'ubugeni, n'abashobora kugutera inkunga.
+                    </p>
                 </div>
+
+                <!-- Serivisi ya 5: Kumenyekanisha Impano -->
+                <div class="service-card">
+                    <div class="icon">🚀</div>
+                    <h3>Kumenyekanisha Impano</h3>
+                    <p>
+                        Twiyemeje gufasha impano nshya kuzamuka, tumenya uburyo bwo kumenyekanisha ibihangano byagejejwe ku rubuga rwacu.
+                    </p>
+                </div>
+                
+                <!-- Serivisi ya 6: Umutekano w'Ibihangano -->
+                <div class="service-card">
+                    <div class="icon">🛡️</div>
+                    <h3>Umutekano w'Ibihangano</h3>
+                    <p>
+                        Ufite uburenganzira busesuye ku bihangano byawe. Ushobora kubishyiraho, kubikuraho, no kubicunga igihe cyose ubishakiye.
+                    </p>
+                </div>
+
             </div>
-            <a href="index.html" class="btn btn-secondary" data-lang-key="back_to_home_btn">Subira ahabanza</a>
         </main>
     </div>
 
-    <script src="assets/js/lang.js"></script>
+    <!-- Script ya Menu -->
+    <script type="module" src="assets/js/nav.js"></script>
 
 </body>
-                      </html>
+</html>
