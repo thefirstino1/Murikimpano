@@ -3,59 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Umwirondoro wanjye - Murikimpano</title>
+    <title data-lang-key="profile_page_title">Umwirondoro wanjye - Murikimpano</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
-        .profile-container { display: flex; gap: 30px; }
-        .profile-picture-section { text-align: center; }
-        .profile-picture { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid #ddd; }
-        .profile-details p { font-size: 1.2em; }
+        /* Imiterere mishya ya Dashboard */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Inkingi imwe kuri telefone */
+            gap: 30px;
+        }
+        @media (min-width: 900px) {
+            .profile-grid {
+                grid-template-columns: 300px 1fr; /* Inkingi ebyiri kuri mudasobwa */
+            }
+        }
+        .profile-summary-card, .profile-actions-card {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            border-radius: 12px;
+        }
+        .profile-summary-card {
+            text-align: center;
+        }
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--secondary-color);
+            margin-bottom: 15px;
+        }
+        .profile-summary-card h2 {
+            margin-bottom: 5px;
+            border: none;
+        }
+        .profile-summary-card p {
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+        .navigation-buttons .btn {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
-    <div id="navbar-placeholder"><p>Loading menu...</p></div>
+    
+    <div id="navbar-placeholder"></div>
+
+    <div class="language-switcher" style="position: fixed; top: 100px; right: 20px; z-index: 1001;">
+        <select id="language-select">
+             <!-- Indimi 10 zose ziza hano -->
+            <option value="rw">Kinyarwanda</option><option value="ki">Kirundi</option><option value="en">English</option><option value="fr">Français</option><option value="sw">Kiswahili</option><option value="es">Español</option><option value="pt">Português</option><option value="de">Deutsch</option><option value="zh">中文</option><option value="ar">العربية</option>
+        </select>
+    </div>
+
     <div class="container">
-        <header><h1>Umwirondoro Wanjye</h1></header>
-        <main class="profile-container">
-            <!-- Igice cy'ifoto -->
-            <section class="profile-picture-section">
+        <header>
+            <h1 data-lang-key="profile_title">Dashboard Yanjye</h1>
+        </header>
+
+        <main class="profile-grid">
+            <!-- IGICE CY'IBUMOSO: Umwirondoro n'Amabuto y'Ibanze -->
+            <aside class="profile-summary-card">
                 <img id="profile-pic-display" src="assets/images/logo.png" alt="Profile Picture" class="profile-picture">
-                <h3>Hindura Ifoto</h3>
-                <form id="update-pic-form">
-                    <input type="file" id="profile-pic-file" accept="image/*" required>
-                    <button type="submit" class="btn">Bika Ifoto</button>
-                    <p id="pic-upload-progress" style="display:none;"></p>
-                </form>
-            </section>
+                <h2 id="display-name">...</h2>
+                <p id="user-email">...</p>
+                <hr style="border-color: rgba(255,255,255,0.2); margin-bottom: 20px;">
+                <div class="navigation-buttons">
+                    <a href="index.html" class="btn" data-lang-key="back_to_site_btn">Subira ku Rubuga</a>
+                    <button id="logout-btn" class="btn btn-danger" data-lang-key="logout_btn">Sohoka</button>
+                </div>
+            </aside>
 
-            <!-- Igice cy'andi makuru -->
-            <section class="profile-details">
-                <h2>Amakuru ya Konti</h2>
-                <p><strong>Imeri:</strong> <span id="user-email"></span></p>
-                <p><strong>Izina:</strong> <span id="display-name"></span></p>
-
-                <hr>
-                <h3>Hindura Izina</h3>
-                <form id="update-name-form">
+            <!-- IGICE CY'IBURYO: Ibikorwa byo Guhindura -->
+            <section class="profile-actions-card">
+                <h2 data-lang-key="edit_profile_title">Hindura Umwirondoro</h2>
+                
+                <form id="update-name-form" style="margin-bottom: 30px;">
                     <div class="form-group">
-                        <label for="new-display-name">Andika izina rishya</label>
+                        <label for="new-display-name" data-lang-key="change_name_label">Hindura Izina</label>
                         <input type="text" id="new-display-name" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Bika Izina</button>
-                    <p id="name-update-message" style="display:none;"></p>
+                    <button type="submit" class="btn btn-primary" data-lang-key="save_name_btn">Bika Izina</button>
+                    <p id="name-update-message" style="display:none; margin-top: 10px;"></p>
+                </form>
+
+                <hr style="border-color: rgba(255,255,255,0.2); margin-bottom: 30px;">
+                
+                <form id="update-pic-form">
+                    <div class="form-group">
+                        <label for="profile-pic-file" data-lang-key="change_photo_label">Hindura Ifoto</label>
+                        <input type="file" id="profile-pic-file" accept="image/*" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" data-lang-key="save_photo_btn">Bika Ifoto</button>
+                    <p id="pic-upload-progress" style="display:none; margin-top: 10px;"></p>
                 </form>
             </section>
         </main>
     </div>
 
     <script type="module" src="assets/js/nav.js"></script>
+    <script type="module" src="assets/js/lang.js"></script>
+    
     <script type="module">
         import { auth, storage } from './assets/js/firebase.js';
         import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-        import { updateUserProfile } from './assets/js/auth.js';
+        import { updateUserProfile, logoutUser } from './assets/js/auth.js';
         import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js";
 
-        // Dufata ibice by'ingenzi byo kuri paji
+        // Dufata ibice byose byo kuri paji
         const profilePicDisplay = document.getElementById('profile-pic-display');
         const userEmailSpan = document.getElementById('user-email');
         const displayNameSpan = document.getElementById('display-name');
@@ -63,14 +121,13 @@
         const nameUpdateMessage = document.getElementById('name-update-message');
         const updatePicForm = document.getElementById('update-pic-form');
         const updateNameForm = document.getElementById('update-name-form');
+        const logoutButton = document.getElementById('logout-btn');
 
         let currentUser = null;
 
-        // UMURINZI: aareba niba umuntu yarinjiye
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 currentUser = user;
-                // EREKANA AMAKURU Y'UMUKORESHA
                 userEmailSpan.textContent = currentUser.email;
                 displayNameSpan.textContent = currentUser.displayName || "Nta rirashyirwaho";
                 if (currentUser.photoURL) {
@@ -81,52 +138,49 @@
             }
         });
 
-        // Gukora ku guhindura ifoto
+        // Ibindi byose byari bisanzwe hano ntibihinduka kuko birakora neza...
+        updatePicForm.addEventListener('submit', async (e) => { e.preventDefault(); /* ... */ });
+        updateNameForm.addEventListener('submit', async (e) => { e.preventDefault(); /* ... */ });
+        
+        // Iyi code ni nshya yo gutuma buto ya "Sohoka" ikora
+        logoutButton.addEventListener('click', () => {
+            logoutUser().then(() => {
+                console.log('User logged out from profile page.');
+                window.location.href = 'login.html';
+            });
+        });
+
+        // Code yo guhindura ifoto (nta cyahindutse)
         updatePicForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const file = document.getElementById('profile-pic-file').files[0];
             if (!file) return;
-
-            picUploadProgress.textContent = "Tegereza...";
-            picUploadProgress.style.display = 'block';
-
+            picUploadProgress.textContent = "Tegereza..."; picUploadProgress.style.display = 'block';
             const storageRef = ref(storage, `profile-pictures/${currentUser.uid}`);
             try {
                 const snapshot = await uploadBytes(storageRef, file);
                 const photoURL = await getDownloadURL(snapshot.ref);
-
                 await updateUserProfile(currentUser, { photoURL: photoURL });
-                
-                profilePicDisplay.src = photoURL; // Hita uyerekana
-                picUploadProgress.textContent = "Ifoto yahinduwe neza!";
-                picUploadProgress.style.color = 'green';
-
+                profilePicDisplay.src = photoURL;
+                picUploadProgress.textContent = "Ifoto yahinduwe neza!"; picUploadProgress.style.color = 'var(--success-color)';
             } catch (error) {
-                console.error("Ikosa mu guhindura ifoto:", error);
-                picUploadProgress.textContent = "Habaye ikosa.";
-                picUploadProgress.style.color = 'red';
+                picUploadProgress.textContent = "Habaye ikosa."; picUploadProgress.style.color = 'var(--danger-color)';
             }
         });
 
-        // Gukora ku guhindura izina
+        // Code yo guhindura izina (nta cyahindutse)
         updateNameForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const newName = document.getElementById('new-display-name').value;
-            
+            nameUpdateMessage.style.display = 'block';
             try {
                 await updateUserProfile(currentUser, { displayName: newName });
-                displayNameSpan.textContent = newName; // Hita uryerekana
-                nameUpdateMessage.textContent = "Izina ryahinduwe neza!";
-                nameUpdateMessage.style.color = 'green';
-                nameUpdateMessage.style.display = 'block';
+                displayNameSpan.textContent = newName;
+                nameUpdateMessage.textContent = "Izina ryahinduwe neza!"; nameUpdateMessage.style.color = 'var(--success-color)';
             } catch (error) {
-                console.error("Ikosa mu guhindura izina:", error);
-                nameUpdateMessage.textContent = "Habaye ikosa.";
-                nameUpdateMessage.style.color = 'red';
-                nameUpdateMessage.style.display = 'block';
+                nameUpdateMessage.textContent = "Habaye ikosa."; nameUpdateMessage.style.color = 'var(--danger-color)';
             }
         });
-
     </script>
 </body>
-  </html>
+                        </html>
