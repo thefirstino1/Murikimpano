@@ -1,110 +1,96 @@
 <!DOCTYPE html>
-<html lang="rw">
+<html lang="rw"> <!-- Ibi bizajya bihindurwa na lang.js -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twandikire - Murikimpano</title>
+    <title data-lang-key="contact_page_title">Twandikire - Murikimpano</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 40px;
-            margin-top: 20px;
-        }
-
-        @media (min-width: 800px) {
-            .contact-container {
-                grid-template-columns: 1fr 1.5fr;
-            }
-        }
-        
-        .contact-info, .contact-form-container {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 30px;
-            border-radius: 10px;
-        }
-
-        .contact-info h3, .contact-form-container h3 {
-            margin-top: 0;
-            color: var(--secondary-color);
-            margin-bottom: 20px;
-        }
-
-        .contact-info p {
-            margin-bottom: 20px;
-            font-size: 1.1em;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .contact-info a {
-            color: var(--light-color);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .contact-info a:hover {
-            color: var(--secondary-color);
-        }
-        .contact-info .icon {
-            font-size: 1.5em;
-            color: var(--secondary-color);
-        }
-        .form-group textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
+        .contact-container { display: grid; grid-template-columns: 1fr; gap: 40px; margin-top: 20px; }
+        @media (min-width: 800px) { .contact-container { grid-template-columns: 1fr 1.5fr; } }
+        .contact-info, .contact-form-container { background: rgba(0, 0, 0, 0.2); padding: 30px; border-radius: 10px; }
+        .contact-info h3, .contact-form-container h3 { margin-top: 0; color: var(--secondary-color); margin-bottom: 20px; }
+        .contact-info p { margin-bottom: 20px; font-size: 1.1em; display: flex; align-items: center; gap: 15px; }
+        .contact-info a { color: var(--light-color); text-decoration: none; transition: color 0.3s; }
+        .contact-info a:hover { color: var(--secondary-color); }
+        .contact-info .icon { font-size: 1.5em; color: var(--secondary-color); }
+        .form-group textarea { min-height: 120px; resize: vertical; }
     </style>
 </head>
 <body>
 
-    <div id="navbar-placeholder"><p style="text-align:center; padding: 20px;">Loading menu...</p></div>
+    <!-- Menu y'urubuga izaza hano -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Agasanduku ko guhitamo indimi zose 10 -->
+    <div class="language-switcher" style="position: fixed; top: 100px; right: 20px; z-index: 1001;">
+        <select id="language-select">
+            <option value="rw">Kinyarwanda</option>
+            <option value="ki">Kirundi</option>
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+            <option value="sw">Kiswahili</option>
+            <option value="es">Español</option>
+            <option value="pt">Português</option>
+            <option value="de">Deutsch</option>
+            <option value="zh">中文</option>
+            <option value="ar">العربية</option>
+        </select>
+    </div>
 
     <div class="container">
         <header>
-            <h1>Tuvugishe</h1>
+            <h1 data-lang-key="contact_title">Tuvugishe</h1>
         </header>
 
         <main class="contact-container">
+            <!-- Igice cya 1: Amakuru yo Kudushakaho -->
             <div class="contact-info">
-                <h3>Aho Wadusanga</h3>
+                <h3 data-lang-key="contact_info_title">Aho Wadusanga</h3>
                 <p><span class="icon">📍</span> Kigali, Rwanda</p>
                 <p><span class="icon">📧</span> <a href="mailto:info@murikimpano.com">info@murikimpano.com</a></p>
                 <p><span class="icon">📞</span> <a href="tel:+250788000000">+250 788 000 000</a></p>
                 
-                <h3>Imbuga Nkoranyambaga</h3>
+                <h3 data-lang-key="social_media_title">Imbuga Nkoranyambaga</h3>
                 <p><span class="icon">👍</span> <a href="#" target="_blank">Facebook</a></p>
                 <p><span class="icon">🐦</span> <a href="#" target="_blank">Twitter (X)</a></p>
                 <p><span class="icon">📸</span> <a href="#" target="_blank">Instagram</a></p>
             </div>
 
+            <!-- Igice cya 2: Ifishi yo Kohereza Ubutumwa -->
             <div class="contact-form-container">
-                <h3>Ohereza Ubutumwa</h3>
+                <h3 data-lang-key="send_message_title">Ohereza Ubutumwa</h3>
                 <form id="contact-form">
                     <div class="form-group">
-                        <label for="contact-name">Amazina Yanyu</label>
+                        <label for="contact-name" data-lang-key="contact_name_label">Amazina Yanyu</label>
                         <input type="text" id="contact-name" required>
                     </div>
                     <div class="form-group">
-                        <label for="contact-email">Imeri Yanyu</label>
+                        <label for="contact-email" data-lang-key="contact_email_label">Imeri Yanyu</label>
                         <input type="email" id="contact-email" required>
                     </div>
                     <div class="form-group">
-                        <label for="contact-message">Ubutumwa</label>
+                        <label for="contact-message" data-lang-key="contact_message_label">Ubutumwa</label>
                         <textarea id="contact-message" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Ohereza</button>
+                    <button type="submit" class="btn btn-primary" data-lang-key="send_btn">Ohereza</button>
                     <p id="form-message" style="display:none; margin-top: 15px; font-weight: bold;"></p>
                 </form>
             </div>
         </main>
     </div>
 
+    <!-- Iyi script ihamagara menu -->
     <script type="module" src="assets/js/nav.js"></script>
+    <!-- Iyi script ihamagara ubuhinduzi bw'indimi -->
+    <script type="module" src="assets/js/lang.js"></script>
+    
+    <!-- Iyi script ni iy'imikorere y'iyi paji gusa -->
     <script type="module">
         import { db } from './assets/js/firebase.js';
         import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
+        // Nta cyo twahinduye kuri iyi code kuko imeze neza
         const contactForm = document.getElementById('contact-form');
         const formMessage = document.getElementById('form-message');
 
