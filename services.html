@@ -1,54 +1,43 @@
 <!DOCTYPE html>
-<html lang="rw">
+<html lang="rw"> <!-- Ibi bizajya bihindurwa na lang.js -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Serivisi Zacu - Murikimpano</title>
+    <title data-lang-key="services_page_title">Serivisi Zacu - Murikimpano</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
-        }
-        .service-card {
-            background-color: rgba(0, 0, 0, 0.2);
-            padding: 30px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-align: center;
-        }
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        .service-card .icon {
-            font-size: 3em;
-            color: var(--secondary-color);
-            margin-bottom: 15px;
-        }
-        .service-card h3 {
-            color: var(--light-color);
-            margin-bottom: 10px;
-            font-size: 1.4em;
-        }
-        .service-card p {
-            opacity: 0.9;
-            font-size: 1em;
-            line-height: 1.7;
-        }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 20px; }
+        .service-card { background-color: rgba(0, 0, 0, 0.2); padding: 30px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; text-align: center; }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); }
+        .service-card .icon { font-size: 3em; color: var(--secondary-color); margin-bottom: 15px; }
+        .service-card h3 { color: var(--light-color); margin-bottom: 10px; font-size: 1.4em; }
+        .service-card p { opacity: 0.9; font-size: 1em; line-height: 1.7; }
     </style>
 </head>
 <body>
 
-    <!-- Menu izaza hano -->
-    <div id="navbar-placeholder"><p style="text-align:center; padding: 20px;">Loading menu...</p></div>
+    <!-- Menu y'urubuga izaza hano -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Agasanduku ko guhitamo indimi zose 10 -->
+    <div class="language-switcher" style="position: fixed; top: 100px; right: 20px; z-index: 1001;">
+        <select id="language-select">
+            <option value="rw">Kinyarwanda</option>
+            <option value="ki">Kirundi</option>
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+            <option value="sw">Kiswahili</option>
+            <option value="es">Español</option>
+            <option value="pt">Português</option>
+            <option value="de">Deutsch</option>
+            <option value="zh">中文</option>
+            <option value="ar">العربية</option>
+        </select>
+    </div>
 
     <div class="container">
         <header>
-            <h1>Serivisi Dutanze</h1>
+            <h1 data-lang-key="services_title">Serivisi Dutanze</h1>
         </header>
 
         <main>
@@ -56,48 +45,48 @@
 
                 <div class="service-card">
                     <div class="icon">🎨</div>
-                    <h3>Gushyiraho Ibihangano</h3>
-                    <p>
+                    <h3 data-lang-key="service1_title">Gushyiraho Ibihangano</h3>
+                    <p data-lang-key="service1_desc">
                         Duha abahanzi b'amashusho n'amafoto umwanya wo kwohereza no kwerekana ibihangano byabo ku buryo bworoshye kandi bwizewe.
                     </p>
                 </div>
 
                 <div class="service-card">
                     <div class="icon">🎵</div>
-                    <h3>Gusangiza Umuziki</h3>
-                    <p>
+                    <h3 data-lang-key="service2_title">Gusangiza Umuziki</h3>
+                    <p data-lang-key="service2_desc">
                         Abahanzi b'indirimbo n'abacuranzi bashobora gushyiraho umuziki wabo, bakawusangiza abakunzi babo n'isi yose.
                     </p>
                 </div>
 
                 <div class="service-card">
                     <div class="icon">👤</div>
-                    <h3>Umwirondoro w'Umuhanzi</h3>
-                    <p>
+                    <h3 data-lang-key="service3_title">Umwirondoro w'Umuhanzi</h3>
+                    <p data-lang-key="service3_desc">
                         Buri mukoresha ashobora kurema paji ye bwite (profile) yerekana amakuru ye, ifoto, n'ibindi, bikamufasha kumenyekanisha izina rye.
                     </p>
                 </div>
 
                 <div class="service-card">
                     <div class="icon">🌐</div>
-                    <h3>Guhuzwa n'Abandi</h3>
-                    <p>
+                    <h3 data-lang-key="service4_title">Guhuzwa n'Abandi</h3>
+                    <p data-lang-key="service4_desc">
                         Murikimpano ni umuryango. Uruhushya guhura no kuvugana n'abandi banyempano, abakunzi b'ubugeni, n'abashobora kugutera inkunga.
                     </p>
                 </div>
 
                 <div class="service-card">
                     <div class="icon">🚀</div>
-                    <h3>Kumenyekanisha Impano</h3>
-                    <p>
+                    <h3 data-lang-key="service5_title">Kumenyekanisha Impano</h3>
+                    <p data-lang-key="service5_desc">
                         Twiyemeje gufasha impano nshya kuzamuka, tumenya uburyo bwo kumenyekanisha ibihangano byagejejwe ku rubuga rwacu.
                     </p>
                 </div>
                 
                 <div class="service-card">
                     <div class="icon">🛡️</div>
-                    <h3>Umutekano w'Ibihangano</h3>
-                    <p>
+                    <h3 data-lang-key="service6_title">Umutekano w'Ibihangano</h3>
+                    <p data-lang-key="service6_desc">
                         Ufite uburenganzira busesuye ku bihangano byawe. Ushobora kubishyiraho, kubikuraho, no kubicunga igihe cyose ubishakiye.
                     </p>
                 </div>
@@ -106,8 +95,12 @@
         </main>
     </div>
 
-    <!-- Script ya Menu -->
+    <!-- Iyi script ihamagara menu -->
     <script type="module" src="assets/js/nav.js"></script>
+    <!-- Iyi script ihamagara ubuhinduzi bw'indimi -->
+    <script type="module" src="assets/js/lang.js"></script>
+
+    <!-- Iyi paji ntabwo ikeneye indi JavaScript yihariye -->
 
 </body>
 </html>
