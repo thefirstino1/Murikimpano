@@ -1,4 +1,10 @@
-// Aya ni ya makuru nyayo ya Firebase yawe.
+// assets/js/firebase.js
+
+// Importa function dukeneye zo muri Firebase SDK
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+// Aya ni ya makuru nyayo ya Firebase yawe. Nta kibazo, ubu ni byo.
 const firebaseConfig = {
   apiKey: "AIzaSyBC-bxI0yfqnlp2TyDAYZH0vEYcQH_tDf0",
   authDomain: "murikimpano.firebaseapp.com",
@@ -10,6 +16,9 @@ const firebaseConfig = {
   measurementId: "G-08Q2CKEE87"
 };
 
-// Guhita itangiza Firebase. Nta kindi iyi dosiye ikora.
-firebase.initializeApp(firebaseConfig);
-```3.  Emeza impinduka (**"Commit changes"**).
+// Tangiza Firebase ukoresheje uburyo bushya
+const app = initializeApp(firebaseConfig);
+
+// Satura service yo kwandikisha (Authentication) hanyuma uyisohore (export)
+// kugira ngo izindi dosiye zizabashe kuyikoresha.
+export const auth = getAuth(app);
