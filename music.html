@@ -1,130 +1,115 @@
-<!DOCTYPE html>
-<html lang="rw">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Umwanya w'Umuziki - Murikimpano</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <style>
-        .music-item { border: 1px solid #eee; padding: 15px; border-radius: 5px; margin-bottom: 15px;}
-        .music-item audio { width: 100%; margin-top: 10px; }
-        #upload-progress { margin-top: 10px; }
-    </style>
-</head>
-<body>
-    <div id="navbar-placeholder"><p>Loading menu...</p></div>
-    <div class="container">
-        <header><h1>Umwanya w'Umuziki</h1></header>
-        <main>
-            <section class="add-music-form" style="padding:20px; border: 1px solid #ddd; border-radius: 5px;">
-                <h2>Ongeraho Indirimbo Nshya (.mp3)</h2>
-                <form id="add-music-form">
-                    <div class="form-group">
-                        <label for="song-title">Izina ry'Indirimbo</label>
-                        <input type="text" id="song-title" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="artist-name">Izina ry'Umuhanzi</label>
-                        <input type="text" id="artist-name" required>
-                    </div>
-                    <div class="form-group">
-                        <!-- HANO NIHO HAHINDUTSE: INPUT YAHINDUTSE 'FILE' -->
-                        <label for="song-file">Hitamo Indirimbo (.mp3)</label>
-                        <input type="file" id="song-file" accept=".mp3" required />
-                    </div>
-                    <button type="submit" class="btn btn-primary">Ohereza Indirimbo</button>
-                    <!-- Ahantu ho kwerekana ko upload irimo iba -->
-                    <p id="upload-progress" style="display:none;"></p>
-                </form>
-            </section>
-            <section class="music-display">
-                <h2>Indirimbo Ziriho</h2>
-                <div id="music-list">
-                    <p>Tegereza, turimo gukurura indirimbo...</p>
-                </div>
-            </section>
-        </main>
-    </div>
+// Importa ibyo dukeneye byose hejuru
+import { auth, db, storage } from './assets/js/firebase.js';
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+import { collection, addDoc, getDocs, query, orderBy, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"; 
+import { ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js";
 
-    <script type="module" src="assets/js/nav.js"></script>
-    <script type="module">
-        import { auth, db, storage } from './assets/js/firebase.js'; // Twongeyemo 'storage'
-        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-        import { collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"; 
-        import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js"; // Nshya!
+const form = document.getElementById('add-music-form');
+const musicList = document.getElementById('music-list');
+const uploadProgress = document.getElementById('upload-progress');
+let currentUser = null;
 
-        const form = document.getElementById('add-music-form');
-        const musicList = document.getElementById('music-list');
-        const uploadProgress = document.getElementById('upload-progress');
-        let currentUser = null;
+// Umurinzi, anareba niba umuntu yarinjiye
+onAuthStateChanged(auth, user => user ? (currentUser = user, loadMusicItems()) : window.location.href = 'login.html');
 
-        onAuthStateChanged(auth, user => user ? (currentUser = user, loadMusicItems()) : window.location.href = 'login.html');
+// Iyo bohereje form yo kongeramo indirimbo
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const title = document.getElementById('song-title').value;
+    const artist = document.getElementById('artist-name').value;
+    const file = document.getElementById('song-file').files[0];
+    if (!file) { alert("Nyamuneka hitamo dosiye y'indirimbo."); return; }
 
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const title = document.getElementById('song-title').value;
-            const artist = document.getElementById('artist-name').value;
-            const file = document.getElementById('song-file').files[0];
-            
-            if (!file) { alert("Nyamuneka hitamo dosiye."); return; }
+    uploadProgress.textContent = "Tegereza, indirimbo irimo yoherezwa...";
+    uploadProgress.style.display = 'block';
 
-            uploadProgress.textContent = "Tegereza, indirimbo irimo yoherezwa...";
-            uploadProgress.style.display = 'block';
+    const storageRef = ref(storage, `music/${Date.now()}_${file.name}`);
+    try {
+        const snapshot = await uploadBytes(storageRef, file);
+        const downloadURL = await getDownloadURL(snapshot.ref);
 
-            // 1. Kora inzira muri Storage
-            const storageRef = ref(storage, `music/${Date.now()}_${file.name}`);
-
-            try {
-                // 2. Ohereza dosiye muri Storage
-                const snapshot = await uploadBytes(storageRef, file);
-                console.log('Uploaded a blob or file!', snapshot);
-
-                // 3. Fata ya Download URL
-                const downloadURL = await getDownloadURL(snapshot.ref);
-                console.log('File available at', downloadURL);
-
-                // 4. Bika amakuru muri Firestore (harimo na ya link nshya)
-                await addDoc(collection(db, "musicFiles"), {
-                    title: title,
-                    artist: artist,
-                    musicURL: downloadURL, // Twabikamo link nyayo ya download
-                    authorEmail: currentUser.email,
-                    createdAt: new Date()
-                });
-
-                uploadProgress.textContent = "Indirimbo yoherejwe neza!";
-                uploadProgress.style.color = 'green';
-                form.reset();
-                loadMusicItems();
-            } catch (error) {
-                console.error("Habaye ikosa rikomeye: ", error);
-                uploadProgress.textContent = "Habaye ikosa mu kohereza dosiye.";
-                uploadProgress.style.color = 'red';
-            }
+        // Ongeramo document nshya muri "musicFiles"
+        await addDoc(collection(db, "musicFiles"), {
+            title: title,
+            artist: artist,
+            musicURL: downloadURL,
+            authorEmail: currentUser.email,
+            authorId: currentUser.uid, // By'ingenzi cyane!
+            createdAt: new Date()
         });
 
-        async function loadMusicItems() {
-            musicList.innerHTML = '<p>Turimo gukurura indirimbo...</p>';
-            const q = query(collection(db, "musicFiles"), orderBy("createdAt", "desc"));
-            const querySnapshot = await getDocs(q);
-            
-            musicList.innerHTML = '';
-            querySnapshot.forEach(doc => {
-                const item = doc.data();
-                const itemElement = document.createElement('div');
-                itemElement.className = 'music-item';
-                itemElement.innerHTML = `
-                    <h3>${item.title}</h3>
-                    <p>Umuhanzi: ${item.artist}</p>
-                    <!-- HANO NIHO HAHINDUTSE: DUKORESHEJE 'AUDIO' TAG -->
-                    <audio controls src="${item.musicURL}">
-                        Your browser does not support the audio element.
-                    </audio>
-                    <br><small>Byakozwe na: ${item.authorEmail}</small>
-                `;
-                musicList.appendChild(itemElement);
-            });
+        uploadProgress.textContent = "Indirimbo yoherejwe neza!";
+        form.reset();
+        loadMusicItems();
+    } catch (error) {
+        console.error("Habaye ikosa rikomeye: ", error);
+        uploadProgress.textContent = "Habaye ikosa mu kohereza dosiye.";
+    }
+});
+
+// Function yo kuzana no kwerekana indirimbo
+async function loadMusicItems() {
+    musicList.innerHTML = '<p>Turimo gukurura indirimbo...</p>';
+    const q = query(collection(db, "musicFiles"), orderBy("createdAt", "desc"));
+    const querySnapshot = await getDocs(q);
+    
+    musicList.innerHTML = '';
+    querySnapshot.forEach(doc => {
+        const item = doc.data();
+        const itemElement = document.createElement('div');
+        itemElement.className = 'music-item';
+        itemElement.setAttribute('data-id', doc.id); // ID ya Firestore
+
+        // IGENZURA: Ese uyu muntu ni we nyir'iyi ndirimbo?
+        let deleteButtonHTML = '';
+        if (currentUser && currentUser.uid === item.authorId) {
+            deleteButtonHTML = `<button class="btn btn-danger delete-btn">Siba Indirimbo</button>`;
         }
-    </script>
-</body>
-</html>
+        itemElement.innerHTML = `
+            <h3>${item.title}</h3>
+            <p>Umuhanzi: ${item.artist}</p>
+            <audio controls src="${item.musicURL}">
+                Your browser does not support the audio element.
+            </audio>
+            <br>
+            ${deleteButtonHTML}
+            <br>
+            <small>Byakozwe na: ${item.authorEmail}</small>
+        `;
+        musicList.appendChild(itemElement);
+    });
+}
+
+// Iyi code yumviriza ibibaye ku rutonde rwose rw'indirimbo
+musicList.addEventListener('click', async (e) => {
+    // Igenzura niba icyo umuntu akanze ari buto yo gusiba
+    if (e.target.classList.contains('delete-btn')) {
+        if (!confirm("Uremeza ko ushaka gusiba iyi ndirimbo burundu?")) return;
+
+        const itemElement = e.target.closest('.music-item');
+        const docId = itemElement.dataset.id;
+        
+        // Fata URL y'indirimbo kugira ngo tuyisibe no muri Storage
+        const musicURL = itemElement.querySelector('audio').src;
+
+        try {
+            // 1. Siba muri Firestore
+            await deleteDoc(doc(db, "musicFiles", docId));
+            
+            // 2. Siba dosiye nyayo muri Storage
+            const musicRef = ref(storage, musicURL);
+            await deleteObject(musicRef);
+
+            itemElement.remove(); // Hita uyikura kuri paji utiriwe ugarura byose
+        } catch (error) {
+            console.error("Ikosa ryo gusiba indirimbo: ", error);
+            // Ibi biba iyo umuntu asibye amakuru muri DB ariko dosiye muri Storage yarasibwe
+            if (error.code === 'storage/object-not-found') {
+                console.warn("Dosiye ntiyabonetse muri Storage, ariko reka dusibe muri Firestore.");
+                itemElement.remove();
+            } else {
+                 alert("Habaye ikosa mu gusiba iyi ndirimbo.");
+            }
+        }
+    }
+});
