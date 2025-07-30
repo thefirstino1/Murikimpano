@@ -1,61 +1,26 @@
-// Iyi kode nshya ntabwo ikoresha "import"
-// Irasanga "firebase" object yamaze gukorwa.
+// assets/js/auth.js
 
-function showNotification(message, isSuccess) {
-    const existingNotif = document.querySelector('.notification');
-    if (existingNotif) { existingNotif.remove(); }
-    const notification = document.createElement('div');
-    notification.className = `notification ${isSuccess ? 'success' : 'error'}`;
-    notification.innerText = message;
-    document.body.appendChild(notification);
-    setTimeout(() => { if (notification) notification.remove(); }, 5000);
-}
+// Importa function yo kurema umukoresha na 'auth' service twateguye muri firebase.js
+import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+import { auth } from './firebase.js'; // Importa 'auth' service
 
-// --- Ipaji yo Kwiyandikisha ---
-if (document.querySelector('form.register-form')) {
-    const form = document.querySelector('form.register-form');
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = form.querySelector('#email').value;
-        const password = form.querySelector('#password').value;
-        showNotification("Turimo kubika amakuru...", true);
-        firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then(() => {
-                showNotification("Wiyandikishije neza! Ubu woherejwe aho winjirira.", true);
-                setTimeout(() => { window.location.href = 'login.html'; }, 2000);
-            })
-            .catch((error) => { showNotification("Ikosa: " + error.message, false); });
-    });
-}
+/**
+ * Iyi function ifata email n'ijambobanga ikarema umukoresha mushya muri Firebase.
+ * Irasubiza Promise: yaba user credential (iyo bikunze) cyangwa ikagarura error (iyo binanze).
+ * HTML yawe niyo izafata iyo error iyereke umukoresha.
+ */
+export const registerUser = async (email, password) => {
+    try {
+        // Gerageza kurema umukoresha ukoresheje function ya Firebase
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        console.log("Umukoresha yiyandikishije neza:", userCredential.user);
+        return userCredential; // Subiza user credential iyo byakunze
+    } catch (error) {
+        // Iyo habaye ikosa, fata ubutumwa bw'ikosa hanyuma ubwohereze
+        console.error("Ikosa mu kwiyandikisha: ", error.message);
+        // Hita utanga ikosa (throw error) kugira ngo code iri muri HTML ibashe kurifata
+        throw error;
+    }
+};
 
-// --- Ipaji yo Kwinjira ---
-if (document.querySelector('form.login-form')) {
-    const form = document.querySelector('form.login-form');
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = form.querySelector('#email').value;
-        const password = form.querySelector('#password').value;
-        showNotification("Turimo kugerageza...", true);
-        firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(() => {
-                showNotification("Winjiye neza! Murakaza neza!", true);
-                setTimeout(() => { window.location.href = 'index.html'; }, 2000);
-            })
-            .catch(() => { showNotification("Ikosa: Imeri cyangwa ijambobanga si byo.", false); });
-    });
-}
-
-// --- Ipaji yo Kwibagirwa Ijambobanga ---
-if (document.querySelector('form.forgot-form')) {
-    const form = document.querySelector('form.forgot-form');
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = form.querySelector('#email').value;
-        showNotification("Turimo kohereza imeri...", true);
-        firebase.auth().sendPasswordResetEmail(email)
-            .then(() => {
-                showNotification("Twakohereje ubutumwa. Reba muri imeri yawe.", true);
-            })
-            .catch((error) => { showNotification("Ikosa: " + error.message, false); });
-    });
-      }
+// Hano ushobora kuzongeramo izindi functions nka 'loginUser', 'logoutUser', n'ibindi...
