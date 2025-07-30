@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="rw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umwirondoro wanjye - Murikimpano</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .profile-container { display: flex; gap: 30px; }
+        .profile-picture-section { text-align: center; }
+        .profile-picture { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid #ddd; }
+        .profile-details p { font-size: 1.2em; }
+    </style>
+</head>
+<body>
+    <div id="navbar-placeholder"><p>Loading menu...</p></div>
+    <div class="container">
+        <header><h1>Umwirondoro Wanjye</h1></header>
+        <main class="profile-container">
+            <!-- Igice cy'ifoto -->
+            <section class="profile-picture-section">
+                <img id="profile-pic-display" src="assets/images/logo.png" alt="Profile Picture" class="profile-picture">
+                <h3>Hindura Ifoto</h3>
+                <form id="update-pic-form">
+                    <input type="file" id="profile-pic-file" accept="image/*" required>
+                    <button type="submit" class="btn">Bika Ifoto</button>
+                    <p id="pic-upload-progress" style="display:none;"></p>
+                </form>
+            </section>
+
+            <!-- Igice cy'andi makuru -->
+            <section class="profile-details">
+                <h2>Amakuru ya Konti</h2>
+                <p><strong>Imeri:</strong> <span id="user-email"></span></p>
+                <p><strong>Izina:</strong> <span id="display-name"></span></p>
+
+                <hr>
+                <h3>Hindura Izina</h3>
+                <form id="update-name-form">
+                    <div class="form-group">
+                        <label for="new-display-name">Andika izina rishya</label>
+                        <input type="text" id="new-display-name" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Bika Izina</button>
+                    <p id="name-update-message" style="display:none;"></p>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script type="module" src="assets/js/nav.js"></script>
+    <script type="module">
+        import { auth, storage } from './assets/js/firebase.js';
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+        import { updateUserProfile } from './assets/js/auth.js';
+        import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js";
+
+        // Dufata ibice by'ingenzi byo kuri paji
+        const profilePicDisplay = document.getElementById('profile-pic-display');
+        const userEmailSpan = document.getElementById('user-email');
+        const displayNameSpan = document.getElementById('display-name');
+        const picUploadProgress = document.getElementById('pic-upload-progress');
+        const nameUpdateMessage = document.getElementById('name-update-message');
+        const updatePicForm = document.getElementById('update-pic-form');
+        const updateNameForm = document.getElementById('update-name-form');
+
+        let currentUser = null;
+
+        // UMURINZI: aareba niba umuntu yarinjiye
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+                // EREKANA AMAKURU Y'UMUKORESHA
+                userEmailSpan.textContent = currentUser.email;
+                displayNameSpan.textContent = currentUser.displayName || "Nta rirashyirwaho";
+                if (currentUser.photoURL) {
+                    profilePicDisplay.src = currentUser.photoURL;
+                }
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Gukora ku guhindura ifoto
+        updatePicForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const file = document.getElementById('profile-pic-file').files[0];
+            if (!file) return;
+
+            picUploadProgress.textContent = "Tegereza...";
+            picUploadProgress.style.display = 'block';
+
+            const storageRef = ref(storage, `profile-pictures/${currentUser.uid}`);
+            try {
+                const snapshot = await uploadBytes(storageRef, file);
+                const photoURL = await getDownloadURL(snapshot.ref);
+
+                await updateUserProfile(currentUser, { photoURL: photoURL });
+                
+                profilePicDisplay.src = photoURL; // Hita uyerekana
+                picUploadProgress.textContent = "Ifoto yahinduwe neza!";
+                picUploadProgress.style.color = 'green';
+
+            } catch (error) {
+                console.error("Ikosa mu guhindura ifoto:", error);
+                picUploadProgress.textContent = "Habaye ikosa.";
+                picUploadProgress.style.color = 'red';
+            }
+        });
+
+        // Gukora ku guhindura izina
+        updateNameForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const newName = document.getElementById('new-display-name').value;
+            
+            try {
+                await updateUserProfile(currentUser, { displayName: newName });
+                displayNameSpan.textContent = newName; // Hita uryerekana
+                nameUpdateMessage.textContent = "Izina ryahinduwe neza!";
+                nameUpdateMessage.style.color = 'green';
+                nameUpdateMessage.style.display = 'block';
+            } catch (error) {
+                console.error("Ikosa mu guhindura izina:", error);
+                nameUpdateMessage.textContent = "Habaye ikosa.";
+                nameUpdateMessage.style.color = 'red';
+                nameUpdateMessage.style.display = 'block';
+            }
+        });
+
+    </script>
+</body>
+  </html>
