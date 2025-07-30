@@ -1,13 +1,9 @@
-```html
 <!DOCTYPE html>
 <html lang="rw">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title data-lang-key="register_page_title">Fungura Konti - Murikimpano</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
@@ -21,22 +17,25 @@
                 <option value="sw">Kiswahili</option>
             </select>
         </div>
+        
         <header><h1 data-lang-key="create_new_account_title">Fungura Konti Nshya</h1></header>
+        
         <main>
             <form id="registerForm" class="auth-form register-form">
-<div class="form-group">
+                <div class="form-group">
                     <label for="email" data-lang-key="email_label">Imeri yawe</label>
-                    <input type="email" id="email" required />
+                    <input type="email" id="email" required autocomplete="email" />
                 </div>
                 <div class="form-group">
                     <label for="password" data-lang-key="password_label">Ijambobanga</label>
-                    <input type="password" id="password" required />
+                    <input type="password" id="password" required autocomplete="new-password" />
                 </div>
                 <button type="submit" class="btn btn-primary" data-lang-key="register_btn">Iyandikishe</button>
             </form>
-            <p id="loadingMessage" style="display:none; color: green; font-weight: bold; margin-top: 10px;">
-                Ndimo kwiyandikisha, tegereza gato...
-            </p>
+            
+            <!-- Aho ubutumwa bw'amakosa n'ibindi byose byerekanwa -->
+            <p id="message" style="display:none; font-weight: bold; margin-top: 15px; padding: 10px; border-radius: 5px;"></p>
+
             <p class="auth-link">
                 <span data-lang-key="already_have_account">Usanganywe konti?</span>
                 <a href="login.html" data-lang-key="login_here_link">Injira hano</a>
@@ -50,25 +49,49 @@
         import { registerUser } from './assets/js/auth.js';
 
         const form = document.getElementById('registerForm');
-        const loadingMessage = document.getElementById('loadingMessage');form.addEventListener('submit', async (e) => {
-            e.preventDefault();
+        const messageElement = document.getElementById('message');
+        const submitButton = form.querySelector('button');
 
-            loadingMessage.style.display = 'block'; // Erekana loading message
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
 
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value.trim();
 
-            try {
-                await registerUser(email, password);
-                alert('Kwiyandikisha byagenze neza! Injira ukoresheje email na password.');
-                window.location.href = 'login.html'; // yerekeze kuri login page
-            } catch (error) {
-                alert('Habaye ikibazo: ' + error.message);
-            } finally {
-                loadingMessage.style.display = 'none'; // Hisha loading message igihe cyose byarangiye
-            }
+            messageElement.style.display = 'none';
+            submitButton.disabled = true;
+            submitButton.textContent = 'Tegereza gato...';
+
+            registerUser(email, password)
+                .then(userCredential => {
+                    messageElement.textContent = 'Wiyandikishije neza! Ubu woherejwe ku paji yo kwinjira...';
+                    messageElement.style.color = 'white';
+                    messageElement.style.backgroundColor = 'green';
+                    messageElement.style.display = 'block';
+                    
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 2000);
+                })
+                .catch(error => {
+                    let userMessage = 'Habaye ikibazo. Ongera ugerageze.';
+                    if (error.code === 'auth/email-already-in-use') {
+                        userMessage = 'Iyi email isanzwe ikoreshwa. Hitamo indi.';
+                    } else if (error.code === 'auth/weak-password') {
+                        userMessage = 'Ijambobanga ni rigufi cyane. Ringomba kugira byibuze inyuguti 6.';
+                    } else if (error.code === 'auth/invalid-email') {
+                         userMessage = 'Imeri wanditse siyo. Ongera ugerageze.';
+                    }
+                    
+                    messageElement.textContent = userMessage;
+                    messageElement.style.color = 'white';
+                    messageElement.style.backgroundColor = 'red';
+                    messageElement.style.display = 'block';
+
+                    submitButton.disabled = false; 
+                    submitButton.textContent = 'Iyandikishe';
+                });
         });
     </script>
 </body>
-</html>
-```
+    </html>
