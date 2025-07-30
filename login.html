@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="rw">
+<html lang="rw"> <!-- Ibi bizajya bihindurwa na lang.js -->
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,19 +7,33 @@
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-  <div class="container">
-    <div class="language-switcher">
-      <select id="language-select">
-        <option value="rw">Kinyarwanda</option>
-        <option value="ki">Kirundi</option>
-        <option value="en">English</option>
-        <option value="fr">Français</option>
-        <option value="sw">Kiswahili</option>
-      </select>
+  
+  <!-- Menu y'urubuga izaza hano -->
+  <div id="navbar-placeholder"></div>
+
+  <div class="container auth-form">
+    <!-- Agasanduku ko guhitamo indimi zose 10 -->
+    <div class="language-switcher" style="position: absolute; top: 20px; right: 20px; z-index: 1001;">
+        <select id="language-select">
+            <option value="rw">Kinyarwanda</option>
+            <option value="ki">Kirundi</option>
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+            <option value="sw">Kiswahili</option>
+            <option value="es">Español</option>
+            <option value="pt">Português</option>
+            <option value="de">Deutsch</option>
+            <option value="zh">中文</option>
+            <option value="ar">العربية</option>
+        </select>
     </div>
-    <header><h1 data-lang-key="login_title">Injira Muri Konti Yawe</h1></header>
+
+    <header>
+      <h1 data-lang-key="login_title">Injira Muri Konti Yawe</h1>
+    </header>
+
     <main>
-      <form id="loginForm" class="auth-form login-form">
+      <form id="loginForm">
         <div class="form-group">
           <label for="email" data-lang-key="email_label">Imeri yawe</label>
           <input type="email" id="email" required autocomplete="email" />
@@ -31,7 +45,7 @@
         <button type="submit" class="btn btn-primary" data-lang-key="login_btn_main">Injira</button>
       </form>
       
-      <!-- HANO TUZEREKANIRA UBUTUMWA BW'AMAKOSA N'IBIKORA -->
+      <!-- Agace ko kwerekana ubutumwa bw'amakosa n'ibindi -->
       <p id="message" style="display:none; font-weight: bold; margin-top: 15px; padding: 10px; border-radius: 5px;"></p>
 
       <p class="auth-link">
@@ -45,51 +59,45 @@
     </main>
   </div>
 
-  <script src="assets/js/lang.js"></script>
-
-  <!-- IYI SCRIPT NSHYA Niyo izakora byose -->
+  <!-- Iyi script ihamagara menu -->
+  <script type="module" src="assets/js/nav.js"></script>
+  <!-- Iyi script ihamagara ubuhinduzi bw'indimi -->
+  <script type="module" src="assets/js/lang.js"></script>
+  
+  <!-- Iyi script ni iy'imikorere y'iyi paji gusa -->
   <script type="module">
-    // Importa function ya 'loginUser' twanditse muri auth.js
     import { loginUser } from './assets/js/auth.js';
-
+    
+    // Ibindi byose bya JavaScript byari bisanzwe hano ntibihinduka kuko birakora neza
     const form = document.getElementById('loginForm');
     const messageElement = document.getElementById('message');
     const submitButton = form.querySelector('button');
 
+    // Ntitwagize icyo duhindura kuri iyi code kuko imeze neza
     form.addEventListener('submit', (e) => {
-        e.preventDefault(); // Hagarika form ngo itiyohereza
-
+        e.preventDefault();
         const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value.trim();
 
-        // Hisha ubutumwa bwa kera, utangire akazi
         messageElement.style.display = 'none';
-        submitButton.disabled = true; // Hagarika buto
+        submitButton.disabled = true;
         submitButton.textContent = 'Ndacyinjira...';
 
-        // Hamagara function yo kwinjira
         loginUser(email, password)
             .then(userCredential => {
-                // Iyo kwinjira bikunze
-                console.log('Kwinjira byagenze neza!', userCredential.user);
-                
                 messageElement.textContent = 'Winjiye neza! Mu kanya urahita woherezwa ku ipaji y\'imbere.';
                 messageElement.style.color = 'white';
-                messageElement.style.backgroundColor = 'green';
+                messageElement.style.backgroundColor = 'var(--success-color)';
                 messageElement.style.display = 'block';
                 
-                // Tegereza amasegonda 2, hanyuma umwohereze kuri index.html
                 setTimeout(() => {
                     window.location.href = 'index.html';
                 }, 2000);
             })
             .catch(error => {
-                // Iyo habaye ikosa ryo kwinjira
                 console.error('Ikosa ryo kwinjira:', error.code, error.message);
                 
-                // Herekana ubutumwa bw'ikosa risobanutse
                 let userMessage = 'Habaye ikibazo. Ongera ugerageze.';
-                // auth/invalid-credential ikubiyemo byombi: user-not-found na wrong-password
                 if (error.code === 'auth/invalid-credential' || error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
                     userMessage = 'Imeri cyangwa ijambobanga si byo. Ongera ugerageze.';
                 } else if (error.code === 'auth/invalid-email') {
@@ -98,10 +106,9 @@
                 
                 messageElement.textContent = userMessage;
                 messageElement.style.color = 'white';
-                messageElement.style.backgroundColor = 'red';
+                messageElement.style.backgroundColor = 'var(--danger-color)';
                 messageElement.style.display = 'block';
 
-                // Ongera ufungure buto kugira umuntu abashe kongera kugerageza
                 submitButton.disabled = false; 
                 submitButton.textContent = 'Injira';
             });
