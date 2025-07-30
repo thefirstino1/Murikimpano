@@ -1,97 +1,81 @@
 <!DOCTYPE html>
-<html lang="rw">
+<html lang="rw"> <!-- Ibi bizajya bihindurwa na lang.js -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abo Turi Bo - Murikimpano</title>
+    <title data-lang-key="about_page_title">Abo Turi Bo - Murikimpano</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
-        .about-section {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            text-align: left;
-        }
-        .about-section h2 {
-            margin-top: 0;
-            border-bottom-color: rgba(255, 255, 255, 0.4);
-        }
-        .about-section p {
-            font-size: 1.1em;
-            opacity: 0.9;
-            line-height: 1.8;
-        }
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            text-align: center;
-        }
-        .team-member img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--secondary-color);
-        }
-        .team-member h4 {
-            margin-top: 10px;
-            margin-bottom: 5px;
-            color: var(--light-color);
-        }
-        .team-member span {
-            font-size: 0.9em;
-            color: var(--secondary-color);
-            font-weight: bold;
-        }
+        .about-section { background: rgba(0, 0, 0, 0.2); padding: 30px; border-radius: 10px; margin-bottom: 25px; text-align: left; }
+        .about-section h2 { margin-top: 0; border-bottom-color: rgba(255, 255, 255, 0.4); }
+        .about-section p { font-size: 1.1em; opacity: 0.9; line-height: 1.8; }
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: center; }
+        .team-member img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid var(--secondary-color); }
+        .team-member h4 { margin-top: 10px; margin-bottom: 5px; color: var(--light-color); }
+        .team-member span { font-size: 0.9em; color: var(--secondary-color); font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <!-- Menu izaza hano -->
-    <div id="navbar-placeholder"><p style="text-align:center; padding: 20px;">Loading menu...</p></div>
+    <!-- Menu y'urubuga izaza hano -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Agasanduku ko guhitamo indimi zose 10 -->
+    <div class="language-switcher" style="position: fixed; top: 100px; right: 20px; z-index: 1001;">
+        <select id="language-select">
+            <option value="rw">Kinyarwanda</option>
+            <option value="ki">Kirundi</option>
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+            <option value="sw">Kiswahili</option>
+            <option value="es">Español</option>
+            <option value="pt">Português</option>
+            <option value="de">Deutsch</option>
+            <option value="zh">中文</option>
+            <option value="ar">العربية</option>
+        </select>
+    </div>
 
     <div class="container">
         <header>
-            <h1>Abo Turi Bo</h1>
+            <h1 data-lang-key="about_title">Abo Turi Bo</h1>
         </header>
 
         <main>
             <!-- Igice cya 1: Intego yacu -->
             <section class="about-section">
-                <h2>Intego ya Murikimpano</h2>
-                <p>
+                <h2 data-lang-key="about_mission_title">Intego ya Murikimpano</h2>
+                <p data-lang-key="about_mission_p">
                     Murikimpano ni urubuga rwashyiriweho gufasha abanyempano bose, aho bava bakagera, kubona umwanya wo kwerekana no gusangiza isi yose ibihangano byabo. Twemera ko buri muntu afite impano idasanzwe, kandi intego yacu ni ugutanga ikibuga aho izo mpano zishobora kumurika, zigakundwa, kandi zigatera imbaraga abandi.
                 </p>
             </section>
 
             <!-- Igice cya 2: Icyo Dukora -->
             <section class="about-section">
-                <h2>Icyo Dukora</h2>
-                <p>
+                <h2 data-lang-key="about_vision_title">Icyo Dukora</h2>
+                <p data-lang-key="about_vision_p">
                     Duha abahanzi, abanditsi, abanyamuziki, n'abandi banyabugeni bose uburyo bwo gushyiraho ibihangano byabo by'amashusho n'amajwi. Urubuga rwacu rworohereza buri wese kurema umwirondoro we, gucunga ibihangano bye, no guhura n'abandi bafite inyota yo kurema no guhanga udushya.
                 </p>
             </section>
 
             <!-- Igice cya 3: Ikipe yacu (Ushobora guhindura aya makuru) -->
             <section class="about-section">
-                <h2>Ikipe yacu</h2>
+                <h2 data-lang-key="about_team_title">Ikipe yacu</h2>
                 <div class="team-grid">
                     <div class="team-member">
                         <img src="assets/images/logo.png" alt="Ifoto y'umuyobozi">
                         <h4>Mugisha Yves</h4>
-                        <span>Washinze Urubuga</span>
+                        <span data-lang-key="team_member1_role">Washinze Urubuga</span>
                     </div>
                     <div class="team-member">
                         <img src="assets/images/logo.png" alt="Ifoto y'ushinzwe tekniki">
                         <h4>Keza Aline</h4>
-                        <span>Ushinzwe Ikoranabuhanga</span>
+                        <span data-lang-key="team_member2_role">Ushinzwe Ikoranabuhanga</span>
                     </div>
                     <div class="team-member">
                         <img src="assets/images/logo.png" alt="Ifoto y'ushinzwe abahanzi">
                         <h4>Gatete Jean</h4>
-                        <span>Ushinzwe Abahanzi</span>
+                        <span data-lang-key="team_member3_role">Ushinzwe Abahanzi</span>
                     </div>
                 </div>
             </section>
@@ -99,8 +83,12 @@
         </main>
     </div>
 
-    <!-- Script ya Menu -->
+    <!-- Iyi script ihamagara menu -->
     <script type="module" src="assets/js/nav.js"></script>
+    <!-- Iyi script ihamagara ubuhinduzi bw'indimi -->
+    <script type="module" src="assets/js/lang.js"></script>
+    
+    <!-- Iyi paji ntabwo ikeneye indi JavaScript yihariye -->
 
 </body>
 </html>
