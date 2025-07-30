@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="rw">
+<html lang="rw"> <!-- Ibi bizajya bihindurwa na lang.js -->
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,22 +7,36 @@
     <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-    <div class="container">
-        <div class="language-switcher">
+    
+    <!-- Menu y'urubuga izaza hano -->
+    <div id="navbar-placeholder"></div>
+
+    <div class="container auth-form">
+        <!-- Agasanduku ko guhitamo indimi zose 10 -->
+        <div class="language-switcher" style="position: absolute; top: 20px; right: 20px; z-index: 1001;">
             <select id="language-select">
                 <option value="rw">Kinyarwanda</option>
                 <option value="ki">Kirundi</option>
                 <option value="en">English</option>
                 <option value="fr">Français</option>
                 <option value="sw">Kiswahili</option>
+                <option value="es">Español</option>
+                <option value="pt">Português</option>
+                <option value="de">Deutsch</option>
+                <option value="zh">中文</option>
+                <option value="ar">العربية</option>
             </select>
         </div>
-        <header><h1 data-lang-key="forgot_title">Subirana Ijambobanga</h1></header>
+
+        <header>
+            <h1 data-lang-key="forgot_title">Subirana Ijambobanga</h1>
+        </header>
+
         <main>
             <p class="auth-description" data-lang-key="forgot_instruction">
                 Shyiramo imeri yawe wakoresheje wiyandikisha. Turakoherezaho ubutumwa bugufasha gusubirana ijambobanga ryawe.
             </p>
-            <form id="forgotForm" class="auth-form forgot-form">
+            <form id="forgotForm">
                 <div class="form-group">
                     <label for="email" data-lang-key="email_label">Imeri yawe</label>
                     <input type="email" id="email" required autocomplete="email" />
@@ -30,7 +44,7 @@
                 <button type="submit" class="btn btn-primary" data-lang-key="send_reset_link_btn">Ohereza Link</button>
             </form>
             
-            <!-- HANO TUZEREKANIRA UBUTUMWA BW'AMAKOSA N'IBIKORA -->
+            <!-- Agace ko kwerekana ubutumwa bw'amakosa n'ibindi -->
             <p id="message" style="display:none; font-weight: bold; margin-top: 15px; padding: 10px; border-radius: 5px;"></p>
 
             <p class="auth-link">
@@ -39,12 +53,16 @@
         </main>
     </div>
 
-    <script src="assets/js/lang.js"></script>
+    <!-- Iyi script ihamagara menu -->
+    <script type="module" src="assets/js/nav.js"></script>
+    <!-- Iyi script ihamagara ubuhinduzi bw'indimi -->
+    <script type="module" src="assets/js/lang.js"></script>
 
-    <!-- IYI SCRIPT NSHYA Niyo izakora byose -->
+    <!-- Iyi script ni iy'imikorere y'iyi paji gusa -->
     <script type="module">
         import { resetPassword } from './assets/js/auth.js';
 
+        // Nta cyo twahinduye kuri iyi code kuko imeze neza
         const form = document.getElementById('forgotForm');
         const messageElement = document.getElementById('message');
         const submitButton = form.querySelector('button');
@@ -59,17 +77,12 @@
 
             resetPassword(email)
                 .then(() => {
-                    // Iyo byoherejwe neza
-                    console.log('Imeri yo gusubiza ijambobanga yoherejwe kuri ' + email);
                     messageElement.textContent = 'Imeri yoherejwe! Genzura inbox yawe (na spam) kugira ngo usubizeho ijambobanga rishya.';
                     messageElement.style.color = 'white';
-                    messageElement.style.backgroundColor = 'green';
+                    messageElement.style.backgroundColor = 'var(--success-color)';
                     messageElement.style.display = 'block';
-
-                    // Nta mpamvu yo guhita afungura buto, kuko akazi kaba karangiye
                 })
                 .catch(error => {
-                    // Iyo habaye ikosa
                     console.error('Ikosa ryo kohereza imeri:', error.code, error.message);
                     
                     let userMessage = 'Habaye ikibazo. Ongera ugerageze.';
@@ -79,10 +92,9 @@
                     
                     messageElement.textContent = userMessage;
                     messageElement.style.color = 'white';
-                    messageElement.style.backgroundColor = 'red';
+                    messageElement.style.backgroundColor = 'var(--danger-color)';
                     messageElement.style.display = 'block';
 
-                    // Ongera ufungure buto
                     submitButton.disabled = false; 
                     submitButton.textContent = 'Ohereza Link';
                 });
