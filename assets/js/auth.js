@@ -1,26 +1,19 @@
 // assets/js/auth.js
 
-// Importa function yo kurema umukoresha na 'auth' service twateguye muri firebase.js
+// Importa function yo kurema umukoresha, na 'auth' service twateguye muri firebase.js
 import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-import { auth } from './firebase.js'; // Importa 'auth' service
+import { auth } from './firebase.js'; // Iyi line irahamagara 'auth' twakoze muri firebase.js
 
 /**
- * Iyi function ifata email n'ijambobanga ikarema umukoresha mushya muri Firebase.
- * Irasubiza Promise: yaba user credential (iyo bikunze) cyangwa ikagarura error (iyo binanze).
- * HTML yawe niyo izafata iyo error iyereke umukoresha.
+ * Iyi function yandikisha umukoresha mushya muri Firebase.
+ * Isubiza (returns) 'Promise' ituruka muri Firebase.
+ * HTML niyo izabika ibyayivuyemo (byiza cyangwa bibi).
  */
-export const registerUser = async (email, password) => {
-    try {
-        // Gerageza kurema umukoresha ukoresheje function ya Firebase
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        console.log("Umukoresha yiyandikishije neza:", userCredential.user);
-        return userCredential; // Subiza user credential iyo byakunze
-    } catch (error) {
-        // Iyo habaye ikosa, fata ubutumwa bw'ikosa hanyuma ubwohereze
-        console.error("Ikosa mu kwiyandikisha: ", error.message);
-        // Hita utanga ikosa (throw error) kugira ngo code iri muri HTML ibashe kurifata
-        throw error;
-    }
+export const registerUser = (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
 };
 
-// Hano ushobora kuzongeramo izindi functions nka 'loginUser', 'logoutUser', n'ibindi...
+/**
+ * Tuzongeraho izindi function hano (login, logout, etc.) nyuma.
+ * Reka tubanze dukemure kwiyandikisha.
+ */
